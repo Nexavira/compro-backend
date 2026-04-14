@@ -1,0 +1,74 @@
+[
+{
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Dashboard",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "User",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "User",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "User",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "User",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Role",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Role",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Role",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Role",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Permission",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Permission",
+    "action_label": "Add"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Auth",
+    "module_label": "Permission",
+    "action_label": "Remove"
+  }
+]

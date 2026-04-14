@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Services\AuthService\RoleUserService;
+
+use App\Models\Auth\Role;
+use App\Models\Auth\RoleUser;
+use App\Models\Auth\User;
+use App\Rules\ExistsUuid;
+use App\Services\DefaultService;
+use App\Services\ServiceInterface;
+
+class RemoveRoleUserService extends DefaultService implements ServiceInterface
+{
+    public function process($dto)
+    {
+        $dto = $this->prepare($dto);
+
+        RoleUser::where('role_id', $dto['role_id'])->where('user_id', $dto['user_id'])->delete();
+
+        $this->results['data'] = [];
+        $this->results['message'] = 'Role successfully removed from user';
+    }
+
+    public function prepare($dto)
+    {
+        $dto['user_id'] = $this->findIdByUuid(User::query(), $dto['user_uuid']);
+        $dto['role_id'] = $this->findIdByUuid(Role::query(), $dto['role_uuid']);
+
+        return $dto;
+    }
+
+    public function rules($dto)
+    {
+        return [
+            'user_uuid' => ['required', 'uuid', new ExistsUuid(new User)],
+            'role_uuid' => ['required', 'uuid', new ExistsUuid(new Role)],
+        ];
+    }
+}
