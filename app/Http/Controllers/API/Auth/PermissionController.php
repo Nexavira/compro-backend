@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\PermissionRequest\GetPermissionRequest;
 use App\Http\Requests\API\PermissionRoleRequest\UpdatePermissionRoleRequest;
-use App\Http\Resources\API\Admin\Permission\GetPermissionResource;
+use App\Http\Resources\API\Permission\GetPermissionResource;
 
 class PermissionController extends Controller
 {

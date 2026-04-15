@@ -7,7 +7,7 @@ use App\Http\Requests\API\RoleRequest\DeleteRoleRequest;
 use App\Http\Requests\API\RoleRequest\GetRoleRequest;
 use App\Http\Requests\API\RoleRequest\StoreRoleRequest;
 use App\Http\Requests\API\RoleRequest\UpdateRoleRequest;
-use App\Http\Resources\API\Admin\Role\GetRoleResource;
+use App\Http\Resources\API\Role\GetRoleResource;
 
 class RoleController extends Controller
 {
