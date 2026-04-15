@@ -26,14 +26,17 @@ class AuthController extends Controller
         $do_logout  = app('DoLogoutService')->execute([]);
 
         return response()->json([
-            'success' => ( isset($do_login['error']) ? false : true ),
+            'success' => ( isset($do_logout['error']) ? false : true ),
             'message' => $do_logout['message'],
             'data' => $do_logout['data'],
         ]);
     }
 
-    public function getUserSessionInformation () {
-        if(!auth()->user()) {
+    public function getUserSessionInformation (Request $request) {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        if(!$user) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not found',
@@ -42,26 +45,26 @@ class AuthController extends Controller
 
         //Photo
         $photo = null;
-        if (isset(auth()->user()->photo)) {
+        if (isset($user->photo)) {
             $photo = [
-                "uuid" => auth()->user()->photo->uuid,
-                "original_file_name" => auth()->user()->photo->original_name,
-                "url" => auth()->user()->photo->url
+                "uuid" => $user->photo->uuid,
+                "original_file_name" => $user->photo->original_name,
+                "url" => $user->photo->url
             ];
         }
 
         return [
-            'uuid' => auth()->user()->uuid,
-            'email' => auth()->user()->email,
-            'name' => auth()->user()->userInformation->name,
+            'uuid' => $user->uuid,
+            'email' => $user->email,
+            'name' => $user->userDetail->full_name,
             'photo' => $photo,
             'role' => [
-                'uuid' => auth()->user()->userRole->role->uuid,
-                'name' => auth()->user()->userRole->role->name,
+                'uuid' => $user->roleUser->role->uuid,
+                'name' => $user->roleUser->role->name,
             ],
             'user_information' => [
-                'name' => auth()->user()->userInformation->name,
-                'phone_number' => auth()->user()->userInformation->phone_number,
+                'name' => $user->userDetail->full_name,
+                'phone_number' => $user->userDetail->phone_number,
             ]
         ];
     }

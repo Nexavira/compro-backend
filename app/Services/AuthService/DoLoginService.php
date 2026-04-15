@@ -21,8 +21,8 @@ class DoLoginService extends DefaultService implements ServiceInterface {
                 'user_uuid' => $user->uuid,
                 'email' => $user->email,
                 'role' => [
-                    'uuid' => $user->userRole->role->uuid,
-                    'name' => $user->userRole->role->name,
+                    'uuid' => $user->roleUser->role->uuid,
+                    'name' => $user->roleUser->role->name,
                 ]
             ],
             'token' => $user->createToken('MyApp')->accessToken
