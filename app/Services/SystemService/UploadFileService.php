@@ -14,20 +14,28 @@ class UploadFileService extends DefaultService implements ServiceInterface
         
         $sys_file = new File();
 
-        $sys_file->tenant_id = $dto['tenant_id'];
+        $sys_file->tenant_id = $dto['tenant_id'] ?? null;
         $sys_file->related_id = $dto['related_id'] ?? null;
         $sys_file->related_type = $dto['related_type'] ?? null;
         
-        $path = $file->store('uploads/tenants/' . $dto['tenant_id'], 'public');
+        // Determine visibility and corresponding storage disk
+        $is_public = isset($dto['is_public']) ? (int) $dto['is_public'] : 1;
+        $disk = $is_public === 1 ? 'public' : 'local';
+
+        // Construct storage path securely
+        $pathPrefix = 'uploads/';
+        $pathPrefix .= $sys_file->tenant_id ? 'tenants/' . $sys_file->tenant_id : 'general';
+        
+        $path = $file->store($pathPrefix, $disk);
 
         $sys_file->file_name = basename($path);
         $sys_file->original_name = $file->getClientOriginalName();
         $sys_file->file_path = $path;
         $sys_file->mime_type = $file->getClientMimeType();
-        $sys_file->file_extension = $file->extension();
+        $sys_file->file_extension = $file->extension() ?: $file->getClientOriginalExtension();
         $sys_file->file_size = $file->getSize();
-        $sys_file->storage_disk = 'public';
-        $sys_file->is_public = $dto['is_public'] ?? 1;
+        $sys_file->storage_disk = $disk;
+        $sys_file->is_public = $is_public;
 
         $this->prepareAuditActive($sys_file);
         $this->prepareAuditInsert($sys_file);
@@ -41,11 +49,11 @@ class UploadFileService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'file' => ['required', 'file'],
-            'tenant_id' => ['required', 'integer'],
+            'file' => ['required', 'file', 'max:51200'], // Max 50MB
+            'tenant_id' => ['nullable', 'integer'],
             'related_id' => ['nullable', 'integer'],
             'related_type' => ['nullable', 'string'],
-            'is_public' => ['nullable', 'integer'],
+            'is_public' => ['nullable', 'integer', 'in:0,1'],
         ];
     }
 }
