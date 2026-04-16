@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sys_files', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('tenant_id')->constrained('sys_tenants')->onDelete('cascade');
+            $table->integer('tenant_id')->nullable();
             $table->integer('related_id')->nullable();
             $table->string('related_type')->nullable();
             $table->string('file_name')->nullable();

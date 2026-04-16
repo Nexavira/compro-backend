@@ -31,9 +31,9 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->uniqueSoftDelete(['name', 'code']);
+            $table->uniqueSoftDelete(['name', 'slug']);
 
-            $table->index(['name', 'code', 'deleted_at']);
+            $table->index(['name', 'slug', 'deleted_at']);
         });
     }
 
