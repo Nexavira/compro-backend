@@ -34,27 +34,26 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label('Tenant Management')
+                    ->label('Tenants')
                     ->collapsible(true)
                     ->collapsed(),
                 
                 NavigationGroup::make()
-                    ->label('Subscription Management')
+                    ->label('Transactions')
                     ->collapsible(true)
                     ->collapsed(),
                 
                 NavigationGroup::make()
-                    ->label('Global Template Management')
-                    ->collapsible(true)
-                    ->collapsed(),
-
-                NavigationGroup::make()
-                    ->label('Api Key Management')
+                    ->label('CMS')
                     ->collapsible(true)
                     ->collapsed(),    
                 
                 NavigationGroup::make()
-                    ->label('User Management')
+                    ->label('Access Control')
+                    ->collapsible(true)
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('System')
                     ->collapsible(true)
                     ->collapsed(),
             ])
