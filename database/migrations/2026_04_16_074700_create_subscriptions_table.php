@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('tnt_subscriptions', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('tenant_id')->nullable()->constrained('tnt_tenants')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('auth_users')->onDelete('cascade');
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload')->nullable();
-            $table->integer('last_activity')->index()->nullable();
+            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
+            $table->string('invoice_number');
+            $table->decimal('amount', 15, 2);
+            $table->unsignedBigInteger('due_date');
+            $table->string('status');
+            $table->string('billing_cycle');
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -27,7 +27,9 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->index(['tenant_id', 'user_id', 'last_activity', 'deleted_at']);
+            $table->uniqueSoftDelete(['tenant_id', 'invoice_number']);
+
+            $table->index(['tenant_id', 'invoice_number', 'status', 'deleted_at']);
         });
     }
 
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('tnt_subscriptions');
     }
 };

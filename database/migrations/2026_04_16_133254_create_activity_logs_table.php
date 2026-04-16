@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('sys_activity_logs', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('tenant_id')->nullable()->constrained('tnt_tenants')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('auth_users')->onDelete('cascade');
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload')->nullable();
-            $table->integer('last_activity')->index()->nullable();
+            $table->integer('tenant_id')->nullable();
+            
+            $table->nullableMorphs('subject');
+            $table->nullableMorphs('causer');
+            
+            $table->string('log_name')->nullable();
+            $table->text('description')->nullable();
+            $table->json('properties')->nullable();
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -27,7 +29,7 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->index(['tenant_id', 'user_id', 'last_activity', 'deleted_at']);
+            $table->index(['tenant_id', 'log_name', 'deleted_at']);
         });
     }
 
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('sys_activity_logs');
     }
 };

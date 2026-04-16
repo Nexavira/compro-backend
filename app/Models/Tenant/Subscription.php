@@ -2,9 +2,14 @@
 
 namespace App\Models\Tenant;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Subscription extends Model
+class Subscription extends BaseModel
 {
-    //
+    protected $table = 'tnt_subscriptions';
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }

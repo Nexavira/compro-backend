@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tnt_tenants', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('logo_id')->constrained('sys_files')->onDelete('cascade');
-            $table->foreignId('favicon_id')->constrained('sys_files')->onDelete('cascade');
+            $table->foreignId('logo_id')->nullable()->constrained('sys_files')->onDelete('cascade');
+            $table->foreignId('favicon_id')->nullable()->constrained('sys_files')->onDelete('cascade');
             $table->foreignId('tenant_category_id')->constrained('tnt_tenant_categories')->onDelete('cascade');
             $table->string('name');
             $table->string('slug');

@@ -6,6 +6,8 @@ use App\Models\Auth\Role;
 use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\RoleSeeder;
 use Database\Seeders\Auth\UserSeeder;
+use Database\Seeders\Tenant\TenantCategorySeeder;
+use Database\Seeders\Tenant\TenantSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            PermissionSeeder::class
+            PermissionSeeder::class,
+            TenantCategorySeeder::class,
+            TenantSeeder::class
         ]);
     }
 }

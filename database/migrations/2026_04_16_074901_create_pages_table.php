@@ -11,9 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('cms_pages', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
+            $table->string('title');
+            $table->string('slug');
+            $table->json('content_blocks')->nullable();
+
+            $table->integer('is_active')->default(1);
+            $table->integer('version')->default(0);
+            $table->userFootprints();
+            $table->epochTimestamps();
+            $table->epochSoftDeletes();
+
+            $table->uniqueSoftDelete(['tenant_id', 'slug']);
+
+            $table->index(['tenant_id', 'slug', 'deleted_at']);
         });
     }
 
@@ -22,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('cms_pages');
     }
 };

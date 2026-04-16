@@ -11,9 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('cms_posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
+            $table->string('title');
+            $table->json('metadata')->nullable();
+            $table->string('slug');
+            $table->text('content')->nullable();
+            $table->longText('body')->nullable();
+
+            $table->integer('is_active')->default(1);
+            $table->integer('version')->default(0);
+            $table->userFootprints();
+            $table->epochTimestamps();
+            $table->epochSoftDeletes();
+
+            $table->uniqueSoftDelete(['tenant_id', 'slug']);
+
+            $table->index(['tenant_id', 'slug', 'deleted_at']);
         });
     }
 
@@ -22,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('cms_posts');
     }
 };
