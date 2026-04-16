@@ -6,6 +6,7 @@ use App\Models\Auth\Permission;
 use App\Providers\RegisterService\RegisterAuthService;
 use App\Providers\RegisterService\RegisterPermissionService;
 use App\Providers\RegisterService\RegisterRoleService;
+use App\Providers\RegisterService\RegisterSystemService;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\Gate;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RegisterRoleService::class);
         $this->app->register(RegisterAuthService::class);
         $this->app->register(RegisterPermissionService::class);
+        $this->app->register(RegisterSystemService::class);
     }
 
     /**
