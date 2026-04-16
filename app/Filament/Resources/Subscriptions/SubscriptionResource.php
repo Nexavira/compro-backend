@@ -9,7 +9,7 @@ use App\Filament\Resources\Subscriptions\Pages\ViewSubscription;
 use App\Filament\Resources\Subscriptions\Schemas\SubscriptionForm;
 use App\Filament\Resources\Subscriptions\Schemas\SubscriptionInfolist;
 use App\Filament\Resources\Subscriptions\Tables\SubscriptionsTable;
-use App\Models\Subscription;
+use App\Models\Tenant\Subscription;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
