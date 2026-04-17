@@ -2,34 +2,14 @@
 
 namespace App\Models\System;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Illuminate\Support\Facades\Storage;
 
-class File extends Model
+class File extends BaseModel
 {
     protected $table = 'sys_files';
 
     protected $guarded = ['id'];
-
-    protected $hidden = [
-        'id',
-        'created_by',
-        'updated_by',
-        'deleted_by',
-        'updated_at',
-        'deleted_at',
-        'is_active',
-        'version'
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'created_at' => 'datetime:U',
-            'updated_at' => 'datetime:U',
-            'deleted_at' => 'datetime:U',
-        ];
-    }
 
     public function getUrlAttribute()
     {
