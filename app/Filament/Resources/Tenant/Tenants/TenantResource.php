@@ -24,7 +24,7 @@ class TenantResource extends Resource
     protected static ?string $model = Tenant::class;
 
     protected static ?string $modelLabel = 'Tenant';
-    protected static ?string $pluralModelLabel = 'List Tenants';
+    protected static ?string $pluralModelLabel = 'Lists';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
 
@@ -39,11 +39,6 @@ class TenantResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return TenantForm::configure($schema);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return TenantInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
@@ -63,8 +58,6 @@ class TenantResource extends Resource
         return [
             'index' => ListTenants::route('/'),
             'create' => CreateTenant::route('/create'),
-            'view' => ViewTenant::route('/{record}'),
-            'edit' => EditTenant::route('/{record}/edit'),
         ];
     }
 
@@ -74,5 +67,10 @@ class TenantResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery();
     }
 }

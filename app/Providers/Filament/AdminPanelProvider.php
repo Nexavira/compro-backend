@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Nexavira')
             ->login()
             ->spa()
+            ->maxContentWidth('full')
             ->colors([
                 'primary' => Color::Amber,
             ])

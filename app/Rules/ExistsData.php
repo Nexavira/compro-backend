@@ -5,6 +5,7 @@ namespace App\Rules;
 use App\Models\BaseModel;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class ExistsData implements ValidationRule
@@ -35,7 +36,7 @@ class ExistsData implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!$this->table instanceof \Illuminate\Database\Eloquent\Model and !$this->table instanceof BaseModel) {
+        if (!$this->table instanceof Model and !$this->table instanceof BaseModel) {
             $this->table = DB::table($this->table);
         }
 
