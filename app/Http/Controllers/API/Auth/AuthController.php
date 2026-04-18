@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
 
     public function getUserSessionInformation (Request $request) {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = $request->user();
 
         if(!$user) {

@@ -9,7 +9,7 @@ use App\Filament\Resources\Transaction\Subscriptions\Pages\ViewSubscription;
 use App\Filament\Resources\Transaction\Subscriptions\Schemas\SubscriptionForm;
 use App\Filament\Resources\Transaction\Subscriptions\Schemas\SubscriptionInfolist;
 use App\Filament\Resources\Transaction\Subscriptions\Tables\SubscriptionsTable;
-use App\Models\Subscription;
+use App\Models\Transaction\Subscription;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

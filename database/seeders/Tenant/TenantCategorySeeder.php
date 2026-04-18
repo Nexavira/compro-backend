@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Tenant;
 
+use App\Models\Tenant\TenantCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -46,7 +47,7 @@ class TenantCategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            \App\Models\Tenant\TenantCategory::create($category);
+            TenantCategory::create($category);
         }
     }
 }

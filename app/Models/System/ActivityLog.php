@@ -3,6 +3,7 @@
 namespace App\Models\System;
 
 use App\Models\BaseModel;
+use App\Models\Tenant\Tenant;
 
 class ActivityLog extends BaseModel
 {
@@ -27,6 +28,6 @@ class ActivityLog extends BaseModel
 
     public function tenant()
     {
-        return $this->belongsTo(\App\Models\Tenant\Tenant::class);
+        return $this->belongsTo(Tenant::class);
     }
 }

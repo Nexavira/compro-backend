@@ -3,6 +3,7 @@
 namespace App\Models\Transaction;
 
 use App\Models\BaseModel;
+use App\Models\System\File;
 
 class Payment extends BaseModel
 {
@@ -10,11 +11,11 @@ class Payment extends BaseModel
 
     public function subscription()
     {
-        return $this->belongsTo(\App\Models\Tenant\Subscription::class);
+        return $this->belongsTo(Subscription::class);
     }
 
     public function proofOfPayment()
     {
-        return $this->belongsTo(\App\Models\System\File::class, 'proof_of_payment_id');
+        return $this->belongsTo(File::class, 'proof_of_payment_id');
     }
 }

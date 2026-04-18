@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models\Tenant;
+namespace App\Models\Transaction;
 
 use App\Models\BaseModel;
+use App\Models\Tenant\Tenant;
 
 class Subscription extends BaseModel
 {

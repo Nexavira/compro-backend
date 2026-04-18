@@ -3,6 +3,7 @@
 namespace App\Models\CMS;
 
 use App\Models\BaseModel;
+use App\Models\Tenant\Tenant;
 
 class Page extends BaseModel
 {
@@ -17,6 +18,6 @@ class Page extends BaseModel
 
     public function tenant()
     {
-        return $this->belongsTo(\App\Models\Tenant\Tenant::class);
+        return $this->belongsTo(Tenant::class);
     }
 }

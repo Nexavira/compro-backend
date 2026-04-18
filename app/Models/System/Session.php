@@ -2,7 +2,9 @@
 
 namespace App\Models\System;
 
+use App\Models\Auth\User;
 use App\Models\BaseModel;
+use App\Models\Tenant\Tenant;
 
 class Session extends BaseModel
 {
@@ -10,11 +12,11 @@ class Session extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(\App\Models\Auth\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function tenant()
     {
-        return $this->belongsTo(\App\Models\Tenant\Tenant::class);
+        return $this->belongsTo(Tenant::class);
     }
 }

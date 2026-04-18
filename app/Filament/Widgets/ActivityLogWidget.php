@@ -2,8 +2,11 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\ActivityLog;
 use App\Models\Auth\User;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Support\Collection;
@@ -20,13 +23,11 @@ class ActivityLogWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            // 1. Panggil query langsung dari model Sushi kita
             ->query(
-                \App\Models\ActivityLog::query()
+                ActivityLog::query()
             )
-            // 2. Kolom tabel tetap sama seperti sebelumnya
             ->columns([
-                Tables\Columns\IconColumn::make('status')
+                IconColumn::make('status')
                     ->label('Status')
                     ->icon(fn (string $state): string => match ($state) {
                         'success' => 'heroicon-o-plus-circle',
@@ -41,17 +42,17 @@ class ActivityLogWidget extends BaseWidget
                         default => 'gray',
                     }),
                 
-                Tables\Columns\TextColumn::make('aktivitas')
+                TextColumn::make('aktivitas')
                     ->label('Aktivitas')
                     ->weight('bold')
                     ->searchable(),
                 
-                Tables\Columns\TextColumn::make('deskripsi')
+                TextColumn::make('deskripsi')
                     ->label('Deskripsi')
                     ->wrap()
                     ->color('gray'),
                 
-                Tables\Columns\TextColumn::make('waktu')
+                TextColumn::make('waktu')
                     ->label('Waktu')
                     ->alignment('right')
                     ->size('sm')
