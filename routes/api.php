@@ -10,4 +10,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     require __DIR__ . '/api/auth/role.php';
     require __DIR__ . '/api/auth/permission.php';
     require __DIR__ . '/api/system/file.php';
+    require __DIR__ . '/api/tenant/tenant.php';
 });
