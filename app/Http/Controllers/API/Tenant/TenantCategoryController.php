@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\Tenant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\TenantCategoryRequest\GetTenantCategoryRequest;
-use App\Http\Resources\API\Tenant\GetTenantCategoryResource;
+use App\Http\Resources\API\TenantCategory\GetTenantCategoryResource;
 
 class TenantCategoryController extends Controller
 {
