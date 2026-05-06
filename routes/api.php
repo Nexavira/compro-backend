@@ -2,8 +2,17 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\TenantHandlerApi;
 
 Route::post('do-login', [App\Http\Controllers\API\Auth\AuthController::class, 'doLogin']);
+
+// Tenant Profiles (Custom Domains & Subdomains)
+Route::middleware([TenantHandlerApi::class])->group(function () {
+    Route::get('/check', function () {
+        $tenant = app('tenant');
+        return "Welcome to the profile of: " . $tenant->name;
+    });
+});
 
 Route::group(['middleware' => 'auth:api'], function () {
     require __DIR__ . '/api/auth/auth.php';

@@ -33,4 +33,18 @@ class Tenant extends BaseModel
     {
         return $this->favicon?->url;
     }
+
+    public static function resolveFromRequest($host)
+    {
+        // 1. Try to find by custom domain first
+        $tenant = self::where('custom_domain', $host)->first();
+
+        // 2. If not found, try to find by slug (subdomain)
+        if (!$tenant && str_ends_with($host, '.nexavira.test')) {
+            $slug = str_replace('.nexavira.test', '', $host);
+            $tenant = self::where('slug', $slug)->first();
+        }
+
+        return $tenant;
+    }
 }
