@@ -5,9 +5,7 @@ namespace App\Filament\Resources\Tenant\Tenants;
 use App\Filament\Resources\Tenant\Tenants\Pages\CreateTenant;
 use App\Filament\Resources\Tenant\Tenants\Pages\EditTenant;
 use App\Filament\Resources\Tenant\Tenants\Pages\ListTenants;
-use App\Filament\Resources\Tenant\Tenants\Pages\ViewTenant;
 use App\Filament\Resources\Tenant\Tenants\Schemas\TenantForm;
-use App\Filament\Resources\Tenant\Tenants\Schemas\TenantInfolist;
 use App\Filament\Resources\Tenant\Tenants\Tables\TenantsTable;
 use App\Models\Tenant\Tenant;
 use BackedEnum;
@@ -58,6 +56,7 @@ class TenantResource extends Resource
         return [
             'index' => ListTenants::route('/'),
             'create' => CreateTenant::route('/create'),
+            'edit' => EditTenant::route('/{record}/edit'),
         ];
     }
 

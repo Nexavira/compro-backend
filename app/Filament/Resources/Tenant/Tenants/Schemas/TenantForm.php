@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Tenant\Tenants\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -81,6 +80,8 @@ class TenantForm
                                         'light' => 'Light',
                                         'dark' => 'Dark',
                                     ])
+                                    ->preload()
+                                    ->searchable()
                                     ->default('light')
                                     ->required(),
                                     
@@ -103,15 +104,21 @@ class TenantForm
                         Section::make('Branding')
                             ->description('Upload logo and favicon.')
                             ->schema([
-                                FileUpload::make('logo_id')
+                                FileUpload::make('logo_upload')
                                     ->label('Company Logo')
                                     ->image()
-                                    ->directory('tenants/logos'),
+                                    ->disk('public')
+                                    ->directory('tenants/logos')
+                                    ->formatStateUsing(fn ($record) => $record?->logo?->file_path),
+                                    // ->dehydrated(false),
                                     
-                                FileUpload::make('favicon_id')
+                                FileUpload::make('favicon_upload')
                                     ->label('Favicon')
                                     ->image()
-                                    ->directory('tenants/favicons'),
+                                    ->disk('public')
+                                    ->directory('tenants/favicons')
+                                    ->formatStateUsing(fn ($record) => $record?->favicon?->file_path),
+                                    // ->dehydrated(false),
                             ]),
                     ])->columnSpan(['lg' => 1]),
                     

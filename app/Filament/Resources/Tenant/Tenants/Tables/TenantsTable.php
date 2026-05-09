@@ -2,15 +2,17 @@
 
 namespace App\Filament\Resources\Tenant\Tenants\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteBulkAction;
-use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 
 class TenantsTable
 {
@@ -18,6 +20,9 @@ class TenantsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('logo')
+                    ->label('Logo')
+                    ->circular(),
                 TextColumn::make('name')
                     ->label('Name')
                     ->searchable(),
@@ -25,15 +30,27 @@ class TenantsTable
             ->filters([
                 TrashedFilter::make(),
             ])
+            ->checkIfRecordIsSelectableUsing(function ($record): bool {
+                return $record->name !== 'Nexavira';
+            })
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make()
+                        ->before(fn ($record) => $record->update(['is_active' => false])),
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                    ForceDeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->action(function (Collection $records) {
+                            $records->each(function ($record) {
+                                if ($record->name !== 'Nexavira') {
+                                    $record->delete();
+                                }
+                            });
+                        }),
                 ]),
             ]);
     }

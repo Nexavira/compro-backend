@@ -9,6 +9,16 @@ class Tenant extends BaseModel
 {
     protected $table = 'tnt_tenants';
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'tenant_category_id',
+        'custom_domain',
+        'logo_id',
+        'favicon_id',
+        'theme_mode',
+    ];
+
     public function tenantCategory()
     {
         return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
