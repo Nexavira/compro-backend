@@ -9,15 +9,7 @@ class Tenant extends BaseModel
 {
     protected $table = 'tnt_tenants';
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'tenant_category_id',
-        'custom_domain',
-        'logo_id',
-        'favicon_id',
-        'theme_mode',
-    ];
+    protected $fillable = [];
 
     public function tenantCategory()
     {
@@ -46,10 +38,8 @@ class Tenant extends BaseModel
 
     public static function resolveFromRequest($host)
     {
-        // 1. Try to find by custom domain first
         $tenant = self::where('custom_domain', $host)->first();
 
-        // 2. If not found, try to find by slug (subdomain)
         if (!$tenant && str_ends_with($host, '.nexavira.test')) {
             $slug = str_replace('.nexavira.test', '', $host);
             $tenant = self::where('slug', $slug)->first();

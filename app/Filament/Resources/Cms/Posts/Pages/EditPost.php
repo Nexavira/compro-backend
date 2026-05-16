@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Filament\Resources\Auth\Roles\Pages;
+namespace App\Filament\Resources\Cms\Posts\Pages;
 
-use App\Filament\Resources\Auth\Roles\RoleResource;
+use App\Filament\Resources\Cms\Posts\PostResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditRoles extends EditRecord
+class EditPost extends EditRecord
 {
-    protected static string $resource = RoleResource::class;
+    protected static string $resource = PostResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
+            ViewAction::make(),
             DeleteAction::make(),
             ForceDeleteAction::make(),
             RestoreAction::make(),

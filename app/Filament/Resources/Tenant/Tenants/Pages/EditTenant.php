@@ -19,7 +19,8 @@ class EditTenant extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->before(fn ($record) => $record->update(['is_active' => false])),
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
@@ -52,7 +53,6 @@ class EditTenant extends EditRecord
                 ]);
                 $data['logo_id'] = $logoFile->id;
             } else {
-                // User Hapus Gambar
                 $data['logo_id'] = null;
             }
         }

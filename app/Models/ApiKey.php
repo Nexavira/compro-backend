@@ -2,9 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Tenant\Tenant;
 
-class ApiKey extends Model
+class ApiKey extends BaseModel
 {
-    //
+    protected $table = 'sys_api_keys';
+
+    public function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'permissions' => 'json',
+        ]);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }

@@ -21,70 +21,24 @@ class RoleForm
         };
     }
 
-    protected static function getViewSchema(Schema $schema): Schema
-    {
-        return $schema->components([
-            Group::make([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->required()
-                    ->unique(
-                        table: 'auth_roles', 
-                        ignoreRecord: true,
-                        modifyRuleUsing: function ($rule) {
-                            return $rule->whereNull('deleted_at');
-                        }
-                    ),
-                TextInput::make('code')
-                    ->label('Code')
-                    ->required()
-                    ->unique(
-                        table: 'auth_roles', 
-                        ignoreRecord: true,
-                        modifyRuleUsing: function ($rule) {
-                            return $rule->whereNull('deleted_at');
-                        }
-                    ),
-                Textarea::make('description')
-                    ->label('Description')
-            ])->columnSpanFull()
-        ]);
-    }
-
     protected static function getCreateSchema(Schema $schema): Schema
     {
-        return $schema->components([
-            Group::make([
-
-                TextInput::make('name')
-                    ->label('Name')
-                    ->required()
-                    ->unique(
-                        table: 'auth_roles', 
-                        ignoreRecord: true,
-                        modifyRuleUsing: function ($rule) {
-                            return $rule->whereNull('deleted_at');
-                        }
-                    ),
-                TextInput::make('code')
-                    ->label('Code')
-                    ->required()
-                    ->unique(
-                        table: 'auth_roles', 
-                        ignoreRecord: true,
-                        modifyRuleUsing: function ($rule) {
-                            return $rule->whereNull('deleted_at');
-                        }
-                    ),
-                Textarea::make('description')
-                    ->label('Description')
-            ])->columnSpanFull()
-        ]);
+        return $schema->components(self::getFormComponents());
     }
 
     protected static function getEditSchema(Schema $schema): Schema
     {
-        return $schema->components([
+        return $schema->components(self::getFormComponents());
+    }
+
+    protected static function getViewSchema(Schema $schema): Schema
+    {
+        return $schema->components(self::getFormComponents());
+    }
+
+    public static function getFormComponents(): array
+    {
+        return [
             Group::make([
 
                 TextInput::make('name')
@@ -110,6 +64,6 @@ class RoleForm
                 Textarea::make('description')
                     ->label('Description')
             ])->columnSpanFull()
-        ]);
+        ];
     }
 }

@@ -5,9 +5,7 @@ namespace App\Filament\Resources\System\ApiKeys;
 use App\Filament\Resources\System\ApiKeys\Pages\CreateApiKey;
 use App\Filament\Resources\System\ApiKeys\Pages\EditApiKey;
 use App\Filament\Resources\System\ApiKeys\Pages\ListApiKeys;
-use App\Filament\Resources\System\ApiKeys\Pages\ViewApiKey;
 use App\Filament\Resources\System\ApiKeys\Schemas\ApiKeyForm;
-use App\Filament\Resources\System\ApiKeys\Schemas\ApiKeyInfolist;
 use App\Filament\Resources\System\ApiKeys\Tables\ApiKeysTable;
 use App\Models\ApiKey;
 use BackedEnum;
@@ -41,11 +39,6 @@ class ApiKeyResource extends Resource
         return ApiKeyForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return ApiKeyInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return ApiKeysTable::configure($table);
@@ -63,7 +56,6 @@ class ApiKeyResource extends Resource
         return [
             'index' => ListApiKeys::route('/'),
             'create' => CreateApiKey::route('/create'),
-            'view' => ViewApiKey::route('/{record}'),
             'edit' => EditApiKey::route('/{record}/edit'),
         ];
     }
@@ -74,5 +66,10 @@ class ApiKeyResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery();
     }
 }

@@ -2,12 +2,8 @@
 
 namespace App\Filament\Resources\Transaction\Subscriptions;
 
-use App\Filament\Resources\Transaction\Subscriptions\Pages\CreateSubscription;
-use App\Filament\Resources\Transaction\Subscriptions\Pages\EditSubscription;
 use App\Filament\Resources\Transaction\Subscriptions\Pages\ListSubscriptions;
-use App\Filament\Resources\Transaction\Subscriptions\Pages\ViewSubscription;
 use App\Filament\Resources\Transaction\Subscriptions\Schemas\SubscriptionForm;
-use App\Filament\Resources\Transaction\Subscriptions\Schemas\SubscriptionInfolist;
 use App\Filament\Resources\Transaction\Subscriptions\Tables\SubscriptionsTable;
 use App\Models\Transaction\Subscription;
 use BackedEnum;
@@ -41,11 +37,6 @@ class SubscriptionResource extends Resource
         return SubscriptionForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return SubscriptionInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return SubscriptionsTable::configure($table);
@@ -62,9 +53,6 @@ class SubscriptionResource extends Resource
     {
         return [
             'index' => ListSubscriptions::route('/'),
-            'create' => CreateSubscription::route('/create'),
-            'view' => ViewSubscription::route('/{record}'),
-            'edit' => EditSubscription::route('/{record}/edit'),
         ];
     }
 
@@ -74,5 +62,10 @@ class SubscriptionResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery();
     }
 }

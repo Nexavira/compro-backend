@@ -20,9 +20,11 @@ class TenantsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('logo')
+                ImageColumn::make('logo.file_path')
                     ->label('Logo')
-                    ->circular(),
+                    ->disk('public')
+                    ->circular()
+                    ->defaultImageUrl(url('/images/default-logo.png')),
                 TextColumn::make('name')
                     ->label('Name')
                     ->searchable(),

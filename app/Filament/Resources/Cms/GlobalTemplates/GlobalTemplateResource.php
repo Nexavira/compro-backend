@@ -5,9 +5,7 @@ namespace App\Filament\Resources\Cms\GlobalTemplates;
 use App\Filament\Resources\Cms\GlobalTemplates\Pages\CreateGlobalTemplate;
 use App\Filament\Resources\Cms\GlobalTemplates\Pages\EditGlobalTemplate;
 use App\Filament\Resources\Cms\GlobalTemplates\Pages\ListGlobalTemplates;
-use App\Filament\Resources\Cms\GlobalTemplates\Pages\ViewGlobalTemplate;
 use App\Filament\Resources\Cms\GlobalTemplates\Schemas\GlobalTemplateForm;
-use App\Filament\Resources\Cms\GlobalTemplates\Schemas\GlobalTemplateInfolist;
 use App\Filament\Resources\Cms\GlobalTemplates\Tables\GlobalTemplatesTable;
 use App\Models\GlobalTemplate;
 use BackedEnum;
@@ -41,11 +39,6 @@ class GlobalTemplateResource extends Resource
         return GlobalTemplateForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return GlobalTemplateInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return GlobalTemplatesTable::configure($table);
@@ -63,7 +56,6 @@ class GlobalTemplateResource extends Resource
         return [
             'index' => ListGlobalTemplates::route('/'),
             'create' => CreateGlobalTemplate::route('/create'),
-            'view' => ViewGlobalTemplate::route('/{record}'),
             'edit' => EditGlobalTemplate::route('/{record}/edit'),
         ];
     }
@@ -74,5 +66,10 @@ class GlobalTemplateResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery();
     }
 }

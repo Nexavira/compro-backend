@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trx_payments', function (Blueprint $table) {
+        Schema::create('sys_api_keys', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('subscription_id')->constrained('tnt_subscriptions')->onDelete('cascade');
-            $table->foreignId('proof_of_payment_id')->nullable()->constrained('sys_files')->onDelete('set null');
-            $table->decimal('amount_paid', 15, 2);
-            $table->string('payment_method');
-            $table->unsignedBigInteger('payment_date');
+            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
+            
+            $table->string('name');
+            $table->string('token')->unique();
+            
+            $table->timestamp('last_used_at')->nullable(); 
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->index(['subscription_id', 'payment_date', 'deleted_at']);
+            $table->index(['tenant_id']);
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trx_payments');
+        Schema::dropIfExists('sys_api_keys');
     }
 };

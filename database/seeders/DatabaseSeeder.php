@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Auth\Role;
 use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\RoleSeeder;
 use Database\Seeders\Auth\UserSeeder;
+use Database\Seeders\Master\PackageSeeder;
 use Database\Seeders\Tenant\TenantCategorySeeder;
 use Database\Seeders\Tenant\TenantSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PermissionSeeder::class,
             TenantCategorySeeder::class,
-            TenantSeeder::class
+            TenantSeeder::class,
+            PackageSeeder::class
         ]);
     }
 }

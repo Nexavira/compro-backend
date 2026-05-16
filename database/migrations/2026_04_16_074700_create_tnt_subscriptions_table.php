@@ -15,11 +15,17 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
-            $table->string('invoice_number');
-            $table->decimal('amount', 15, 2);
-            $table->unsignedBigInteger('due_date');
-            $table->string('status');
-            $table->string('billing_cycle');
+            $table->string('subscription_number')->unique();
+
+            // Package Information
+            $table->foreignId('package_id')->constrained('mst_packages')->onDelete('cascade');
+            $table->string('package_name');
+            $table->string('billing_cycle')->comment('monthly,annually');
+            $table->string('status')->comment('active, past_due, canceled');
+
+            // Subscription Details
+            $table->date('next_billing_date');
+            $table->decimal('amount', 15, 0);
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -27,9 +33,9 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->uniqueSoftDelete(['tenant_id', 'invoice_number']);
+            $table->uniqueSoftDelete(['tenant_id']);
 
-            $table->index(['tenant_id', 'invoice_number', 'status', 'deleted_at']);
+            $table->index(['tenant_id', 'status', 'deleted_at']);
         });
     }
 

@@ -17,7 +17,8 @@ class EditGlobalTemplate extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->before(fn ($record) => $record->update(['is_active' => false])),
             ForceDeleteAction::make(),
             RestoreAction::make(),
         ];
