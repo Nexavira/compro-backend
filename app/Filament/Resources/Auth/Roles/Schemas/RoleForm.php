@@ -40,7 +40,6 @@ class RoleForm
     {
         return [
             Group::make([
-
                 TextInput::make('name')
                     ->label('Name')
                     ->required()
