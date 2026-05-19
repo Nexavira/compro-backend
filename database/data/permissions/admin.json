@@ -1,73 +1,73 @@
 [
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Dashboard",
     "module_label": "Dashboard",
     "action_label": "View"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "User",
     "action_label": "View"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "User",
     "action_label": "Create"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "User",
     "action_label": "Edit"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "User",
     "action_label": "Delete"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Role",
     "action_label": "View"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Role",
     "action_label": "Create"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Role",
     "action_label": "Edit"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Role",
     "action_label": "Delete"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Permission",
     "action_label": "View"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Permission",
     "action_label": "Add"
   },
   {
     "guard_name": "admin",
-    "prefix_label": "Auth",
+    "prefix_label": "Access Control",
     "module_label": "Permission",
     "action_label": "Remove"
   },
@@ -93,6 +93,138 @@
     "guard_name": "admin",
     "prefix_label": "Tenant",
     "module_label": "Tenant",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Transaction",
+    "module_label": "Subscription",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Transaction",
+    "module_label": "Subscription",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Transaction",
+    "module_label": "Subscription",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Transaction",
+    "module_label": "Subscription",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "Transaction",
+    "module_label": "Payment",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Payment",
+    "action_label": "Payment Verification"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Post",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Post",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Post",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Post",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Page",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Page",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Page",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Page",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Global Template",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Global Template",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Global Template",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "CMS",
+    "module_label": "Global Template",
+    "action_label": "Delete"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "System",
+    "module_label": "Api Key",
+    "action_label": "View"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "System",
+    "module_label": "Api Key",
+    "action_label": "Create"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "System",
+    "module_label": "Api Key",
+    "action_label": "Edit"
+  },
+  {
+    "guard_name": "admin",
+    "prefix_label": "System",
+    "module_label": "Api Key",
     "action_label": "Delete"
   }
 ]

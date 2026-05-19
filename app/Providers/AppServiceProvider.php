@@ -3,6 +3,18 @@
 namespace App\Providers;
 
 use App\Models\Auth\Permission;
+use App\Models\Auth\Role;
+use App\Models\Auth\User;
+use App\Models\Tenant\Tenant;
+use App\Models\Transaction\Subscription;
+
+// Policies
+use App\Policies\AccessControl\RolePolicy;
+use App\Policies\AccessControl\UserPolicy;
+use App\Policies\Tenant\TenantPolicy;
+use App\Policies\Transaction\SubscriptionPolicy;
+
+// Register Services
 use App\Providers\RegisterService\RegisterAuthService;
 use App\Providers\RegisterService\RegisterPermissionService;
 use App\Providers\RegisterService\RegisterRoleService;
@@ -38,6 +50,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Policy
+        Gate::policy(Role::class, RolePolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Tenant::class, TenantPolicy::class);
+        Gate::policy(Subscription::class, SubscriptionPolicy::class);
+
+
         // Custom macro for created_at and updated_at as Epoch
         Blueprint::macro('epochTimestamps', function () {
             $this->unsignedBigInteger('created_at')->nullable();
