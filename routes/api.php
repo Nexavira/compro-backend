@@ -9,7 +9,7 @@ Route::post('do-login', [App\Http\Controllers\API\Auth\AuthController::class, 'd
 
 // Tenant Profiles (Custom Domains & Subdomains)
 Route::middleware([TenantHandlerApi::class])->group(function () {
-    Route::get('/check', function () {
+    Route::get('/check-tenant', function () {
         $tenant = app('tenant');
         return "Welcome to the profile of: " . $tenant->name;
     });
