@@ -70,8 +70,12 @@ class ApiKeyForm
                                     Select::make('tenant_id')
                                         ->label('Tenant')
                                         ->relationship('tenant', 'name')
+                                        ->native(false)
                                         ->searchable()
                                         ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
+                                        ])
                                         ->required(),
 
                                     Select::make('is_active')
@@ -79,6 +83,12 @@ class ApiKeyForm
                                         ->options([
                                             1 => 'Active (Allow API)',
                                             0 => 'Inactive (Block API)',
+                                        ])
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
                                         ->required()

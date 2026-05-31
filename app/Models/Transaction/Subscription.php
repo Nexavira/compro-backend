@@ -20,6 +20,13 @@ class Subscription extends BaseModel
         return $this->belongsTo(Package::class);
     }
 
+    public function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'next_billing_date' => 'date',
+        ]);
+    }
+
     public function payments()
     {
         return $this->hasMany(Payment::class);

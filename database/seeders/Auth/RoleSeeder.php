@@ -9,10 +9,31 @@ class RoleSeeder extends Seeder
 {
     public function run(): void
     {
-        Role::create([
-            'name' => 'Master Admin',
-            'code' => 'master_admin',
-            'description' => 'Ini adalah role Master Admin',
-        ]);
+        $datas =
+            [
+                [
+                    'name' => 'Master Admin',
+                    'code' => 'master_admin',
+                    'description' => 'Ini adalah role Master Admin',
+                ],
+                [
+                    'name' => 'Internal',
+                    'code' => 'internal',
+                    'description' => 'Ini adalah role Internal',
+                ],
+                [
+                    'name' => 'Tenant Admin',
+                    'code' => 'tenant_admin',
+                    'description' => 'Ini adalah role Tenant Admin',
+                ]
+            ];
+
+        foreach ($datas as $data) {
+            Role::create([
+                'name' => $data['name'],
+                'code' => $data['code'],
+                'description' => $data['description'],
+            ]);
+        }
     }
 }

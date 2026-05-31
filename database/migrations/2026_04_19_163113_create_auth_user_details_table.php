@@ -14,17 +14,19 @@ return new class extends Migration
         Schema::create('auth_user_details', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->integer('photo_id')->nullable();
             $table->foreignId('user_id')->constrained('auth_users')->onDelete('cascade');
+            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
             $table->string('full_name');
             $table->string('phone_number');
-            
+
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
             $table->userFootprints();
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->index(['user_id', 'full_name', 'deleted_at']);
+            $table->index(['user_id', 'tenant_id', 'full_name', 'deleted_at']);
         });
     }
 

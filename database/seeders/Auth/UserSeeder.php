@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
 
         $admin->userDetail()->create([
             'user_id' => $admin->id,
+            'tenant_id' => 1,
             'full_name' => 'Master Admin',
             'phone_number' => '08123456789',
         ]);

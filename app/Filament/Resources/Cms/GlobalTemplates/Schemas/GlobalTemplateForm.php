@@ -111,6 +111,12 @@ class GlobalTemplateForm
                                             'portfolio'       => 'Portfolio & Resume',
                                             'facility'        => 'Facility',
                                         ])
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
+                                        ])
                                         ->default('company_profile')
                                         ->required(),
 
@@ -119,6 +125,12 @@ class GlobalTemplateForm
                                         ->options([
                                             1 => 'Active (Available for Tenant)',
                                             0 => 'Inactive (Hide)',
+                                        ])
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
                                         ->required(),

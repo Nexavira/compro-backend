@@ -2,15 +2,17 @@
 
 namespace App\Models\Auth;
 
+use App\Models\Tenant\Tenant;
 use App\Traits\Blameable;
-use Database\Factories\UserFactory;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
@@ -70,12 +72,25 @@ class User extends Authenticatable
         return "{$this->userDetail?->full_name}";
     }
 
-    public function getFilamentAvatarUrl(): ?string
+    public function getTenants(Panel $panel): array|Collection
     {
-        if (! $this->photo_id) {
-            return null;
+        if ($this->roleUser && $this->roleUser->role_id == 1) {
+            return Tenant::all();
         }
 
-        return Storage::disk('public')->url($this->photo_id);
+        if ($this->userDetail && $this->userDetail->tenant) {
+            return collect([$this->userDetail->tenant]);
+        }
+
+        return collect();
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        if ($this->roleUser && $this->roleUser->role_id == 1) {
+            return true;
+        }
+
+        return $this->userDetail && $this->userDetail->tenant_id == $tenant->id;
     }
 }

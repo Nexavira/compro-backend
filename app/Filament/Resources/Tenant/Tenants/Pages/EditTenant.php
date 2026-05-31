@@ -4,10 +4,6 @@ namespace App\Filament\Resources\Tenant\Tenants\Pages;
 
 use App\Filament\Resources\Tenant\Tenants\TenantResource;
 use App\Models\System\File;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\ForceDeleteAction;
-use Filament\Actions\RestoreAction;
-use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,11 +14,7 @@ class EditTenant extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make()
-                ->before(fn ($record) => $record->update(['is_active' => false])),
-            ForceDeleteAction::make(),
-            RestoreAction::make(),
+            // Removed View and Delete actions to only allow them from the table list.
         ];
     }
 

@@ -20,8 +20,7 @@ class RoleUser extends Model
         'role_id'
     ];
 
-    protected $hidden = 
-    [   
+    protected $hidden = [   
         'user_id',
         'role_id',
     ];

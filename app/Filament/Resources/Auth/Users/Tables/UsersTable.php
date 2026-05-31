@@ -22,9 +22,9 @@ class UsersTable
             ->columns([
                 ImageColumn::make('photo_id')
                     ->label('Profile Picture')
+                    ->getStateUsing(fn ($record) => $record->userDetail?->photo?->file_path ? url('storage/' . $record->userDetail->photo->file_path) : null)
                     ->circular()
-                    ->disk('public')
-                    ->visibility('public'),
+                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->userDetail?->full_name ?? 'User') . '&color=FFFFFF&background=111827'),
                 TextColumn::make('userDetail.full_name')
                     ->label('Full Name')
                     ->searchable(),

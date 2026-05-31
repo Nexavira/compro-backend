@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('auth_users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->integer('photo_id')->nullable();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
 
             $table->integer('is_active')->default(1);
@@ -27,7 +26,7 @@ return new class extends Migration
             $table->epochSoftDeletes();
 
             $table->uniqueSoftDelete('email');
-            
+
             $table->index(['email', 'deleted_at']);
         });
     }

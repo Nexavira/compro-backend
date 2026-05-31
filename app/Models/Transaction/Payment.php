@@ -20,6 +20,14 @@ class Payment extends BaseModel
         return $this->belongsTo(File::class, 'proof_of_payment_id');
     }
 
+    public function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'due_date' => 'date',
+            'payment_date' => 'date',
+        ]);
+    }
+
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);

@@ -54,6 +54,12 @@ class PaymentForm
                             Select::make('tenant_id')
                                 ->label('Tenant')
                                 ->relationship('tenant', 'name')
+                                ->native(false)
+                                ->searchable()
+                                ->preload()
+                                ->extraAttributes([
+                                    'style' => 'cursor: pointer !important;',
+                                ])
                                 ->disabled()
                                 ->required(),
                             TextInput::make('description')
@@ -81,6 +87,12 @@ class PaymentForm
                                     'paid'                 => 'Paid',
                                     'failed'               => 'Failed',
                                 ])
+                                ->native(false)
+                                ->searchable()
+                                ->preload()
+                                ->extraAttributes([
+                                    'style' => 'cursor: pointer !important;',
+                                ])
                                 ->required(),
                             TextInput::make('amount_paid')
                                 ->label('Amount Paid')
@@ -92,6 +104,12 @@ class PaymentForm
                                 ->options([
                                     'bank_transfer' => 'Bank Transfer',
                                     'midtrans'      => 'Otomatis (Gateway)',
+                                ])
+                                ->native(false)
+                                ->searchable()
+                                ->preload()
+                                ->extraAttributes([
+                                    'style' => 'cursor: pointer !important;',
                                 ])
                                 ->required($isEdit),
                             FileUpload::make('proof_of_payment_upload')

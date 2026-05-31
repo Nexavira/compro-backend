@@ -7,6 +7,8 @@ use App\Models\Auth\Role;
 use App\Models\Auth\User;
 use App\Models\Tenant\Tenant;
 use App\Models\Transaction\Subscription;
+use App\Models\Transaction\Payment;
+use App\Observers\PaymentObserver;
 
 // Policies
 use App\Policies\AccessControl\RolePolicy;
@@ -56,16 +58,18 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Tenant::class, TenantPolicy::class);
         Gate::policy(Subscription::class, SubscriptionPolicy::class);
 
+        // Observers
+        Payment::observe(PaymentObserver::class);
 
         // Custom macro for created_at and updated_at as Epoch
         Blueprint::macro('epochTimestamps', function () {
-            $this->unsignedBigInteger('created_at')->nullable();
-            $this->unsignedBigInteger('updated_at')->nullable();
+            $this->bigInteger('created_at')->nullable();
+            $this->bigInteger('updated_at')->nullable();
         });
 
         // Custom macro for deleted_at as Epoch
         Blueprint::macro('epochSoftDeletes', function () {
-            $this->unsignedBigInteger('deleted_at')->nullable();
+            $this->bigInteger('deleted_at')->nullable();
         });
 
         // Custom macro for user footprints
@@ -117,7 +121,7 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    protected function registerService($serviceName, $className)
+    protected function registerService(string $serviceName, string $className)
     {
         $this->app->singleton($serviceName, function () use ($className) {
             return new $className;

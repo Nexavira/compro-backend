@@ -12,6 +12,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 class PostForm
 {
@@ -64,7 +65,7 @@ class PostForm
                                     TextInput::make('slug')
                                         ->label('URL Slug')
                                         ->required()
-                                        ->unique(ignoreRecord: true, modifyRuleUsing: function (\Illuminate\Validation\Rules\Unique $rule, callable $get) {
+                                        ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule, callable $get) {
                                             return $rule->where('tenant_id', $get('tenant_id'));
                                         }),
 
@@ -76,8 +77,18 @@ class PostForm
                                     RichEditor::make('body')
                                         ->label('Full Article Content')
                                         ->toolbarButtons([
-                                            'attachFiles', 'blockquote', 'bold', 'bulletList', 
-                                            'h2', 'h3', 'italic', 'link', 'orderedList', 'redo', 'strike', 'undo',
+                                            'attachFiles',
+                                            'blockquote',
+                                            'bold',
+                                            'bulletList',
+                                            'h2',
+                                            'h3',
+                                            'italic',
+                                            'link',
+                                            'orderedList',
+                                            'redo',
+                                            'strike',
+                                            'undo',
                                         ])
                                         ->fileAttachmentsDisk('public')
                                         ->fileAttachmentsDirectory('cms/posts')
@@ -92,8 +103,12 @@ class PostForm
                                     Select::make('tenant_id')
                                         ->label('Tenant Ownership')
                                         ->relationship('tenant', 'name')
+                                        ->native(false)
                                         ->searchable()
                                         ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
+                                        ])
                                         ->required(),
 
                                     Select::make('is_active')
@@ -101,6 +116,12 @@ class PostForm
                                         ->options([
                                             1 => 'Published',
                                             0 => 'Draft',
+                                        ])
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
                                         ->required(),

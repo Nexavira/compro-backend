@@ -2,7 +2,8 @@
 
 namespace App\Filament\Resources\Transaction\Payments\Tables;
 
-use Filament\Actions\ActionGroup;
+use App\Models\Auth\UserDetail;
+use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -32,7 +33,15 @@ class PaymentsTable
                 TextColumn::make('due_date')
                     ->label('Due Date')
                     ->date('d M Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->color(function ($record) {
+                        if ($record->status === 'paid' || !$record->due_date) {
+                            return null;
+                        }
+                        $dueDate = \Carbon\Carbon::parse($record->due_date);
+                        $days = now()->startOfDay()->diffInDays($dueDate->startOfDay(), false);
+                        return $days <= 5 ? 'danger' : null;
+                    }),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
@@ -42,7 +51,7 @@ class PaymentsTable
                         'success' => 'paid',
                         'secondary' => 'failed',
                     ])
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'unpaid'               => 'Unpaid',
                         'pending_verification' => 'Pending Verification',
                         'paid'                 => 'Paid',
@@ -52,10 +61,31 @@ class PaymentsTable
             ])
             ->filters([])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make()->label('Payment Verification'), 
-                ]),
+                ViewAction::make(),
+                EditAction::make()
+                    ->label('Payment Verification')
+                    ->button()
+                    ->hidden(fn($record) => $record->status === 'paid'),
+                Action::make('whatsapp')
+                    ->label('Bagikan WA')
+                    ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                    ->color('success')
+                    ->url(function ($record) {
+                        $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
+                        $phone = $adminDetail?->phone_number ?? '';
+
+                        // Format phone number to international format (62...)
+                        if (str_starts_with($phone, '0')) {
+                            $phone = '62' . substr($phone, 1);
+                        }
+
+                        $price = number_format($record->amount_due, 0, ',', '.');
+                        $message = "Halo, ini adalah tagihan langganan sistem Anda.\n\nNomor Invoice: {$record->invoice_number}\nTotal Tagihan: Rp {$price}\n\nSilakan lakukan pembayaran agar sistem dapat diakses. Terima kasih.";
+
+                        return "https://wa.me/{$phone}?text=" . urlencode($message);
+                    })
+                    ->openUrlInNewTab()
+                    ->button(),
             ]);
     }
 }

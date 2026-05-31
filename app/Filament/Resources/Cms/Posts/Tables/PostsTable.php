@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Cms\Posts\Tables;
 
+use App\Models\CMS\Post;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -25,7 +26,7 @@ class PostsTable
                     ->label('Title')
                     ->searchable()
                     ->sortable()
-                    ->description(fn (\App\Models\Cms\Post $record): string => $record->slug),
+                    ->description(fn(Post $record): string => $record->slug),
                 TextColumn::make('tenant.name')
                     ->label('Tenant')
                     ->searchable()
@@ -53,7 +54,7 @@ class PostsTable
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make()
-                        ->before(fn ($record) => $record->update(['is_active' => 0])),
+                        ->before(fn($record) => $record->update(['is_active' => 0])),
                 ]),
             ])
             ->toolbarActions([

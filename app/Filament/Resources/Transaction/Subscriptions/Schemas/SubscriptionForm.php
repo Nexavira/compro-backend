@@ -50,15 +50,23 @@ class SubscriptionForm
             Select::make('tenant_id')
                 ->label('Tenant')
                 ->relationship('tenant', 'name')
+                ->native(false)
                 ->searchable()
                 ->preload()
+                ->extraAttributes([
+                    'style' => 'cursor: pointer !important;',
+                ])
                 ->required(),
 
             Select::make('package_id')
                 ->label('Package')
                 ->relationship('package', 'name')
+                ->native(false)
                 ->searchable()
                 ->preload()
+                ->extraAttributes([
+                    'style' => 'cursor: pointer !important;',
+                ])
                 ->live()
                 ->afterStateUpdated(function (Set $set, ?string $state) {
                     if (!blank($state)) {
@@ -85,6 +93,12 @@ class SubscriptionForm
                     'past_due'  => 'Past Due',
                     'canceled'  => 'Canceled',
                 ])
+                ->native(false)
+                ->searchable()
+                ->preload()
+                ->extraAttributes([
+                    'style' => 'cursor: pointer !important;',
+                ])
                 ->default('active')
                 ->required(),
             Select::make('billing_cycle')
@@ -93,6 +107,12 @@ class SubscriptionForm
                     'monthly'  => 'Monthly',
                     'annually' => 'Annually',
                     'custom'   => 'Custom',
+                ])
+                ->native(false)
+                ->searchable()
+                ->preload()
+                ->extraAttributes([
+                    'style' => 'cursor: pointer !important;',
                 ])
                 ->required(),
             DatePicker::make('next_billing_date')

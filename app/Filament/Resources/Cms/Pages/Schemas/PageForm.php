@@ -85,6 +85,12 @@ class PageForm
                                         ->options(function () {
                                             return GlobalTemplate::where('is_active', 1)->pluck('title', 'id');
                                         })
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
+                                        ])
                                         ->live()
                                         ->afterStateUpdated(function (Set $set, $state) {
                                             if ($state) {
@@ -149,8 +155,12 @@ class PageForm
                                     Select::make('tenant_id')
                                         ->label('Tenant Ownership')
                                         ->relationship('tenant', 'name')
+                                        ->native(false)
                                         ->searchable()
                                         ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
+                                        ])
                                         ->required(),
 
                                     Select::make('is_active')
@@ -158,6 +168,12 @@ class PageForm
                                         ->options([
                                             1 => 'Published',
                                             0 => 'Draft',
+                                        ])
+                                        ->native(false)
+                                        ->searchable()
+                                        ->preload()
+                                        ->extraAttributes([
+                                            'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
                                         ->required(),

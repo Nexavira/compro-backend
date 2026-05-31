@@ -61,7 +61,7 @@ class SubscriptionsTable
                         ->label('Lihat Invoice')
                         ->icon('heroicon-o-document-text')
                         ->color('info')
-                        ->url(fn ($record) => PaymentResource::getUrl('index', ['subscription_id' => $record->id])),
+                        ->url(fn ($record) => PaymentResource::getUrl('index', ['subscription_uuid' => $record->uuid])),
                     ViewAction::make(),
                     DeleteAction::make()
                         ->before(fn ($record) => $record->update(['is_active' => false])),

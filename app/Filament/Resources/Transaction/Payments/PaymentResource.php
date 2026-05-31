@@ -54,7 +54,7 @@ class PaymentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPayments::route('/'),
+            'index' => ListPayments::route('/{subscription_uuid?}'),
             'create' => CreatePayment::route('/create'),
             'edit' => EditPayment::route('/{record}/edit'),
         ];
@@ -72,8 +72,8 @@ class PaymentResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        if ($subId = request()->query('subscription_id')) {
-            $query->where('subscription_id', $subId);
+        if ($subUuid = request()->route('subscription_uuid')) {
+            $query->whereHas('subscription', fn($q) => $q->where('uuid', $subUuid));
         }
 
         return $query;

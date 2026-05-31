@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Auth\Users\Schemas;
 
 use App\Models\Auth\Role;
+use App\Models\Tenant\Tenant;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
@@ -44,15 +45,16 @@ class UserForm
     protected static function getFormComponents(): array
     {
         return [
-            Grid::make(1)
-                ->schema([
-                    FileUpload::make('photo_id')
-                        ->label('Foto Profil')
-                        ->image()
-                        ->avatar()
-                        ->directory('profile-photos')
-                        ->alignCenter()
-                ])->columnSpanFull(),
+            Group::make([
+                FileUpload::make('photo_upload')
+                    ->label('Foto Profil')
+                    ->image()
+                    ->avatar()
+                    ->directory('profile-photos')
+                    ->alignCenter()
+                    ->formatStateUsing(fn($record) => $record?->photo?->file_path)
+            ])->relationship('userDetail')
+                ->columnSpanFull(),
             Grid::make(2)
                 ->schema([
                     Group::make([
@@ -63,21 +65,28 @@ class UserForm
                             TextInput::make('phone_number')
                                 ->label('Phone Number')
                                 ->tel(),
+                            Select::make('tenant_id')
+                                ->label('Tenant')
+                                ->options(Tenant::all()->pluck('name', 'id'))
+                                ->native(false)
+                                ->searchable()
+                                ->preload()
+                                ->extraAttributes([
+                                    'style' => 'cursor: pointer !important;',
+                                ]),
                         ])->relationship('userDetail'),
                         Group::make([
                             Select::make('role_id')
                                 ->label('Role')
                                 ->options(Role::all()->pluck('name', 'id'))
                                 ->native(false)
-                                ->searchable() 
-                                ->preload() 
+                                ->searchable()
+                                ->preload()
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
-                                ]),
+                                ])
+                                ->formatStateUsing(fn ($record) => $record?->role_id),
                         ])->relationship('roleUser'),
-                        Toggle::make('is_active')
-                            ->label('Status Aktif')
-                            ->default(true),
                     ])->columnSpan(1),
                     Group::make([
                         TextInput::make('email')
@@ -85,7 +94,7 @@ class UserForm
                             ->email()
                             ->required()
                             ->unique(
-                                table: 'auth_users', 
+                                table: 'auth_users',
                                 ignoreRecord: true,
                                 modifyRuleUsing: function ($rule) {
                                     return $rule->whereNull('deleted_at');
@@ -96,16 +105,22 @@ class UserForm
                             ->password()
                             ->required()
                             ->revealable()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
+                            ->hiddenOn(['edit', 'view'])
+                            ->dehydrateStateUsing(fn($state) => Hash::make($state)),
                         TextInput::make('password_confirmation')
                             ->label('Password Confirmation')
                             ->password()
                             ->required()
                             ->revealable()
+                            ->hiddenOn(['edit', 'view'])
                             ->dehydrated(false)
-                            ->same('password') 
+                            ->same('password'),
+                        Toggle::make('is_active')
+                            ->label('Status Aktif')
+                            ->default(true)
+                            ->inline(false),
                     ])->columnSpan(1)
-                ])->columnSpanFull(),     
+                ])->columnSpanFull(),
         ];
     }
 }

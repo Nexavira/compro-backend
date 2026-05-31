@@ -26,7 +26,7 @@ class PaymentPolicy extends BasePolicy
     public function update(User $user, Payment $model): bool
     { 
         if ($this->isMasterRecord($model)) return false;
-        return $user->can('admin_transaction_payment_edit');
+        return $user->can('admin_cms_payment_payment_verification') || $user->roleUser?->role?->code === 'master_admin';
     }
     
     public function delete(User $user, Payment $model): bool
