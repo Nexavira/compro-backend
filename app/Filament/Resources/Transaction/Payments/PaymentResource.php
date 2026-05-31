@@ -54,7 +54,7 @@ class PaymentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPayments::route('/{subscription_uuid?}'),
+            'index' => ListPayments::route('/'),
             'create' => CreatePayment::route('/create'),
             'edit' => EditPayment::route('/{record}/edit'),
         ];

@@ -28,6 +28,14 @@ class TenantsTable
                 TextColumn::make('name')
                     ->label('Name')
                     ->searchable(),
+                TextColumn::make('is_suspended')
+                    ->label('Suspended')
+                    ->sortable()
+                    ->badge()
+                    ->formatStateUsing(function ($state) {
+                        return $state ? 'Suspended' : 'Active';
+                    })
+                    ->color(fn($state) => $state ? 'danger' : 'success'),
             ])
             ->filters([
                 TrashedFilter::make(),
@@ -40,13 +48,13 @@ class TenantsTable
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make()
-                        ->before(fn ($record) => $record->update(['is_active' => false])),
+                        ->before(fn($record) => $record->update(['is_active' => false])),
                 ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                    ->action(function (Collection $records) {
+                        ->action(function (Collection $records) {
                             $records->each(function ($record) {
                                 if ($record->name !== 'Nexavira') {
                                     $record->delete();

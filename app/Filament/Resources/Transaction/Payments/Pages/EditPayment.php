@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Transaction\Payments\Pages;
 
 use App\Filament\Resources\Transaction\Payments\PaymentResource;
+use App\Filament\Resources\Transaction\Subscriptions\SubscriptionResource;
 use App\Models\System\File;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,7 @@ class EditPayment extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-        ];
+        return [];
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
@@ -61,5 +61,10 @@ class EditPayment extends EditRecord
         unset($data['proof_of_payment_upload']);
 
         return $data;
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return SubscriptionResource::getUrl('payments', ['record' => $this->record->subscription->uuid]);
     }
 }

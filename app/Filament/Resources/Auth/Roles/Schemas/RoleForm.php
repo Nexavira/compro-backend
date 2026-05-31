@@ -42,7 +42,11 @@ class RoleForm
             Group::make([
                 TextInput::make('name')
                     ->label('Name')
-                    ->required()
+                    ->markAsRequired()
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Name is required'
+                    ])
                     ->unique(
                         table: 'auth_roles', 
                         ignoreRecord: true,
@@ -52,7 +56,11 @@ class RoleForm
                     ),
                 TextInput::make('code')
                     ->label('Code')
-                    ->required()
+                    ->markAsRequired()
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Code is required'
+                    ])
                     ->unique(
                         table: 'auth_roles', 
                         ignoreRecord: true,

@@ -50,7 +50,9 @@ class PaymentForm
                             TextInput::make('invoice_number')
                                 ->label('Invoice Number')
                                 ->disabled()
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Invoice Number is required']),
                             Select::make('tenant_id')
                                 ->label('Tenant')
                                 ->relationship('tenant', 'name')
@@ -61,7 +63,9 @@ class PaymentForm
                                     'style' => 'cursor: pointer !important;',
                                 ])
                                 ->disabled()
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Tenant is required']),
                             TextInput::make('description')
                                 ->label('Description')
                                 ->disabled(),
@@ -93,17 +97,29 @@ class PaymentForm
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ])
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Status Invoice is required']),
                             TextInput::make('amount_paid')
                                 ->label('Amount Paid')
                                 ->numeric()
                                 ->prefix('Rp')
-                                ->required($isEdit),
+                                ->markAsRequired($isEdit)
+                                ->rules([
+                                    $isEdit ? 'required' : 'nullable',
+                                    fn ($get) => 'min:' . $get('amount_due'),
+                                    fn ($get) => 'max:' . $get('amount_due'),
+                                ])
+                                ->validationMessages([
+                                    'required' => 'Amount Paid is required',
+                                    'min' => 'Amount Paid cannot be less than Amount Due',
+                                    'max' => 'Amount Paid cannot be greater than Amount Due',
+                                ]),
                             Select::make('payment_method')
                                 ->label('Payment Method')
                                 ->options([
                                     'bank_transfer' => 'Bank Transfer',
-                                    'midtrans'      => 'Otomatis (Gateway)',
+                                    'cash'          => 'Cash',
                                 ])
                                 ->native(false)
                                 ->searchable()
@@ -111,7 +127,9 @@ class PaymentForm
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ])
-                                ->required($isEdit),
+                                ->markAsRequired($isEdit)
+                                ->rules($isEdit ? ['required'] : [])
+                                ->validationMessages(['required' => 'Payment Method is required']),
                             FileUpload::make('proof_of_payment_upload')
                                 ->label('Proof of Payment')
                                 ->image()

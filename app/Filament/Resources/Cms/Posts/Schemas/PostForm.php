@@ -55,7 +55,11 @@ class PostForm
                                 ->schema([
                                     TextInput::make('title')
                                         ->label('Title')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Title is required'
+                                        ])
                                         ->live(onBlur: true)
                                         ->afterStateUpdated(function (Set $set, ?string $state, string $operation) {
                                             if ($operation === 'create' && $state) {
@@ -64,7 +68,11 @@ class PostForm
                                         }),
                                     TextInput::make('slug')
                                         ->label('URL Slug')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'URL Slug is required'
+                                        ])
                                         ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule, callable $get) {
                                             return $rule->where('tenant_id', $get('tenant_id'));
                                         }),
@@ -92,7 +100,11 @@ class PostForm
                                         ])
                                         ->fileAttachmentsDisk('public')
                                         ->fileAttachmentsDirectory('cms/posts')
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Full Article Content is required'
+                                        ]),
                                 ]),
                         ]),
                     Grid::make(1)
@@ -109,7 +121,11 @@ class PostForm
                                         ->extraAttributes([
                                             'style' => 'cursor: pointer !important;',
                                         ])
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Tenant Ownership is required'
+                                        ]),
 
                                     Select::make('is_active')
                                         ->label('Publishing Status')
@@ -124,7 +140,11 @@ class PostForm
                                             'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Publishing Status is required'
+                                        ]),
                                 ]),
                             Section::make('Metadata & SEO')
                                 ->schema([

@@ -25,12 +25,12 @@ class GlobalTemplatesTable
                     ->label('Title')
                     ->searchable()
                     ->sortable()
-                    ->description(fn ($record) => $record->description),
+                    ->description(fn($record) => $record->description),
 
                 TextColumn::make('category')
                     ->label('Category')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'company_profile' => 'Company Profile',
                         'landing_page'    => 'Landing Page',
                         'portfolio'       => 'Portfolio',
@@ -56,7 +56,8 @@ class GlobalTemplatesTable
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
-                    DeleteAction::make(),
+                    DeleteAction::make()
+                        ->before(fn($record) => $record->update(['is_active' => false])),
                 ]),
             ])
             ->toolbarActions([

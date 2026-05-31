@@ -52,7 +52,11 @@ class ApiKeyForm
                                     TextInput::make('name')
                                         ->label('Name')
                                         ->placeholder('Example: Nuxt.js Frontend Production')
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Name is required'
+                                        ]),
 
                                     TextInput::make('token')
                                         ->label('Secret Token (API Key)')
@@ -76,7 +80,11 @@ class ApiKeyForm
                                         ->extraAttributes([
                                             'style' => 'cursor: pointer !important;',
                                         ])
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Tenant is required'
+                                        ]),
 
                                     Select::make('is_active')
                                         ->label('Access Status')
@@ -91,7 +99,11 @@ class ApiKeyForm
                                             'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Access Status is required'
+                                        ])
                                         ->helperText('If blocked, the tenant website will immediately lose data access.'),
                                 ]),
                         ]),

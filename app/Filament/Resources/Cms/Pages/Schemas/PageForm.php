@@ -60,7 +60,11 @@ class PageForm
                                 ->schema([
                                     TextInput::make('title')
                                         ->label('Page Title')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Page Title is required'
+                                        ])
                                         ->live(onBlur: true)
                                         ->afterStateUpdated(function (Set $set, ?string $state, string $operation) {
                                             if ($operation === 'create' && $state) {
@@ -70,7 +74,11 @@ class PageForm
 
                                     TextInput::make('slug')
                                         ->label('URL Slug')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'URL Slug is required'
+                                        ])
                                         ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule, callable $get) {
                                             return $rule->where('tenant_id', $get('tenant_id'));
                                         }),
@@ -110,7 +118,13 @@ class PageForm
                                                 ->label('Hero Section (Header)')
                                                 ->icon('heroicon-o-stop')
                                                 ->schema([
-                                                    TextInput::make('heading')->label('Title')->required(),
+                                                    TextInput::make('heading')
+                                                        ->label('Title')
+                                                        ->markAsRequired()
+                                                        ->rules(['required'])
+                                                        ->validationMessages([
+                                                            'required' => 'Title is required'
+                                                        ]),
                                                     Textarea::make('subheading')->label('Sub Title')->rows(3),
                                                     TextInput::make('button_text')->label('Button Text (Optional)'),
                                                     TextInput::make('button_link')->label('Button Link'),
@@ -126,7 +140,11 @@ class PageForm
                                                 ->schema([
                                                     RichEditor::make('content')
                                                         ->label('Content')
-                                                        ->required(),
+                                                        ->markAsRequired()
+                                                        ->rules(['required'])
+                                                        ->validationMessages([
+                                                            'required' => 'Content is required'
+                                                        ]),
                                                 ]),
                                             Block::make('faq_section')
                                                 ->label('Frequently Asked Questions')
@@ -136,8 +154,20 @@ class PageForm
                                                     Repeater::make('questions')
                                                         ->label('Question List')
                                                         ->schema([
-                                                            TextInput::make('question')->label('Question')->required(),
-                                                            Textarea::make('answer')->label('Answer')->required(),
+                                                            TextInput::make('question')
+                                                                ->label('Question')
+                                                                ->markAsRequired()
+                                                                ->rules(['required'])
+                                                                ->validationMessages([
+                                                                    'required' => 'Question is required'
+                                                                ]),
+                                                            Textarea::make('answer')
+                                                                ->label('Answer')
+                                                                ->markAsRequired()
+                                                                ->rules(['required'])
+                                                                ->validationMessages([
+                                                                    'required' => 'Answer is required'
+                                                                ]),
                                                         ])
                                                         ->collapsible(),
                                                 ]),
@@ -161,7 +191,11 @@ class PageForm
                                         ->extraAttributes([
                                             'style' => 'cursor: pointer !important;',
                                         ])
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Tenant Ownership is required'
+                                        ]),
 
                                     Select::make('is_active')
                                         ->label('Page Status')
@@ -176,7 +210,11 @@ class PageForm
                                             'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Page Status is required'
+                                        ]),
                                 ]),
                         ]),
                 ])

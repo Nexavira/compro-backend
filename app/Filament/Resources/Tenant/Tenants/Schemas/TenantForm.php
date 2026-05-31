@@ -13,6 +13,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 
@@ -43,16 +44,22 @@ class TenantForm
                         Section::make('Kredensial Admin Tenant')->schema([
                             TextInput::make('user_name')
                                 ->label('Nama Pengelola')
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Nama Pengelola is required']),
                             TextInput::make('user_phone')
                                 ->label('Nomor Telepon')
                                 ->tel()
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Nomor Telepon is required']),
                             TextInput::make('user_email')
                                 ->label('Email Perusahaan/Pengelola')
                                 ->email()
                                 ->unique(table: 'auth_users', column: 'email')
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Email Perusahaan/Pengelola is required']),
                         ])->columns(3),
                     ]),
 
@@ -78,12 +85,19 @@ class TenantForm
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ])
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages(['required' => 'Paket Langganan is required']),
                         ]),
                     ]),
             ])
                 ->columnSpanFull()
-                ->skippable(false),
+                ->skippable(false)
+                ->submitAction(new HtmlString(Blade::render(<<<BLADE
+                    <x-filament::button type="submit" size="sm">
+                        Create
+                    </x-filament::button>
+                BLADE))),
         ]);
     }
 
@@ -109,18 +123,24 @@ class TenantForm
                             ->schema([
                                 TextInput::make('name')
                                     ->label('Client Name')
-                                    ->required()
+                                    ->markAsRequired()
+                                    ->rules(['required'])
+                                    ->validationMessages(['required' => 'Client Name is required'])
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn(string $state, callable $set) => $set('slug', Str::slug($state))),
 
                                 TextInput::make('code')
                                     ->label('Kode Tenant')
-                                    ->required()
+                                    ->markAsRequired()
+                                    ->rules(['required'])
+                                    ->validationMessages(['required' => 'Kode Tenant is required'])
                                     ->unique(table: 'tnt_tenants', ignoreRecord: true),
 
                                 TextInput::make('slug')
                                     ->label('Slug / URL Prefix')
-                                    ->required()
+                                    ->markAsRequired()
+                                    ->rules(['required'])
+                                    ->validationMessages(['required' => 'Slug / URL Prefix is required'])
                                     ->unique(table: 'tnt_tenants', ignoreRecord: true),
 
                                 \Filament\Forms\Components\Textarea::make('description')
@@ -155,7 +175,9 @@ class TenantForm
                                         'style' => 'cursor: pointer !important;',
                                     ])
                                     ->default('light')
-                                    ->required(),
+                                    ->markAsRequired()
+                                    ->rules(['required'])
+                                    ->validationMessages(['required' => 'UI Theme is required']),
 
                                 TextInput::make('custom_domain')
                                     ->label('Custom Domain')

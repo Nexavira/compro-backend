@@ -32,7 +32,6 @@ class User extends Authenticatable
         'deleted_by',
         'updated_at',
         'deleted_at',
-        'is_active',
         'version'
     ];
 
@@ -49,6 +48,7 @@ class User extends Authenticatable
             'created_at' => 'datetime:U',
             'updated_at' => 'datetime:U',
             'deleted_at' => 'datetime:U',
+            'is_active' => 'boolean',
         ];
     }
 

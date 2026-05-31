@@ -61,16 +61,41 @@ class UserForm
                         Group::make([
                             TextInput::make('full_name')
                                 ->label('Full Name')
-                                ->required(),
+                                ->markAsRequired()
+                                ->rules(['required'])
+                                ->validationMessages([
+                                    'required' => 'Full Name is required'
+                                ]),
                             TextInput::make('phone_number')
                                 ->label('Phone Number')
-                                ->tel(),
+                                ->markAsRequired()
+                                ->rules([
+                                    'required',
+                                    'regex:/^[0-9]+$/',
+                                    'starts_with:62',
+                                    'min_digits:10',
+                                    'max_digits:14',
+                                ])
+                                ->validationMessages([
+                                    'required' => 'Phone Number is required',
+                                    'regex' => 'Phone Number must be numeric',
+                                    'starts_with' => 'Phone Number must start with 62',
+                                    'min_digits' => 'Phone Number must be at least 10 digits',
+                                    'max_digits' => 'Phone Number cannot exceed 14 digits',
+                                ]),
                             Select::make('tenant_id')
                                 ->label('Tenant')
                                 ->options(Tenant::all()->pluck('name', 'id'))
                                 ->native(false)
                                 ->searchable()
                                 ->preload()
+                                ->markAsRequired()
+                                ->rules([
+                                    'required'
+                                ])
+                                ->validationMessages([
+                                    'required' => 'Tenant must be selected'
+                                ])
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ]),
@@ -82,17 +107,31 @@ class UserForm
                                 ->native(false)
                                 ->searchable()
                                 ->preload()
+                                ->markAsRequired()
+                                ->rules([
+                                    'required'
+                                ])
+                                ->validationMessages([
+                                    'required' => 'Role must be selected'
+                                ])
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ])
-                                ->formatStateUsing(fn ($record) => $record?->role_id),
+                                ->formatStateUsing(fn($record) => $record?->role_id),
                         ])->relationship('roleUser'),
                     ])->columnSpan(1),
                     Group::make([
                         TextInput::make('email')
                             ->label('Email')
-                            ->email()
-                            ->required()
+                            ->markAsRequired()
+                            ->rules([
+                                'required',
+                                'email'
+                            ])
+                            ->validationMessages([
+                                'required' => 'Email is required',
+                                'email' => 'Format Email is invalid'
+                            ])
                             ->unique(
                                 table: 'auth_users',
                                 ignoreRecord: true,
@@ -103,20 +142,35 @@ class UserForm
                         TextInput::make('password')
                             ->label('Password')
                             ->password()
-                            ->required()
+                            ->markAsRequired()
+                            ->rules([
+                                'required',
+                                'min:8'
+                            ])
+                            ->validationMessages([
+                                'required' => 'Password is required',
+                                'min' => 'Password must be at least 8 characters'
+                            ])
                             ->revealable()
                             ->hiddenOn(['edit', 'view'])
                             ->dehydrateStateUsing(fn($state) => Hash::make($state)),
                         TextInput::make('password_confirmation')
                             ->label('Password Confirmation')
                             ->password()
-                            ->required()
+                            ->markAsRequired()
+                            ->rules([
+                                'required'
+                            ])
+                            ->validationMessages([
+                                'required' => 'Password Confirmation is required',
+                                'same' => 'Password Confirmation does not match'
+                            ])
                             ->revealable()
                             ->hiddenOn(['edit', 'view'])
                             ->dehydrated(false)
                             ->same('password'),
                         Toggle::make('is_active')
-                            ->label('Status Aktif')
+                            ->label('Active Status')
                             ->default(true)
                             ->inline(false),
                     ])->columnSpan(1)

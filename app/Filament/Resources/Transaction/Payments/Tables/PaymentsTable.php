@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Transaction\Payments\Tables;
 
+use App\Filament\Resources\Transaction\Payments\PaymentResource;
 use App\Models\Auth\UserDetail;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -61,31 +63,57 @@ class PaymentsTable
             ])
             ->filters([])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make()
-                    ->label('Payment Verification')
-                    ->button()
-                    ->hidden(fn($record) => $record->status === 'paid'),
-                Action::make('whatsapp')
-                    ->label('Bagikan WA')
-                    ->icon('heroicon-o-chat-bubble-left-ellipsis')
-                    ->color('success')
-                    ->url(function ($record) {
-                        $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
-                        $phone = $adminDetail?->phone_number ?? '';
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make()
+                        ->label('Payment Verification')
+                        ->button()
+                        ->hidden(fn($record) => $record->status === 'paid')
+                        ->url(fn($record) => PaymentResource::getUrl('edit', [
+                            'record' => $record,
+                        ])),
+                    Action::make('whatsapp')
+                        ->label('Share via WA')
+                        ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                        ->color('success')
+                        ->hidden(fn($record) => $record->status === 'paid')
+                        ->url(function ($record) {
+                            $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
+                            $phone = $adminDetail?->phone_number ?? '';
 
-                        // Format phone number to international format (62...)
-                        if (str_starts_with($phone, '0')) {
-                            $phone = '62' . substr($phone, 1);
-                        }
+                            // Format phone number to international format (62...)
+                            if (str_starts_with($phone, '0')) {
+                                $phone = '62' . substr($phone, 1);
+                            }
 
-                        $price = number_format($record->amount_due, 0, ',', '.');
-                        $message = "Halo, ini adalah tagihan langganan sistem Anda.\n\nNomor Invoice: {$record->invoice_number}\nTotal Tagihan: Rp {$price}\n\nSilakan lakukan pembayaran agar sistem dapat diakses. Terima kasih.";
+                            $price = number_format($record->amount_due, 0, ',', '.');
+                            $message = "Hello, this is your system subscription invoice.\n\nInvoice Number: {$record->invoice_number}\nTotal Due: Rp {$price}\n\nPlease make a payment so the system can be accessed. Thank you.";
 
-                        return "https://wa.me/{$phone}?text=" . urlencode($message);
-                    })
-                    ->openUrlInNewTab()
-                    ->button(),
+                            return "https://wa.me/{$phone}?text=" . urlencode($message);
+                        })
+                        ->openUrlInNewTab()
+                        ->button(),
+                    Action::make('whatsapp_thanks')
+                        ->label('Send Payment Proof via WA')
+                        ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                        ->color('success')
+                        ->visible(fn($record) => $record->status === 'paid')
+                        ->url(function ($record) {
+                            $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
+                            $phone = $adminDetail?->phone_number ?? '';
+
+                            if (str_starts_with($phone, '0')) {
+                                $phone = '62' . substr($phone, 1);
+                            }
+
+                            $invoiceUrl = url('/');
+                            $message = "Hello, thank you for making the payment.\n\nInvoice Number: {$record->invoice_number}\nStatus: PAID\n\nThank you for using our services.";
+
+                            return "https://wa.me/{$phone}?text=" . urlencode($message);
+                        })
+                        ->openUrlInNewTab()
+                        ->button(),
+                ]),
             ]);
     }
 }

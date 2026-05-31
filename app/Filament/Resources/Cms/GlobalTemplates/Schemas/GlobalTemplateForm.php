@@ -31,7 +31,11 @@ class GlobalTemplateForm
                                 ->schema([
                                     TextInput::make('title')
                                         ->label('Template Name (e.g., SaaS Landing Page)')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Template Name is required'
+                                        ])
                                         ->live(onBlur: true)
                                         ->afterStateUpdated(function (Set $set, ?string $state, string $operation) {
                                             if ($operation === 'create' && $state) {
@@ -41,7 +45,11 @@ class GlobalTemplateForm
 
                                     TextInput::make('slug')
                                         ->label('URL Slug')
-                                        ->required()
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'URL Slug is required'
+                                        ])
                                         ->unique(ignoreRecord: true),
 
                                     Textarea::make('description')
@@ -61,7 +69,13 @@ class GlobalTemplateForm
                                                 ->label('Hero Section (Header)')
                                                 ->icon('heroicon-o-stop')
                                                 ->schema([
-                                                    TextInput::make('heading')->label('Default Main Title')->required(),
+                                                    TextInput::make('heading')
+                                                        ->label('Default Main Title')
+                                                        ->markAsRequired()
+                                                        ->rules(['required'])
+                                                        ->validationMessages([
+                                                            'required' => 'Default Main Title is required'
+                                                        ]),
                                                     Textarea::make('subheading')->label('Default Sub Title')->rows(2),
                                                     TextInput::make('button_text')->label('Button Text'),
                                                     TextInput::make('button_link')->label('Button Link'),
@@ -76,7 +90,13 @@ class GlobalTemplateForm
                                                 ->label('Teks Konten (Rich Text)')
                                                 ->icon('heroicon-o-document-text')
                                                 ->schema([
-                                                    RichEditor::make('content')->label('Default Content')->required(),
+                                                    RichEditor::make('content')
+                                                        ->label('Default Content')
+                                                        ->markAsRequired()
+                                                        ->rules(['required'])
+                                                        ->validationMessages([
+                                                            'required' => 'Default Content is required'
+                                                        ]),
                                                 ]),
 
                                             Block::make('faq_section')
@@ -87,8 +107,20 @@ class GlobalTemplateForm
                                                     Repeater::make('questions')
                                                         ->label('Example Questions')
                                                         ->schema([
-                                                            TextInput::make('question')->label('Question')->required(),
-                                                            Textarea::make('answer')->label('Answer')->required(),
+                                                            TextInput::make('question')
+                                                                ->label('Question')
+                                                                ->markAsRequired()
+                                                                ->rules(['required'])
+                                                                ->validationMessages([
+                                                                    'required' => 'Question is required'
+                                                                ]),
+                                                            Textarea::make('answer')
+                                                                ->label('Answer')
+                                                                ->markAsRequired()
+                                                                ->rules(['required'])
+                                                                ->validationMessages([
+                                                                    'required' => 'Answer is required'
+                                                                ]),
                                                         ])
                                                         ->collapsible(),
                                                 ]),
@@ -118,7 +150,11 @@ class GlobalTemplateForm
                                             'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default('company_profile')
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Template Category is required'
+                                        ]),
 
                                     Select::make('is_active')
                                         ->label('Status Template')
@@ -133,7 +169,11 @@ class GlobalTemplateForm
                                             'style' => 'cursor: pointer !important;',
                                         ])
                                         ->default(1)
-                                        ->required(),
+                                        ->markAsRequired()
+                                        ->rules(['required'])
+                                        ->validationMessages([
+                                            'required' => 'Status Template is required'
+                                        ]),
                                 ]),
                         ]),
                 ])

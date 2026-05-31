@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Transaction\Subscriptions;
 
 use App\Filament\Resources\Transaction\Subscriptions\Pages\ListSubscriptions;
+use App\Filament\Resources\Transaction\Subscriptions\Pages\ManageSubscriptionPayments;
 use App\Filament\Resources\Transaction\Subscriptions\Schemas\SubscriptionForm;
 use App\Filament\Resources\Transaction\Subscriptions\Tables\SubscriptionsTable;
 use App\Models\Transaction\Subscription;
@@ -53,6 +54,7 @@ class SubscriptionResource extends Resource
     {
         return [
             'index' => ListSubscriptions::route('/'),
+            'payments' => ManageSubscriptionPayments::route('/{record}/payments'),
         ];
     }
 

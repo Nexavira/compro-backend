@@ -56,7 +56,9 @@ class SubscriptionForm
                 ->extraAttributes([
                     'style' => 'cursor: pointer !important;',
                 ])
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Tenant is required']),
 
             Select::make('package_id')
                 ->label('Package')
@@ -82,10 +84,14 @@ class SubscriptionForm
                         $set('billing_cycle', null);
                     }
                 })
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Package is required']),
 
             Hidden::make('package_name')
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Package Name is required']),
             Select::make('status')
                 ->label('Status')
                 ->options([
@@ -100,7 +106,9 @@ class SubscriptionForm
                     'style' => 'cursor: pointer !important;',
                 ])
                 ->default('active')
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Status is required']),
             Select::make('billing_cycle')
                 ->label('Billing Cycle')
                 ->options([
@@ -114,16 +122,22 @@ class SubscriptionForm
                 ->extraAttributes([
                     'style' => 'cursor: pointer !important;',
                 ])
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Billing Cycle is required']),
             DatePicker::make('next_billing_date')
                 ->label('Next Billing Date')
                 ->default(now()->addMonth())
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Next Billing Date is required']),
             TextInput::make('amount')
                 ->label('Amount')
                 ->numeric()
                 ->prefix('Rp')
-                ->required(),
+                ->markAsRequired()
+                ->rules(['required'])
+                ->validationMessages(['required' => 'Amount is required']),
         ];
     }
 }

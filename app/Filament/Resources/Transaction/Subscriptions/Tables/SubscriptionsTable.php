@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Transaction\Subscriptions\Tables;
 
 use App\Filament\Resources\Transaction\Payments\PaymentResource;
+use App\Filament\Resources\Transaction\Subscriptions\SubscriptionResource;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -32,19 +33,19 @@ class SubscriptionsTable
                     ->label('Package'),
                 TextColumn::make('billing_cycle')
                     ->label('Billing Cycle')
-                    ->formatStateUsing(fn ($state) => ucfirst($state)),
+                    ->formatStateUsing(fn($state) => ucfirst($state)),
                 TextColumn::make('next_billing_date')
                     ->label('Next Billing Date')
                     ->date('d F Y', 'Asia/Jakarta'),
                 TextColumn::make('amount')
                     ->label('Amount')
-                    ->money('IDR', locale:'id_ID')
-                    ->formatStateUsing(fn ($state) => number_format($state, 0, ',', '.')),
+                    ->money('IDR', locale: 'id_ID')
+                    ->formatStateUsing(fn($state) => number_format($state, 0, ',', '.')),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
-                    ->formatStateUsing(fn (string $state) => ucfirst($state))
-                    ->color(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state) => ucfirst($state))
+                    ->color(fn(string $state): string => match ($state) {
                         'active' => 'success',
                         'pending' => 'warning',
                         'inactive' => 'gray',
@@ -61,10 +62,10 @@ class SubscriptionsTable
                         ->label('Lihat Invoice')
                         ->icon('heroicon-o-document-text')
                         ->color('info')
-                        ->url(fn ($record) => PaymentResource::getUrl('index', ['subscription_uuid' => $record->uuid])),
+                        ->url(fn($record) => SubscriptionResource::getUrl('payments', ['record' => $record])),
                     ViewAction::make(),
                     DeleteAction::make()
-                        ->before(fn ($record) => $record->update(['is_active' => false])),
+                        ->before(fn($record) => $record->update(['is_active' => false])),
                 ])
             ])
             ->toolbarActions([
