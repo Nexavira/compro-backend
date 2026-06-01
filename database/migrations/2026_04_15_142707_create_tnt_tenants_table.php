@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('logo_id')->nullable()->constrained('sys_files')->onDelete('cascade');
             $table->foreignId('favicon_id')->nullable()->constrained('sys_files')->onDelete('cascade');
             $table->foreignId('tenant_category_id')->constrained('tnt_tenant_categories')->onDelete('cascade');
+            $table->foreignId('global_template_id')->nullable()->constrained('cms_global_templates')->nullOnDelete();
             $table->string('name');
             $table->string('code')->after('id')->unique()->nullable();
             $table->text('description')->nullable();
             $table->string('slug');
-            $table->string('theme_code');
             $table->string('custom_domain')->nullable();
             $table->json('settings')->nullable();
             $table->integer('is_suspended')->default(0);

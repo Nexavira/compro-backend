@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tenant\Tenants\Schemas;
 
+use App\Models\GlobalTemplate;
 use App\Models\Master\Package;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -156,28 +157,33 @@ class TenantForm
                                     ->extraAttributes([
                                         'style' => 'cursor: pointer !important;',
                                     ])
-                                    ->columnSpanFull(),
+                                    ->columnSpanFull()
+                                    ->live(),
                             ]),
                         Section::make('Technical Configuration')
                             ->description('Set UI theme and custom domain for this tenant.')
                             ->columns(2)
                             ->schema([
-                                Select::make('theme_code')
-                                    ->label('UI Theme')
-                                    ->options([
-                                        'light' => 'Light',
-                                        'dark' => 'Dark',
-                                    ])
+                                Select::make('global_template_id')
+                                    ->label('Global Template (Theme)')
+                                    ->options(function (callable $get) {
+                                        $categoryId = $get('tenant_category_id');
+                                        if (!$categoryId) {
+                                            return [];
+                                        }
+                                        return GlobalTemplate::where('tenant_category_id', $categoryId)
+                                            ->where('is_active', 1)
+                                            ->pluck('title', 'id');
+                                    })
                                     ->native(false)
                                     ->searchable()
                                     ->preload()
                                     ->extraAttributes([
                                         'style' => 'cursor: pointer !important;',
                                     ])
-                                    ->default('light')
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'UI Theme is required']),
+                                    ->validationMessages(['required' => 'Global Template is required']),
 
                                 TextInput::make('custom_domain')
                                     ->label('Custom Domain')

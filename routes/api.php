@@ -24,31 +24,16 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 
-Route::middleware(['tenant.api'])->group(function () {
+Route::group(['prefix' => 'v1/t/{tenant_slug}'], function () {
+
+    // CMS Endpoints for Nuxt Frontend (Pages & Posts)
+    Route::get('/pages', [App\Http\Controllers\API\Cms\PageController::class, 'index']);
+    Route::get('/pages/{slug}', [App\Http\Controllers\API\Cms\PageController::class, 'show']);
     
-    // Endpoint: GET /api/v1/pages/{slug}
-    Route::get('/v1/pages/{slug}', function (Request $request, $slug) {
-        
-        // Ambil halaman HANYA milik tenant yang API Key-nya lolos pengecekan
-        $page = Page::where('tenant_id', $request->current_tenant_id)
-            ->where('slug', $slug)
-            ->where('is_active', 1)
-            ->first();
-
-        if (!$page) {
-            return response()->json(['error' => 'Halaman tidak ditemukan'], 404);
-        }
-
-        // Kembalikan data dalam format JSON murni
-        return response()->json([
-            'success' => true,
-            'data'    => [
-                'title'  => $page->title,
-                'slug'   => $page->slug,
-                // Di sinilah JSON struktur Lego dari Filament akan dikirimkan
-                'blocks' => $page->content_blocks, 
-            ]
-        ]);
-    });
-
+    Route::get('/posts', [App\Http\Controllers\API\Cms\PostController::class, 'index']);
+    Route::get('/posts/{slug}', [App\Http\Controllers\API\Cms\PostController::class, 'show']);
 });
+
+// Global Template Endpoints (Doesn't necessarily need tenant auth, but we can keep it separate or accessible)
+Route::get('/v1/templates', [App\Http\Controllers\API\Cms\TemplateController::class, 'index']);
+Route::get('/v1/templates/{slug}', [App\Http\Controllers\API\Cms\TemplateController::class, 'show']);

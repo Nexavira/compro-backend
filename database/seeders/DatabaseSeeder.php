@@ -23,10 +23,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             TenantCategorySeeder::class,
+            GlobalTemplateSeeder::class,
             TenantSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
-            PackageSeeder::class
+            PackageSeeder::class,
         ]);
     }
 }

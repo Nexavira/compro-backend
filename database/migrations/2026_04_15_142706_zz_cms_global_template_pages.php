@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cms_global_templates', function (Blueprint $table) {
+        Schema::create('cms_global_template_pages', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->foreignId('global_template_id')->constrained('cms_global_templates')->onDelete('cascade');
             $table->string('title');
             $table->string('slug');
             $table->json('content_blocks')->nullable();
+            $table->json('meta')->nullable();
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -24,9 +26,9 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->uniqueSoftDelete(['slug']);
+            $table->uniqueSoftDelete(['global_template_id', 'slug']);
 
-            $table->index(['slug', 'deleted_at']);
+            $table->index(['global_template_id', 'slug', 'deleted_at']);
         });
     }
 
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cms_global_templates');
+        Schema::dropIfExists('cms_global_template_pages');
     }
 };

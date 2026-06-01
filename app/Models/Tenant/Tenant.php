@@ -12,6 +12,13 @@ class Tenant extends BaseModel
 
     protected $fillable = [];
 
+    public function casts(): array
+    {
+        return array_merge(parent::casts(), [
+            'settings' => 'array',
+        ]);
+    }
+
     public function tenantCategory()
     {
         return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
@@ -52,5 +59,14 @@ class Tenant extends BaseModel
         }
 
         return $tenant;
+    }
+    public function globalTemplate()
+    {
+        return $this->belongsTo(\App\Models\GlobalTemplate::class, 'global_template_id', 'id');
+    }
+
+    public function pages()
+    {
+        return $this->hasMany(\App\Models\Cms\Page::class, 'tenant_id', 'id');
     }
 }

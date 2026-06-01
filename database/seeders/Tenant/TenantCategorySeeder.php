@@ -43,6 +43,11 @@ class TenantCategorySeeder extends Seeder
                 'name' => 'Technology',
                 'code' => 'TEC',
                 'description' => 'Technology and Software Services',
+            ],
+            [
+                'name' => 'Food and Beverages',
+                'code' => 'FNB',
+                'description' => 'Food and Beverages Services',
             ]
         ];
 

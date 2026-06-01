@@ -13,6 +13,7 @@ class Page extends BaseModel
     {
         return array_merge(parent::casts(), [
             'content_blocks' => 'json',
+            'meta' => 'json',
         ]);
     }
 

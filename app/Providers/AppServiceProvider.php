@@ -9,6 +9,7 @@ use App\Models\Tenant\Tenant;
 use App\Models\Transaction\Subscription;
 use App\Models\Transaction\Payment;
 use App\Observers\PaymentObserver;
+use App\Observers\TenantObserver;
 
 // Policies
 use App\Policies\AccessControl\RolePolicy;
@@ -60,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Observers
         Payment::observe(PaymentObserver::class);
+        Tenant::observe(TenantObserver::class);
 
         // Custom macro for created_at and updated_at as Epoch
         Blueprint::macro('epochTimestamps', function () {
