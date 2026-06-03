@@ -78,8 +78,9 @@ class PageController extends Controller
         }
 
         $pages = Page::where('tenant_id', $tenant->id)
-            ->where('is_active', 1)
-            ->select('id', 'title', 'slug', 'created_at', 'updated_at')
+            ->join('tnt_tenants', 'cms_pages.tenant_id', '=', 'tnt_tenants.id')
+            ->select('cms_pages.title', 'cms_pages.slug', 'tnt_tenants.theme_code', 'cms_pages.created_at', 'cms_pages.updated_at')
+            ->where('cms_pages.is_active', 1)
             ->get();
 
         return response()->json([
