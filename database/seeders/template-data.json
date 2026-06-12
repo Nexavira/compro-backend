@@ -1,0 +1,717 @@
+{
+    "data": [
+        {
+            "id": "etoile-premium",
+            "categoryId": "fnb",
+            "subCategory": "fine_dining",
+            "brand": {
+                "name": "ÉTOILE",
+                "primaryColor": "#C35B3E",
+                "accentColor": "#1A1A1A",
+                "fontPairing": {
+                    "heading": "Playfair Display",
+                    "body": "Inter"
+                }
+            },
+            "seo": {
+                "title": "Étoile — A Modern Culinary Symphony",
+                "description": "Fine dining in Bandung. Avant-garde techniques, local terroirs, and architectural plating.",
+                "keywords": [
+                    "fine dining",
+                    "restaurant",
+                    "bandung",
+                    "fnb",
+                    "etoile"
+                ],
+                "ogImage": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop"
+            },
+            "social": {
+                "instagram": "#",
+                "twitter": "#"
+            },
+            "sections": {
+                "promotions": {
+                    "enabled": true,
+                    "order": 0,
+                    "title": "Announcements",
+                    "items": [
+                        {
+                            "id": "p1",
+                            "title": "NOW ACCEPTING RESERVATIONS FOR NEW YEAR EVE DINNER",
+                            "description": ""
+                        },
+                        {
+                            "id": "p2",
+                            "title": "•",
+                            "description": ""
+                        },
+                        {
+                            "id": "p3",
+                            "title": "COMPLIMENTARY WELCOME DRINK FOR WEEKDAY LUNCH",
+                            "description": ""
+                        },
+                        {
+                            "id": "p4",
+                            "title": "•",
+                            "description": ""
+                        },
+                        {
+                            "id": "p5",
+                            "title": "MICHELIN STAR GUEST CHEF SERIES THIS NOVEMBER",
+                            "description": ""
+                        }
+                    ]
+                },
+                "hero": {
+                    "enabled": true,
+                    "order": 1,
+                    "headline": "Sensory",
+                    "subheadline": "A Modern Culinary Symphony.",
+                    "cta": {
+                        "primary": {
+                            "label": "Reserve a Table",
+                            "href": "#reservations"
+                        }
+                    },
+                    "backgroundImage": {
+                        "src": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop",
+                        "alt": "Restaurant ambiance"
+                    },
+                    "badge": "EST. 2024 / BANDUNG"
+                },
+                "about": {
+                    "enabled": true,
+                    "order": 2,
+                    "title": "Our Genesis",
+                    "story": "Born from a restless desire to deconstruct the boundaries of fine dining, Étoile strips away the archaic pretense of gastronomy. We source relentlessly, cook precisely, and plate with an architectural mindset. Every dish is an homage to local terroirs, reimagined through avant-garde techniques.",
+                    "highlights": [
+                        {
+                            "icon": "star",
+                            "value": "3",
+                            "label": "Hat Awards",
+                            "suffix": "+"
+                        },
+                        {
+                            "icon": "wine",
+                            "value": "850",
+                            "label": "Wine Labels",
+                            "suffix": "+"
+                        },
+                        {
+                            "icon": "chef",
+                            "value": "100",
+                            "label": "Farm Partners",
+                            "suffix": "%"
+                        }
+                    ],
+                    "image": {
+                        "src": "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=2070&auto=format&fit=crop",
+                        "alt": "Culinary art"
+                    },
+                    "foundedYear": 2024
+                },
+                "menu": {
+                    "enabled": true,
+                    "order": 3,
+                    "title": "Curated Selections",
+                    "categories": [
+                        {
+                            "id": "signatures",
+                            "name": "Signatures"
+                        }
+                    ],
+                    "items": [
+                        {
+                            "id": "m1",
+                            "name": "Charred Octopus",
+                            "description": "Squid ink emulsion, confit potato, smoked paprika",
+                            "price": 34,
+                            "currency": "USD",
+                            "categoryId": "signatures",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1574966739987-65e386c9f692?q=80&w=1000&auto=format&fit=crop",
+                                "alt": "Charred Octopus"
+                            },
+                            "tags": [],
+                            "featured": true
+                        },
+                        {
+                            "id": "m2",
+                            "name": "Wagyu A5 Striploin",
+                            "description": "Maitake mushrooms, black garlic jus, bone marrow",
+                            "price": 85,
+                            "currency": "USD",
+                            "categoryId": "signatures",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1544025162-836b7012984b?q=80&w=1000&auto=format&fit=crop",
+                                "alt": "Wagyu A5 Striploin"
+                            },
+                            "tags": [],
+                            "featured": true
+                        },
+                        {
+                            "id": "m3",
+                            "name": "Truffle Capellini",
+                            "description": "Hand-made pasta, pecorino romano, shaved winter truffle",
+                            "price": 42,
+                            "currency": "USD",
+                            "categoryId": "signatures",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=1000&auto=format&fit=crop",
+                                "alt": "Truffle Capellini"
+                            },
+                            "tags": [
+                                "vegetarian"
+                            ]
+                        }
+                    ],
+                    "ctaLabel": "View Full Menu",
+                    "ctaHref": "#menu"
+                },
+                "gallery": {
+                    "enabled": true,
+                    "order": 4,
+                    "title": "The Ambience",
+                    "layout": "masonry",
+                    "images": [
+                        {
+                            "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Gallery 1"
+                        },
+                        {
+                            "src": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Gallery 2"
+                        },
+                        {
+                            "src": "https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Gallery 3"
+                        },
+                        {
+                            "src": "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Gallery 4"
+                        },
+                        {
+                            "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Gallery 5"
+                        }
+                    ]
+                },
+                "testimonials": {
+                    "enabled": true,
+                    "order": 5,
+                    "title": "Echoes",
+                    "averageRating": 4.9,
+                    "totalReviews": 342,
+                    "items": [
+                        {
+                            "id": "t1",
+                            "author": "The Michelin Guide",
+                            "role": "Critic",
+                            "content": "A masterful display of technique meeting raw emotion on a plate.",
+                            "rating": 5
+                        },
+                        {
+                            "id": "t2",
+                            "author": "Vogue Culinary",
+                            "role": "Magazine",
+                            "content": "Étoile isn't just a restaurant; it's a sensory theater.",
+                            "rating": 5
+                        },
+                        {
+                            "id": "t3",
+                            "author": "James R.",
+                            "role": "Guest",
+                            "content": "The Wagyu A5 was a transcendent experience. Flawless execution.",
+                            "rating": 5
+                        }
+                    ]
+                },
+                "location": {
+                    "enabled": true,
+                    "order": 6,
+                    "address": {
+                        "street": "123 Culinary Blvd, Setiabudi",
+                        "city": "Bandung",
+                        "postalCode": "40115",
+                        "country": "Indonesia"
+                    },
+                    "hours": [
+                        {
+                            "day": "monday",
+                            "open": "",
+                            "close": "",
+                            "closed": true
+                        },
+                        {
+                            "day": "tuesday",
+                            "open": "",
+                            "close": "",
+                            "closed": true
+                        },
+                        {
+                            "day": "wednesday",
+                            "open": "17:00",
+                            "close": "23:00"
+                        },
+                        {
+                            "day": "thursday",
+                            "open": "17:00",
+                            "close": "23:00"
+                        },
+                        {
+                            "day": "friday",
+                            "open": "17:00",
+                            "close": "23:00"
+                        },
+                        {
+                            "day": "saturday",
+                            "open": "17:00",
+                            "close": "23:00"
+                        },
+                        {
+                            "day": "sunday",
+                            "open": "17:00",
+                            "close": "23:00"
+                        }
+                    ],
+                    "phone": "+62 812 3456 7890",
+                    "email": "reservations@etoile.com",
+                    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d107.57311709235512!3d-6.903444341687889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                }
+            }
+        },
+        {
+            "id": "professional-services",
+            "categoryId": "company_profile",
+            "subCategory": "professional_services",
+            "brand": {
+                "name": "Nama Perusahaan",
+                "logo": "https://url-logo.com/logo.png",
+                "primaryColor": "#101010",
+                "accentColor": "#2563EB",
+                "fontPairing": {
+                    "heading": "Inter",
+                    "body": "Inter"
+                }
+            },
+            "seo": {
+                "title": "Nama Perusahaan | Solusi Jasa & Layanan Profesional",
+                "description": "Deskripsi singkat tentang layanan perusahaan Anda. Kami berdedikasi memberikan solusi terbaik untuk kebutuhan bisnis Anda.",
+                "keywords": [
+                    "jasa profesional",
+                    "perusahaan B2B",
+                    "layanan bisnis",
+                    "nama perusahaan"
+                ],
+                "ogImage": "https://url-gambar-thumbnail.com/og-image.jpg",
+                "ogTitle": "Nama Perusahaan | Solusi Jasa & Layanan Profesional",
+                "ogDescription": "Ketahui lebih lanjut tentang layanan dan keahlian kami di sini.",
+                "ogType": "website"
+            },
+            "social": {
+                "instagram": "https://instagram.com/...",
+                "twitter": "https://linkedin.com/company/..."
+            },
+            "sections": {
+                "navigation": {
+                    "enabled": true,
+                    "order": 1,
+                    "logo": {
+                        "src": "https://url-logo.com/logo.png",
+                        "alt": "Logo Resmi Nama Perusahaan"
+                    },
+                    "menuItems": [
+                        {
+                            "label": "Beranda",
+                            "href": "#home"
+                        },
+                        {
+                            "label": "Tentang & Layanan",
+                            "href": "#narrative"
+                        },
+                        {
+                            "label": "Kontak",
+                            "href": "#contact"
+                        }
+                    ],
+                    "primaryCta": {
+                        "label": "Hubungi Kami",
+                        "href": "https://wa.me/6281234567890",
+                        "isWhatsapp": true
+                    }
+                },
+                "hero": {
+                    "enabled": true,
+                    "order": 2,
+                    "anchorId": "home",
+                    "headline": "Mitra Strategis",
+                    "highlightedHeadline": "Pertumbuhan",
+                    "subheadline": "Layanan profesional terintegrasi untuk mempercepat dan mengoptimalkan skala operasional perusahaan Anda.",
+                    "ctaButtons": [
+                        {
+                            "label": "Chat Expert",
+                            "href": "https://wa.me/6281234567890?text=Halo%20saya%20ingin%20konsultasi",
+                            "style": "primary",
+                            "icon": "whatsapp"
+                        },
+                        {
+                            "label": "Pelajari Layanan",
+                            "href": "#narrative",
+                            "style": "secondary"
+                        }
+                    ],
+                    "backgroundImage": {
+                        "src": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
+                        "alt": "Corporate architecture"
+                    }
+                },
+                "about": {
+                    "enabled": true,
+                    "order": 3,
+                    "anchorId": "narrative",
+                    "title": "Mendefinisikan Ulang Standar Industri",
+                    "description": "Berdiri dengan visi menjadi pelopor inovasi. Kami tidak hanya memberikan layanan, kami menciptakan ekosistem operasional yang tangguh melalui integritas dan dedikasi penuh kepada setiap klien.",
+                    "highlights": [
+                        {
+                            "value": "10+",
+                            "label": "Tahun Pengalaman"
+                        },
+                        {
+                            "value": "500+",
+                            "label": "Klien Puas"
+                        },
+                        {
+                            "value": "50+",
+                            "label": "Tenaga Ahli Bersertifikasi"
+                        }
+                    ]
+                },
+                "services": {
+                    "enabled": true,
+                    "order": 4,
+                    "anchorId": "narrative",
+                    "eyebrow": "Layanan Utama",
+                    "title": "Solusi End-to-End",
+                    "description": "Dirancang khusus untuk memecahkan kompleksitas bisnis modern.",
+                    "items": [
+                        {
+                            "id": "consulting",
+                            "title": "Konsultasi Bisnis",
+                            "description": "Pemetaan strategi jitu untuk menembus pasar baru secara efektif dengan analisis mendalam.",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
+                                "alt": "Konsultasi Bisnis"
+                            },
+                            "features": [
+                                "Riset & Analisis Pasar Komprehensif",
+                                "Perencanaan Strategi Go-To-Market",
+                                "Restrukturisasi Operasional"
+                            ],
+                            "accentColor": "#2563EB"
+                        },
+                        {
+                            "id": "digital",
+                            "title": "Pengembangan Digital",
+                            "description": "Transformasi operasional dengan sistem terintegrasi, modern, dan scalable.",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
+                                "alt": "Pengembangan Digital"
+                            },
+                            "features": [
+                                "Pembuatan Aplikasi Enterprise",
+                                "Integrasi API & Pihak Ketiga",
+                                "Modernisasi Sistem Legacy"
+                            ],
+                            "accentColor": "#60A5FA"
+                        },
+                        {
+                            "id": "project-management",
+                            "title": "Manajemen Proyek",
+                            "description": "Pengawalan eksekusi proyek dari hulu ke hilir dengan efisien sesuai timeline.",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop",
+                                "alt": "Manajemen Proyek"
+                            },
+                            "features": [
+                                "Implementasi Agile & Scrum",
+                                "Mitigasi Risiko & Quality Assurance",
+                                "Pemantauan KPI Real-time"
+                            ],
+                            "accentColor": "#C084FC"
+                        },
+                        {
+                            "id": "it-infrastructure",
+                            "title": "Infrastruktur IT",
+                            "description": "Pembangunan fondasi teknologi yang aman, tangguh, dan dapat diandalkan 24/7.",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
+                                "alt": "Infrastruktur IT"
+                            },
+                            "features": [
+                                "Audit & Penetration Testing",
+                                "Migrasi & Optimasi Cloud",
+                                "Disaster Recovery Planning"
+                            ],
+                            "accentColor": "#34D399"
+                        },
+                        {
+                            "id": "data-ai",
+                            "title": "Data & AI",
+                            "description": "Pemanfaatan data mining dan AI untuk menghasilkan wawasan prediktif bagi bisnis.",
+                            "image": {
+                                "src": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+                                "alt": "Data & AI"
+                            },
+                            "features": [
+                                "Implementasi Machine Learning",
+                                "Dashboard Analytics Interaktif",
+                                "Arsitektur Big Data Processing"
+                            ],
+                            "accentColor": "#FB7185"
+                        }
+                    ]
+                },
+                "contact": {
+                    "enabled": true,
+                    "order": 5,
+                    "anchorId": "contact",
+                    "title": "Mari Berdiskusi",
+                    "companyInfo": {
+                        "address": "Jl. Sudirman No. 123, Jakarta, Indonesia",
+                        "email": "info@namaperusahaan.com",
+                        "phone": "+62 812 3456 7890"
+                    },
+                    "whatsappCta": {
+                        "title": "Tim Support Kami",
+                        "description": "Halo! Ada yang bisa kami bantu terkait layanan konsultasi atau pengembangan?",
+                        "button": {
+                            "label": "Chat Admin Sekarang",
+                            "href": "https://wa.me/6281234567890",
+                            "icon": "whatsapp"
+                        }
+                    }
+                },
+                "footer": {
+                    "enabled": true,
+                    "order": 6,
+                    "copyright": "© 2026 Nama Perusahaan. All rights reserved.",
+                    "legalLinks": [
+                        {
+                            "label": "Syarat & Ketentuan",
+                            "href": "/terms"
+                        },
+                        {
+                            "label": "Kebijakan Privasi",
+                            "href": "/privacy"
+                        }
+                    ],
+                    "socialMedia": [
+                        {
+                            "platform": "LinkedIn",
+                            "href": "https://linkedin.com/company/...",
+                            "icon": "linkedin"
+                        },
+                        {
+                            "platform": "Instagram",
+                            "href": "https://instagram.com/...",
+                            "icon": "instagram"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "glow-beauty",
+            "categoryId": "retail",
+            "subCategory": "beauty",
+            "brand": {
+                "name": "AURA",
+                "primaryColor": "#FDFCF0",
+                "accentColor": "#1A1A1A",
+                "fontPairing": {
+                    "heading": "Playfair Display",
+                    "body": "Inter"
+                }
+            },
+            "seo": {
+                "title": "AURA | Skincare Redefined",
+                "description": "Minimalist skincare with maximum efficacy.",
+                "keywords": [
+                    "skincare",
+                    "beauty",
+                    "aura"
+                ],
+                "ogImage": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=2000&auto=format&fit=crop"
+            },
+            "social": {
+                "instagram": "#",
+                "tiktok": "#"
+            },
+            "products": [
+                {
+                    "id": "prod-1",
+                    "name": "Radiance Serum",
+                    "description": "Vitamin C + Hyaluronic Acid complex for everyday glow.",
+                    "price": 48,
+                    "currency": "USD",
+                    "categoryId": "skincare",
+                    "badge": "bestseller",
+                    "images": [
+                        {
+                            "src": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Radiance Serum Bottle"
+                        }
+                    ],
+                    "ingredients": [
+                        "15% L-Ascorbic Acid",
+                        "2% Hyaluronic Acid",
+                        "Ferulic Acid"
+                    ],
+                    "features": [
+                        "Clinically Proven",
+                        "Vegan",
+                        "Cruelty Free"
+                    ]
+                },
+                {
+                    "id": "prod-2",
+                    "name": "Purifying Cleanser",
+                    "description": "Gentle exfoliating gel cleanser with BHA.",
+                    "price": 32,
+                    "currency": "USD",
+                    "categoryId": "skincare",
+                    "images": [
+                        {
+                            "src": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Purifying Cleanser"
+                        }
+                    ]
+                },
+                {
+                    "id": "prod-3",
+                    "name": "Hydrating Cloud Cream",
+                    "description": "Weightless moisturizer that locks in hydration for 24 hours.",
+                    "price": 54,
+                    "currency": "USD",
+                    "categoryId": "skincare",
+                    "badge": "new",
+                    "images": [
+                        {
+                            "src": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Cloud Cream"
+                        }
+                    ]
+                },
+                {
+                    "id": "prod-4",
+                    "name": "Rosewater Essence",
+                    "description": "Balancing and calming essence.",
+                    "price": 28,
+                    "currency": "USD",
+                    "categoryId": "skincare",
+                    "images": [
+                        {
+                            "src": "https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=1000&auto=format&fit=crop",
+                            "alt": "Rosewater Essence"
+                        }
+                    ]
+                }
+            ],
+            "sections": {
+                "hero": {
+                    "enabled": true,
+                    "order": 1,
+                    "headline": "The Science of Glow",
+                    "subheadline": "AURA fuses minimalist editorial beauty with clinically proven botanicals.",
+                    "backgroundImage": {
+                        "src": "https://images.unsplash.com/photo-1648203276014-20f97ba1f817?q=80&w=2000&auto=format&fit=crop",
+                        "alt": "Model with glowing skin"
+                    },
+                    "cta": {
+                        "primary": {
+                            "label": "Discover",
+                            "href": "#collection"
+                        }
+                    }
+                },
+                "brandStory": {
+                    "enabled": true,
+                    "order": 2,
+                    "title": "Our Philosophy",
+                    "story": "Beauty is an expression of inner health. Our formulations strip away the unnecessary, focusing only on clinically proven active ingredients. No compromises.",
+                    "image": {
+                        "src": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1500&auto=format&fit=crop",
+                        "alt": "Ingredients and textures"
+                    }
+                },
+                "featuredProducts": {
+                    "enabled": true,
+                    "order": 3,
+                    "title": "The Essentials",
+                    "productIds": [
+                        "prod-1",
+                        "prod-2",
+                        "prod-3",
+                        "prod-4"
+                    ]
+                },
+                "immersiveMarquee": {
+                    "enabled": true,
+                    "order": 4,
+                    "text": "CLINICALLY PROVEN • VEGAN • CRUELTY FREE • CLINICALLY PROVEN • VEGAN • CRUELTY FREE •",
+                    "backgroundImage": {
+                        "src": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2000&auto=format&fit=crop",
+                        "alt": "Immersive textures"
+                    }
+                },
+                "categories": {
+                    "enabled": false,
+                    "order": 5,
+                    "title": "Shop by Category",
+                    "categories": []
+                },
+                "testimonials": {
+                    "enabled": false,
+                    "order": 5,
+                    "title": "Real Results",
+                    "items": []
+                },
+                "newsletter": {
+                    "enabled": true,
+                    "order": 6,
+                    "title": "Join the Community",
+                    "description": "Subscribe to receive 15% off your first order and early access to new drops.",
+                    "placeholderText": "Enter your email",
+                    "buttonLabel": "Subscribe"
+                },
+                "footer": {
+                    "enabled": true,
+                    "order": 7,
+                    "copyright": "© 2024 AURA Beauty. All rights reserved.",
+                    "legalLinks": [
+                        {
+                            "label": "Privacy Policy",
+                            "href": "#"
+                        },
+                        {
+                            "label": "Terms of Service",
+                            "href": "#"
+                        }
+                    ],
+                    "socialMedia": [
+                        {
+                            "platform": "Instagram",
+                            "href": "#",
+                            "icon": "instagram"
+                        },
+                        {
+                            "platform": "TikTok",
+                            "href": "#",
+                            "icon": "tiktok"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

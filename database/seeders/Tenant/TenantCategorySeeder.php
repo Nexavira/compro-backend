@@ -48,6 +48,16 @@ class TenantCategorySeeder extends Seeder
                 'name' => 'Food and Beverages',
                 'code' => 'FNB',
                 'description' => 'Food and Beverages Services',
+            ],
+            [
+                'name' => 'Company Profile',
+                'code' => 'CMP',
+                'description' => 'Company Profile Services',
+            ],
+            [
+                'name' => 'Retail',
+                'code' => 'RET',
+                'description' => 'Retail Services',
             ]
         ];
 
