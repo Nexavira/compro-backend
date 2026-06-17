@@ -23,8 +23,11 @@ class PageController extends Controller
         }
 
         $page = Page::where('tenant_id', $tenant->id)
-            ->where('slug', $slug)
-            ->where('is_active', 1)
+            ->join('tnt_tenants', 'cms_pages.tenant_id', '=', 'tnt_tenants.id')
+            ->join('cms_global_templates', 'cms_global_templates.id', '=', 'tnt_tenants.global_template_id')
+            ->select('cms_pages.title', 'cms_pages.slug', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug', 'cms_pages.created_at', 'cms_pages.updated_at')
+            ->where('cms_pages.is_active', 1)
+            ->where('cms_pages.slug', $slug)
             ->first();
 
         if (!$page) {
@@ -54,6 +57,8 @@ class PageController extends Controller
             'data'    => [
                 'title'   => $page->title,
                 'slug'    => $page->slug,
+                'template_title'   => $page->template_title ?? null,
+                'template_slug'    => $page->template_slug ?? null,
                 'brand'   => $brandSettings['brand'] ?? null,
                 'seo'     => $meta['seo'] ?? null,
                 'social'  => $brandSettings['social'] ?? null,
