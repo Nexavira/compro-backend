@@ -25,7 +25,7 @@ class PageController extends Controller
         $page = Page::where('tenant_id', $tenant->id)
             ->join('tnt_tenants', 'cms_pages.tenant_id', '=', 'tnt_tenants.id')
             ->join('cms_global_templates', 'cms_global_templates.id', '=', 'tnt_tenants.global_template_id')
-            ->select('cms_pages.title', 'cms_pages.slug', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug','cms_pages.content_blocks', 'cms_pages.created_at', 'cms_pages.updated_at')
+            ->select('cms_pages.*', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug')
             ->where('cms_pages.is_active', 1)
             ->where('cms_pages.slug', $slug)
             ->first();
