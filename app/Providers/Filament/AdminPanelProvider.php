@@ -91,22 +91,65 @@ class AdminPanelProvider extends PanelProvider
                 'panels::styles.after',
                 fn (): string => '
                 <style>
+                    /* Mengubah background color di semua halaman menjadi abu-abu agak gelap */
+                    body, .fi-layout, .fi-main {
+                        background-color: #e2e8f0 !important; 
+                    }
+
                     .fi-main-ctn { padding-top: 1.5rem; }
                     
                     aside.fi-sidebar { 
                         background-color: #ffffff !important; 
-                        border-right: 1px solid #e2e8f0 !important; 
+                        border-right: 1px solid #cbd5e1 !important; 
                     }
                     
+                    /* Mengurangi ketebalan border input menjadi 1px */
+                    .fi-input-wrp {
+                        border: 1px solid #cbd5e1 !important; 
+                        border-radius: 0.5rem !important;
+                    }
+                    
+                    /* Mengurangi ketebalan border builder / repeater items */
+                    /* Mengubah background builder/repeater items menjadi agak gelap (soft grey) agar terpisah */
+                    .fi-fo-builder-item, 
+                    .fi-fo-repeater-item {
+                        border: 1px solid #cbd5e1 !important;
+                        border-radius: 0.75rem !important;
+                        background-color: #f8fafc !important; /* Soft grey background */
+                    }
+
+                    /* Mengurangi ketebalan border header item builder / repeater */
+                    .fi-fo-builder-item-header,
+                    .fi-fo-repeater-item-header {
+                        border-bottom: 1px solid #cbd5e1 !important;
+                        background-color: #f1f5f9 !important; /* Header builder agak gelap */
+                    }
+                    
+                    /* Mengurangi ketebalan border section menjadi 1px */
+                    .fi-section {
+                        border: 1px solid #cbd5e1 !important;
+                        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05) !important;
+                        background-color: #ffffff !important; /* Section utama tetap putih */
+                    }
+
+                    /* Mengurangi ketebalan border fieldset menjadi 1px */
+                    /* Mengubah background fieldset menjadi agak gelap agar terpisah */
+                    fieldset.fi-fo-fieldset, .fi-fo-fieldset, fieldset {
+                        border: 1px solid #cbd5e1 !important;
+                        border-radius: 0.75rem !important;
+                        background-color: #f8fafc !important; /* Soft grey background */
+                    }
+                    
+                    /* Mengurangi ketebalan border table, widget, dan card statistik menjadi 1px */
                     .fi-ta-ctn, .fi-wi-stats-overview-stat, .fi-wi { 
                         border-radius: 1rem !important;
                         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05) !important; 
-                        border: 1px solid #f8fafc !important;
+                        border: 1px solid #cbd5e1 !important;
                     }
                     
                     .fi-topbar {
                         background-color: #f1f5f9 !important;
-                        border-bottom: 1px solid #e2e8f0 !important;
+                        border-bottom: 1px solid #cbd5e1 !important;
                     }
                 </style>',
             );

@@ -75,19 +75,28 @@ class PaymentObserver
                 $tenant->save();
             }
 
-            // 3. Send Welcome Email
-            $adminDetail = UserDetail::where('tenant_id', $payment->tenant_id)->first();
-            if ($adminDetail && $adminDetail->user) {
-                $user = $adminDetail->user;
-                $token = Password::createToken($user);
+            // 3. Send Welcome Email (Only for the first payment of the tenant)
+            $isFirstPayment = !Payment::where('tenant_id', $payment->tenant_id)
+                ->where('id', '<', $payment->id)
+                ->exists();
 
-                // Construct reset url
-                $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($user->email));
+            if ($isFirstPayment && $tenant) {
+                $adminDetail = UserDetail::where('tenant_id', $payment->tenant_id)->first();
+                if ($adminDetail && $adminDetail->user) {
+                    $user = $adminDetail->user;
+                    $token = Password::createToken($user);
 
-                try {
-                    Mail::to($user->email)->send(new WelcomeTenantMail($tenant, $user, $resetUrl));
-                } catch (\Exception $e) {
-                    Log::error('Failed to send welcome email: ' . $e->getMessage());
+                    // Construct reset url
+                    $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($user->email));
+
+                    // Use nexavira26@gmail.com in local/development environment for testing
+                    $recipientEmail = app()->environment('production') ? $user->email : 'nexavira26@gmail.com';
+
+                    try {
+                        Mail::to($recipientEmail)->send(new WelcomeTenantMail($tenant, $user, $resetUrl));
+                    } catch (\Exception $e) {
+                        Log::error('Failed to send welcome email: ' . $e->getMessage());
+                    }
                 }
             }
         }

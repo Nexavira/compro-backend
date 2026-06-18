@@ -46,7 +46,7 @@ class WelcomeTenantMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.welcome_tenant',
+            view: 'emails.welcome_tenant',
         );
     }
 
