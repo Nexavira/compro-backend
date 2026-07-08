@@ -7,13 +7,15 @@ use App\Models\CMS\Page;
 
 Route::post('do-login', [App\Http\Controllers\API\Auth\AuthController::class, 'doLogin']);
 
-// Tenant Profiles (Custom Domains & Subdomains)
-Route::middleware([TenantHandlerApi::class])->group(function () {
-    Route::get('/check-tenant', function () {
-        $tenant = app('tenant');
-        return "Welcome to the profile of: " . $tenant->name;
-    });
-});
+Route::get('/package', [App\Http\Controllers\API\Master\PackageController::class, 'get']);
+
+// // Tenant Profiles (Custom Domains & Subdomains)
+// Route::middleware([TenantHandlerApi::class])->group(function () {
+//     Route::get('/check-tenant', function () {
+//         $tenant = app('tenant');
+//         return "Welcome to the profile of: " . $tenant->name;
+//     });
+// });
 
 Route::group(['middleware' => 'auth:api'], function () {
     require __DIR__ . '/api/auth/auth.php';

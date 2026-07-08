@@ -19,6 +19,7 @@ use App\Policies\Transaction\SubscriptionPolicy;
 
 // Register Services
 use App\Providers\RegisterService\RegisterAuthService;
+use App\Providers\RegisterService\RegisterPackageService;
 use App\Providers\RegisterService\RegisterPermissionService;
 use App\Providers\RegisterService\RegisterRoleService;
 use App\Providers\RegisterService\RegisterSystemService;
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RegisterSystemService::class);
         $this->app->register(RegisterTenantService::class);
         $this->app->register(RegisterTenantCategoryService::class);
+        $this->app->register(RegisterPackageService::class);
     }
 
     /**
