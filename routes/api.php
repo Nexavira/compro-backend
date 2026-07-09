@@ -7,8 +7,6 @@ use App\Models\CMS\Page;
 
 Route::post('do-login', [App\Http\Controllers\API\Auth\AuthController::class, 'doLogin']);
 
-Route::get('/package', [App\Http\Controllers\API\Master\PackageController::class, 'get']);
-
 // // Tenant Profiles (Custom Domains & Subdomains)
 // Route::middleware([TenantHandlerApi::class])->group(function () {
 //     Route::get('/check-tenant', function () {
@@ -39,3 +37,5 @@ Route::group(['prefix' => 'v1/t/{tenant_slug}'], function () {
 // Global Template Endpoints (Doesn't necessarily need tenant auth, but we can keep it separate or accessible)
 Route::get('/v1/templates', [App\Http\Controllers\API\Cms\TemplateController::class, 'index']);
 Route::get('/v1/templates/{slug}', [App\Http\Controllers\API\Cms\TemplateController::class, 'show']);
+
+Route::get('v1/packages', [App\Http\Controllers\API\Master\PackageController::class, 'get']);

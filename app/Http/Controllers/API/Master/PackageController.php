@@ -3,26 +3,27 @@
 namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\PackageRequest\GetPackageRequest;
 use App\Http\Resources\API\Package\GetPackageResource;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
-    public function get(Request $request)
+    public function get(GetPackageRequest $request)
     {
-        $tenant = app('GetPackageService')->execute($request->all());
+        $package = app('GetPackageService')->execute($request->all());
 
-        // $data = null;
-        // if (isset($tenant['data'])) {
-        //     $data = ( isset($tenant['data']->id)) ? new GetPackageResource($tenant['data']) :
-        //     GetPackageResource::collection($tenant['data']);
-        // }
+        $data = null;
+        if (isset($package['data'])) {
+            $data = ( isset($package['data']->id)) ? new GetPackageResource($package['data']) :
+            GetPackageResource::collection($package['data']);
+        }
 
         return response()->json([
-            'success' => ( isset($tenant['error']) ? false : true ),
-            'message' => $tenant['message'],
-            'data' => $tenant['data'],
-            'pagination' => $tenant['pagination'] ?? null
-        ], $tenant['response_code']);
+            'success' => ( isset($package['error']) ? false : true ),
+            'message' => $package['message'],
+            'data' => $data,
+            'pagination' => $package['pagination'] ?? null
+        ], $package['response_code']);
     }
 }
