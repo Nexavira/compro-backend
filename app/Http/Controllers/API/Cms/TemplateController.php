@@ -39,7 +39,7 @@ class TemplateController extends Controller
                 }
             }
         }
-        
+
         $meta = $firstPage && is_string($firstPage->meta) ? json_decode($firstPage->meta, true) : ($firstPage->meta ?? []);
         $brandSettings = is_string($template->brand_settings) ? json_decode($template->brand_settings, true) : ($template->brand_settings ?? []);
 
@@ -48,11 +48,15 @@ class TemplateController extends Controller
             'data'    => [
                 'title'       => $template->title,
                 'slug'        => $template->slug,
-                'category'    => $template->category,
                 'description' => $template->description,
                 'brand'       => $brandSettings['brand'] ?? null,
                 'seo'         => $meta['seo'] ?? null,
                 'social'      => $brandSettings['social'] ?? null,
+                'category'    => [
+                    'name' => $template->tenantCategory->name,
+                    'code' => $template->tenantCategory->code,
+                    'description' => $template->tenantCategory->description ?? null,
+                ],
                 'blocks'      => [
                     'sections' => $sections
                 ],
