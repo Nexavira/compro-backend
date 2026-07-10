@@ -70,7 +70,7 @@ class TemplateController extends Controller
     public function index(Request $request)
     {
         $templates = GlobalTemplate::where('is_active', 1)
-            ->select('id', 'title', 'slug', 'category', 'description')
+            ->select('id', 'tenant_category_id', 'title', 'slug', 'description')
             ->get();
 
         return response()->json([
