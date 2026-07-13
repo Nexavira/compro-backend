@@ -7,7 +7,7 @@ use App\Filament\Resources\Cms\Pages\Pages\EditPage;
 use App\Filament\Resources\Cms\Pages\Pages\ListPages;
 use App\Filament\Resources\Cms\Pages\Schemas\PageForm;
 use App\Filament\Resources\Cms\Pages\Tables\PagesTable;
-use App\Models\Cms\Page;
+use App\Models\COS\Page;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -29,7 +29,7 @@ class PageResource extends Resource
     protected static ?string $recordTitleAttribute = 'Page';
 
     protected static string|UnitEnum|null $navigationGroup = 'CMS';
-    
+
     protected static ?int $navigationSort = 2;
 
     protected static ?string $slug = 'cms/pages';

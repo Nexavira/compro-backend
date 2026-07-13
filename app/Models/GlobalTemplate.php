@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tenant\TenantCategory;
 use Illuminate\Database\Eloquent\Model;
 
 class GlobalTemplate extends BaseModel
@@ -27,7 +28,7 @@ class GlobalTemplate extends BaseModel
     }
     public function tenantCategory()
     {
-        return $this->belongsTo(\App\Models\Tenant\TenantCategory::class, 'tenant_category_id', 'id');
+        return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
     }
 
     public function pages()

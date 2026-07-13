@@ -67,6 +67,6 @@ class Tenant extends BaseModel
 
     public function pages()
     {
-        return $this->hasMany(\App\Models\Cms\Page::class, 'tenant_id', 'id');
+        return $this->hasMany(\App\Models\COS\Page::class, 'tenant_id', 'id');
     }
 }

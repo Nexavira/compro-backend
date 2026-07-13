@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Cms\Page;
+use App\Models\COS\Page;
 use App\Models\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use Illuminate\Support\Facades\DB;
@@ -23,11 +23,11 @@ class TemplateCloningService
         try {
             // 1. Clone brand settings to tenant's settings
             $currentSettings = $tenant->settings ?? [];
-            
+
             // Merge existing settings with template's brand settings
             // If template has brand_settings, we inject it into a 'brand' key or merge it
             $currentSettings['brand_settings'] = $template->brand_settings;
-            
+
             $tenant->settings = $currentSettings;
             $tenant->saveQuietly(); // Use saveQuietly to prevent infinite loops if called from Observer
 
