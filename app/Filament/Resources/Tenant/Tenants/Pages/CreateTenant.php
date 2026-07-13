@@ -15,6 +15,7 @@ use App\Models\Auth\Role;
 use App\Models\Transaction\Subscription;
 use App\Models\Master\Package;
 use App\Models\Transaction\Payment;
+use Carbon\Carbon;
 
 class CreateTenant extends CreateRecord
 {
@@ -88,10 +89,15 @@ class CreateTenant extends CreateRecord
             $tenant = static::getModel()::create($tenantData);
 
             if (isset($data['user_email'])) {
+                // Create pass
+                $str = strtolower(substr($data['user_email'], 0, 6));
+                $md = Carbon::now()->startOfDay()->format('md');
+                $pass = $md.$str;
+
                 // Create Admin User
                 $user = User::create([
                     'email' => $data['user_email'],
-                    'password' => null,
+                    'password' => $pass,
                     'is_active' => 1,
                     'version' => 0,
                 ]);
