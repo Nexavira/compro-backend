@@ -7,7 +7,7 @@ use App\Filament\Resources\Cms\Pages\Pages\EditPage;
 use App\Filament\Resources\Cms\Pages\Pages\ListPages;
 use App\Filament\Resources\Cms\Pages\Schemas\PageForm;
 use App\Filament\Resources\Cms\Pages\Tables\PagesTable;
-use App\Models\COS\Page;
+use App\Models\CMS\Page;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
