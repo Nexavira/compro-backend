@@ -296,11 +296,11 @@ class GlobalTemplateSeeder extends Seeder
     // $data = json_decode($data_json, true);
 
 
-    $filePath = database_path('seeders/template-data.json');
+    $filePath = database_path('seeders/home-template-data.json');
     $jsonString = file_get_contents($filePath);
-    $dataArray = collect(json_decode($jsonString, true));
+    $homeDataArray = collect(json_decode($jsonString, true));
 
-    foreach ($dataArray['data'] as $index => $data) {
+    foreach ($homeDataArray['data'] as $index => $data) {
       $brandSettings = [
         'brand' => $data['brand'] ?? [],
         'social' => $data['social'] ?? [],

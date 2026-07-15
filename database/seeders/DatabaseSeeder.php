@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             TenantCategorySeeder::class,
             GlobalTemplateSeeder::class,
+            GlobalTemplateAboutPageSeeder::class,
             TenantSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
