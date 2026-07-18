@@ -38,4 +38,4 @@ Route::group(['prefix' => 'v1/t/{tenant_slug}'], function () {
 Route::get('/v1/templates', [App\Http\Controllers\API\Cms\TemplateController::class, 'index']);
 Route::get('/v1/templates/{slug}', [App\Http\Controllers\API\Cms\TemplateController::class, 'show']);
 
-Route::get('v1/packages', [App\Http\Controllers\API\Master\PackageController::class, 'get']);
+Route::get('/v1/packages', [App\Http\Controllers\API\Master\PackageController::class, 'get']);

@@ -1,0 +1,127 @@
+{
+    "data": [
+        {
+            "slug": "etoile-premium-about",
+            "title": "Étoile — Our Story",
+            "categoryId": "fnb",
+            "brand": {
+                "name": "ÉTOILE",
+                "primaryColor": "#C35B3E",
+                "accentColor": "#1A1A1A",
+                "fontPairing": {
+                    "heading": "Playfair Display",
+                    "body": "Inter"
+                }
+            },
+            "seo": {
+                "title": "Our Story — Étoile",
+                "description": "A relentless pursuit of culinary perfection.",
+                "keywords": [
+                    "fine dining",
+                    "restaurant",
+                    "bandung",
+                    "fnb",
+                    "etoile",
+                    "about us"
+                ],
+                "ogImage": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop"
+            },
+            "social": {
+                "instagram": "#",
+                "twitter": "#"
+            },
+            "blocks": {
+                "sections": {
+                    "hero": {
+                        "enabled": true,
+                        "order": 1,
+                        "title": "Behind the Étoile",
+                        "subtitle": "A relentless pursuit of culinary perfection.",
+                        "image": {
+                            "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop",
+                            "alt": "Fine dining kitchen"
+                        }
+                    },
+                    "history": {
+                        "enabled": true,
+                        "order": 2,
+                        "title": "Our Genesis",
+                        "description": "Étoile Premium was born out of a desire to create an unparalleled dining experience. Every element, from the locally sourced ingredients to the meticulously designed plating, is a testament to our dedication to the culinary arts. We do not just serve food; we craft memories.",
+                        "milestones": [
+                            {
+                                "year": "2022",
+                                "title": "The Inception",
+                                "description": "Chef Julian Dupont envisioned a space where avant-garde techniques meet local terroir."
+                            },
+                            {
+                                "year": "2023",
+                                "title": "Farm Partnerships",
+                                "description": "Establishing relationships with over 100 local organic farms to ensure the highest quality ingredients."
+                            },
+                            {
+                                "year": "2024",
+                                "title": "Grand Opening",
+                                "description": "Étoile opens its doors in Bandung, introducing a new era of fine dining."
+                            }
+                        ]
+                    },
+                    "philosophy": {
+                        "enabled": true,
+                        "order": 3,
+                        "title": "Our Philosophy",
+                        "statement": "We source relentlessly, cook precisely, and plate with an architectural mindset.",
+                        "features": [
+                            {
+                                "title": "Sustainability",
+                                "description": "A zero-waste approach in our kitchens and deep respect for the environment."
+                            },
+                            {
+                                "title": "Innovation",
+                                "description": "Constantly pushing the boundaries of taste, texture, and presentation."
+                            },
+                            {
+                                "title": "Heritage",
+                                "description": "Honoring traditional culinary foundations while breaking new ground."
+                            }
+                        ]
+                    },
+                    "team": {
+                        "enabled": true,
+                        "order": 4,
+                        "title": "The Maestros",
+                        "description": "Meet the visionaries behind our culinary symphony.",
+                        "members": [
+                            {
+                                "name": "Julian Dupont",
+                                "role": "Executive Chef",
+                                "bio": "With over 15 years in Michelin-starred kitchens across Europe, Julian brings a relentless passion for perfection.",
+                                "image": {
+                                    "src": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=2000&auto=format&fit=crop",
+                                    "alt": "Julian Dupont"
+                                }
+                            },
+                            {
+                                "name": "Isabella Chen",
+                                "role": "Head Sommelier",
+                                "bio": "Curator of our 850+ wine labels, Isabella crafts the perfect pairings for every dish.",
+                                "image": {
+                                    "src": "https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?q=80&w=2000&auto=format&fit=crop",
+                                    "alt": "Isabella Chen"
+                                }
+                            },
+                            {
+                                "name": "Marcus Thorne",
+                                "role": "Chef de Cuisine",
+                                "bio": "Marcus oversees the daily orchestrations of the kitchen, ensuring flawless execution of every plate.",
+                                "image": {
+                                    "src": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=2000&auto=format&fit=crop",
+                                    "alt": "Marcus Thorne"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -11,6 +11,7 @@ class GlobalTemplate extends BaseModel
 
     protected $hidden = [
         'id',
+        'tenant_category_id',
         'created_by',
         'updated_by',
         'deleted_by',
