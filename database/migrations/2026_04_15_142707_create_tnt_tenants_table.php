@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('custom_domain')->nullable();
             $table->json('settings')->nullable();
-            $table->integer('is_suspended')->default(0);
+            $table->integer('is_suspended')->default(1);
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\TenantService;
 
 use App\Models\System\File;
@@ -10,7 +11,8 @@ use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 use Illuminate\Support\Str;
 
-class StoreTenantService extends DefaultService implements ServiceInterface {
+class StoreTenantService extends DefaultService implements ServiceInterface
+{
 
     public function process($dto)
     {
@@ -21,13 +23,13 @@ class StoreTenantService extends DefaultService implements ServiceInterface {
         $tenant->slug = $dto['slug'] ?? Str::slug($dto['name']);
         $tenant->theme_code = $dto['theme_code'];
         $tenant->tenant_category_id = $dto['tenant_category_id'];
-        
+
         $tenant->logo_id = $dto['logo_id'] ?? null;
         $tenant->favicon_id = $dto['favicon_id'] ?? null;
         $tenant->custom_domain = $dto['custom_domain'] ?? null;
         $tenant->settings = $dto['settings'] ?? null;
         $tenant->description = $dto['description'] ?? null;
-        $tenant->is_suspended = $dto['is_suspended'] ?? 0;
+        $tenant->is_suspended = $dto['is_suspended'] ?? 1;
 
         $this->prepareAuditActive($tenant);
         $this->prepareAuditInsert($tenant);
@@ -37,7 +39,8 @@ class StoreTenantService extends DefaultService implements ServiceInterface {
         $this->results['message'] = "Tenant successfully stored";
     }
 
-    public function prepare ($dto) {
+    public function prepare($dto)
+    {
         if (isset($dto['logo_uuid']) and $dto['logo_uuid'] != '') {
             $dto['logo_id'] = $this->findIdByUuid(File::query(), $dto['logo_uuid']);
         }
@@ -51,7 +54,8 @@ class StoreTenantService extends DefaultService implements ServiceInterface {
         return $dto;
     }
 
-    public function rules ($dto) {
+    public function rules($dto)
+    {
         return [
             'name' => ['required', 'string', 'max:255', new UniqueData('tnt_tenants', 'name')],
             'slug' => ['nullable', 'string', 'max:255', new UniqueData('tnt_tenants', 'slug')],
@@ -65,5 +69,4 @@ class StoreTenantService extends DefaultService implements ServiceInterface {
             'is_suspended' => ['nullable', 'integer', 'in:0,1'],
         ];
     }
-
 }

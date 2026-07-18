@@ -68,11 +68,18 @@ class PaymentObserver
                 }
             }
 
-            // 2. Activate Tenant
+            // 2. Activate Tenant & Trigger Template Cloning
             $tenant = $payment->tenant;
             if ($tenant) {
                 $tenant->is_suspended = 0;
                 $tenant->save();
+
+                // Trigger Template Cloning after payment is paid (if it hasn't been cloned yet)
+                // Note: We use the globalTemplate assigned during tenant creation.
+                if ($tenant->global_template_id && $tenant->globalTemplate) {
+                    $cloningService = new \App\Services\TemplateCloningService();
+                    $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
+                }
             }
 
             // 3. Send Welcome Email (Only for the first payment of the tenant)

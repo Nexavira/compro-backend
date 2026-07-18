@@ -85,6 +85,7 @@ class CreateTenant extends CreateRecord
     {
         return DB::transaction(function () use ($data) {
             $tenantData = collect($data)->except(['user_name', 'user_email', 'user_phone', 'user_password', 'user_password_confirmation', 'subscription_plan'])->toArray();
+            $tenantData['is_suspended'] = 1; // Tenant is suspended by default until payment is paid
             $tenant = static::getModel()::create($tenantData);
 
             if (isset($data['user_email'])) {

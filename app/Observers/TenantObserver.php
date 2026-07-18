@@ -10,10 +10,7 @@ class TenantObserver
     /**
      * Handle the Tenant "created" event.
      */
-    public function created(Tenant $tenant): void
-    {
-        $this->handleTemplateCloning($tenant);
-    }
+    public function created(Tenant $tenant): void {}
 
     /**
      * Handle the Tenant "updated" event.
