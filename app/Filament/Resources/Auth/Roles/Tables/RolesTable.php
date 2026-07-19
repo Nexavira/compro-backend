@@ -21,13 +21,13 @@ class RolesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('code')
-                    ->label('Code')
+                    ->label('Kode')
                     ->searchable(),
                 TextColumn::make('description')
-                    ->label('Description')
+                    ->label('Deskripsi')
                     ->searchable(),
             ])
             ->filters([
@@ -49,7 +49,7 @@ class RolesTable
                     DeleteAction::make()
                         ->before(fn ($record) => $record->update(['is_active' => false])),
                     Action::make('manage_permissions')
-                        ->label('Permissions')
+                        ->label('Hak Akses')
                         ->icon('heroicon-m-shield-check')
                         ->color('warning')
                         ->url(fn ($record): string => RoleResource::getUrl('permissions', ['record' => $record]))

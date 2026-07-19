@@ -21,18 +21,18 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static ?string $modelLabel = 'Page';
-    protected static ?string $pluralModelLabel = 'Pages';
+    protected static ?string $modelLabel = 'Halaman';
+    protected static ?string $pluralModelLabel = 'Halaman';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Page';
 
-    protected static string|UnitEnum|null $navigationGroup = 'CMS';
+    protected static string|UnitEnum|null $navigationGroup = 'Sistem Konten';
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $slug = 'cms/pages';
+    protected static ?string $slug = 'sistem-konten/halaman';
 
     public static function form(Schema $schema): Schema
     {

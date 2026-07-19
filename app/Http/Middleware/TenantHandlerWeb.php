@@ -9,16 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TenantHandlerWeb
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
+
     public function handle(Request $request, Closure $next): Response
     {
         $host = $request->getHost();
-    
-        // Skip middleware for the main landing page
+
         if ($host === 'nexavira.test') {
             return $next($request);
         }
@@ -33,7 +28,6 @@ class TenantHandlerWeb
             abort(403, "This account has been suspended.");
         }
 
-        // Bind the tenant to the service container for easy access
         app()->instance('tenant', $tenant);
 
         return $next($request);

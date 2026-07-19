@@ -10,11 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TenantHandlerApi
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
+
     public function handle(Request $request, Closure $next): Response
     {
         $host = $request->getHost();
@@ -28,7 +24,6 @@ class TenantHandlerApi
             return response()->json(['message' => 'Account suspended.'], 403);
         }
 
-        // if header includes optional api key, check api key
         $token = $request->header('X-Tenant-API-Key');
         if ($token != null) {
             $active_token = $tenant->getActiveApiKey;

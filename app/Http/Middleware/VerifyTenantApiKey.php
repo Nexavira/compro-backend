@@ -9,11 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VerifyTenantApiKey
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
+
     public function handle(Request $request, Closure $next): Response
     {
         $token = $request->header('X-Tenant-API-Key');

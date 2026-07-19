@@ -9,7 +9,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-// Sangat disarankan implement ShouldQueue agar request user tidak terblokir saat API call ke Resend
 class WelcomeEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
@@ -35,7 +34,7 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcome', // Sesuaikan dengan file blade Anda
+            view: 'emails.welcome', 
         );
     }
 }

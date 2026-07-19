@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('sys_files', function (Blueprint $table) {
@@ -26,7 +24,6 @@ return new class extends Migration
             $table->string('storage_disk')->nullable();
             $table->integer('is_public')->default(1);
 
-
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
             $table->userFootprints();
@@ -39,9 +36,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sys_files');

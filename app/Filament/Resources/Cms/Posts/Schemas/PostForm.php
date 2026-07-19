@@ -54,7 +54,7 @@ class PostForm
                             Section::make('Article Content')
                                 ->schema([
                                     TextInput::make('title')
-                                        ->label('Title')
+                                        ->label('Judul')
                                         ->markAsRequired()
                                         ->rules(['required'])
                                         ->validationMessages([

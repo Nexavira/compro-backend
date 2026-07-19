@@ -24,7 +24,7 @@ class Payment extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            // Custom Attribute mutators handle date fields instead to bypass integer formatting
+
         ]);
     }
 

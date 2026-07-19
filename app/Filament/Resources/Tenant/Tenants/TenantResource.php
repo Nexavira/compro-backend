@@ -21,18 +21,18 @@ class TenantResource extends Resource
 {
     protected static ?string $model = Tenant::class;
 
-    protected static ?string $modelLabel = 'Tenant';
-    protected static ?string $pluralModelLabel = 'Lists';
+    protected static ?string $modelLabel = 'Klien';
+    protected static ?string $pluralModelLabel = 'Klien';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice2;
 
     protected static ?string $recordTitleAttribute = 'Tenant';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Tenants';
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Klien';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $slug = 'tenants/tenants';
+    protected static ?string $slug = 'manajemen-klien/klien';
 
     public static function form(Schema $schema): Schema
     {

@@ -21,18 +21,18 @@ class ApiKeyResource extends Resource
 {
     protected static ?string $model = ApiKey::class;
 
-    protected static ?string $modelLabel = 'Api Key';
-    protected static ?string $pluralModelLabel = 'Api Keys';
+    protected static ?string $modelLabel = 'API Key';
+    protected static ?string $pluralModelLabel = 'API Key';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Key;
 
     protected static ?string $recordTitleAttribute = 'ApiKey';
 
-    protected static string|UnitEnum|null $navigationGroup = 'System';
+    protected static string|UnitEnum|null $navigationGroup = 'Sistem';
 
     protected static ?int $navigationSort = 4;
 
-    protected static ?string $slug = 'system/api-keys';
+    protected static ?string $slug = 'sistem/api-key';
 
     public static function form(Schema $schema): Schema
     {

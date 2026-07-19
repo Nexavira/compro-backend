@@ -7,17 +7,12 @@ use App\Services\TemplateCloningService;
 
 class TenantObserver
 {
-    /**
-     * Handle the Tenant "created" event.
-     */
+
     public function created(Tenant $tenant): void {}
 
-    /**
-     * Handle the Tenant "updated" event.
-     */
     public function updated(Tenant $tenant): void
     {
-        // Check if global_template_id was changed
+
         if ($tenant->wasChanged('global_template_id')) {
             $this->handleTemplateCloning($tenant);
         }

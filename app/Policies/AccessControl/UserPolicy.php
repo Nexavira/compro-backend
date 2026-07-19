@@ -21,13 +21,13 @@ class UserPolicy extends BasePolicy
     { 
         return $user->can('admin_access_control_user_create'); 
     }
-    
+
     public function update(User $user, User $model): bool
     { 
         if ($this->isMasterRecord($model)) return false;
         return $user->can('admin_access_control_user_edit');
     }
-    
+
     public function delete(User $user, User $model): bool
     { 
         if ($this->isMasterRecord($model)) return false;

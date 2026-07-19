@@ -23,7 +23,7 @@ class PostsTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label('Judul')
                     ->searchable()
                     ->sortable()
                     ->description(fn(Post $record): string => $record->slug),

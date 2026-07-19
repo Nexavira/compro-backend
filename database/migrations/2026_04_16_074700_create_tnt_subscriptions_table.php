@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('tnt_subscriptions', function (Blueprint $table) {
@@ -17,13 +15,11 @@ return new class extends Migration
             $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
             $table->string('subscription_number')->unique();
 
-            // Package Information
             $table->foreignId('package_id')->constrained('mst_packages')->onDelete('cascade');
             $table->string('package_name');
             $table->string('billing_cycle')->comment('monthly,annually');
             $table->string('status')->comment('active, past_due, canceled');
 
-            // Subscription Details
             $table->date('next_billing_date');
             $table->decimal('amount', 15, 0);
 
@@ -39,9 +35,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('tnt_subscriptions');

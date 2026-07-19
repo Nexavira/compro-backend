@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\GlobalTemplate;
+use App\Models\GlobalTemplatePage;
+use App\Models\Tenant\TenantCategory;
 use Illuminate\Database\Seeder;
 
 class GlobalTemplateAboutPageSeeder extends Seeder
 {
-  /**
-   * Run the database seeds.
-   */
+
   public function run(): void
   {
     $filePath = database_path('seeders/about-template-data.json');
@@ -36,7 +36,7 @@ class GlobalTemplateAboutPageSeeder extends Seeder
         case 0:
           $template = GlobalTemplate::where('slug', 'food-and-beverage')->first();
 
-          \App\Models\GlobalTemplatePage::create([
+          GlobalTemplatePage::create([
             'global_template_id' => $template->id,
             'title' => 'About',
             'slug' => 'about',
@@ -46,32 +46,7 @@ class GlobalTemplateAboutPageSeeder extends Seeder
           ]);
           break;
 
-        // case 1:
-        //   $tenantCategory = \App\Models\Tenant\TenantCategory::where('code', 'CMP')->first();
-
-        //   $template = GlobalTemplate::create(
-        //     [
-        //       'title' => 'Company Profile',
-        //       'slug' => 'company-profile',
-        //       'tenant_category_id' => $tenantCategory?->id,
-        //       'description' => 'A Sophisticated Blueprint of Innovation template suitable for corporate identities',
-        //       'brand_settings' => $brandSettings,
-        //       'is_active' => 1,
-        //     ]
-        //   );
-
-        //   \App\Models\GlobalTemplatePage::create([
-        //     'global_template_id' => $template->id,
-        //     'title' => 'Home',
-        //     'slug' => 'home',
-        //     'content_blocks' => $contentBlocks,
-        //     'meta' => ['seo' => $data['seo'] ?? []],
-        //     'is_active' => 1,
-        //   ]);
-        //   break;
-
-        // case 2:
-          $tenantCategory = \App\Models\Tenant\TenantCategory::where('code', 'RET')->first();
+          $tenantCategory = TenantCategory::where('code', 'RET')->first();
 
           $template = GlobalTemplate::create(
             [
@@ -84,7 +59,7 @@ class GlobalTemplateAboutPageSeeder extends Seeder
             ]
           );
 
-          \App\Models\GlobalTemplatePage::create([
+          GlobalTemplatePage::create([
             'global_template_id' => $template->id,
             'title' => 'Home',
             'slug' => 'home',
@@ -94,7 +69,7 @@ class GlobalTemplateAboutPageSeeder extends Seeder
           ]);
           break;
       }
-      
+
     }
   }
 }

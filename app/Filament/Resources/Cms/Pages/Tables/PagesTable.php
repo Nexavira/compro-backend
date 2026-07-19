@@ -23,7 +23,7 @@ class PagesTable
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label('Judul')
                     ->searchable()
                     ->sortable()
                     ->description(fn (Page $record): string => $record->slug),

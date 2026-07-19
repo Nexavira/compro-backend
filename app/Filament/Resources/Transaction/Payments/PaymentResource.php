@@ -21,18 +21,18 @@ class PaymentResource extends Resource
 {
     protected static ?string $model = Payment::class;
 
-    protected static ?string $modelLabel = 'Payment';
-    protected static ?string $pluralModelLabel = 'Payments';
+    protected static ?string $modelLabel = 'Pembayaran';
+    protected static ?string $pluralModelLabel = 'Pembayaran';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Banknotes;
 
     protected static ?string $recordTitleAttribute = 'Payment';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Transactions';
+    protected static string|UnitEnum|null $navigationGroup = 'Transaksi';
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $slug = 'transaction/payments';
+    protected static ?string $slug = 'transaksi/pembayaran';
 
     public static function form(Schema $schema): Schema
     {

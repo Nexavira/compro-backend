@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Get a single post by its slug for the current tenant.
-     */
+
     public function show(Request $request, $tenant_slug, $slug)
     {
         $tenant = Tenant::where('slug', $tenant_slug)->first();
@@ -47,9 +45,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Get all active posts for the current tenant.
-     */
     public function index(Request $request, $tenant_slug)
     {
         $tenant = Tenant::where('slug', $tenant_slug)->first();

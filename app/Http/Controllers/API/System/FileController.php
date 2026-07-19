@@ -10,7 +10,7 @@ class FileController extends Controller
     public function upload(Request $request)
     {
         $dto = $request->all();
-        // Since $request->all() doesn't always handle files properly depending on content type,
+
         if ($request->hasFile('file')) {
             $dto['file'] = $request->file('file');
         }

@@ -9,24 +9,20 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeTenantMail;
 use Illuminate\Support\Facades\Log;
+use App\Services\TemplateCloningService;
 
 class PaymentObserver
 {
-    /**
-     * Handle the Payment "created" event.
-     */
+
     public function created(Payment $payment): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Payment "updated" event.
-     */
     public function updated(Payment $payment): void
     {
         if ($payment->isDirty('status') && $payment->status === 'paid') {
-            // 1. Activate Subscription
+
             $subscription = $payment->subscription;
             $tenant = $payment->tenant;
 
@@ -38,7 +34,6 @@ class PaymentObserver
                     : $baseDate->copy()->addMonthNoOverflow();
                 $subscription->save();
 
-                // Create next payment invoice immediately if it doesn't already exist
                 if ($tenant) {
                     $existingPayment = Payment::where('tenant_id', $tenant->id)
                         ->where('subscription_id', $subscription->id)
@@ -68,21 +63,17 @@ class PaymentObserver
                 }
             }
 
-            // 2. Activate Tenant & Trigger Template Cloning
             $tenant = $payment->tenant;
             if ($tenant) {
                 $tenant->is_suspended = 0;
                 $tenant->save();
 
-                // Trigger Template Cloning after payment is paid (if it hasn't been cloned yet)
-                // Note: We use the globalTemplate assigned during tenant creation.
                 if ($tenant->global_template_id && $tenant->globalTemplate) {
-                    $cloningService = new \App\Services\TemplateCloningService();
+                    $cloningService = new TemplateCloningService();
                     $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
                 }
             }
 
-            // 3. Send Welcome Email (Only for the first payment of the tenant)
             $isFirstPayment = !Payment::where('tenant_id', $payment->tenant_id)
                 ->where('id', '<', $payment->id)
                 ->exists();
@@ -93,10 +84,8 @@ class PaymentObserver
                     $user = $adminDetail->user;
                     $token = Password::createToken($user);
 
-                    // Construct reset url
                     $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($user->email));
 
-                    // Use nexavira26@gmail.com in local/development environment for testing
                     $recipientEmail = app()->environment('production') ? $user->email : 'nexavira26@gmail.com';
 
                     try {
@@ -109,27 +98,18 @@ class PaymentObserver
         }
     }
 
-    /**
-     * Handle the Payment "deleted" event.
-     */
     public function deleted(Payment $payment): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Payment "restored" event.
-     */
     public function restored(Payment $payment): void
     {
-        //
+
     }
 
-    /**
-     * Handle the Payment "force deleted" event.
-     */
     public function forceDeleted(Payment $payment): void
     {
-        //
+
     }
 }

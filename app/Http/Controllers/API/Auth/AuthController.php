@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
 
     public function getUserSessionInformation (Request $request) {
-        /** @var User $user */
+
         $user = $request->user();
 
         if(!$user) {
@@ -43,7 +43,6 @@ class AuthController extends Controller
             ], 404);
         }
 
-        //Photo
         $photo = null;
         if (isset($user->photo)) {
             $photo = [

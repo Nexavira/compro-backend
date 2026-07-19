@@ -5,6 +5,8 @@ namespace App\Models\Tenant;
 use App\Models\ApiKey;
 use App\Models\BaseModel;
 use App\Models\System\File;
+use App\Models\GlobalTemplate;
+use App\Models\CMS\Page;
 
 class Tenant extends BaseModel
 {
@@ -62,11 +64,11 @@ class Tenant extends BaseModel
     }
     public function globalTemplate()
     {
-        return $this->belongsTo(\App\Models\GlobalTemplate::class, 'global_template_id', 'id');
+        return $this->belongsTo(GlobalTemplate::class, 'global_template_id', 'id');
     }
 
     public function pages()
     {
-        return $this->hasMany(\App\Models\CMS\Page::class, 'tenant_id', 'id');
+        return $this->hasMany(Page::class, 'tenant_id', 'id');
     }
 }

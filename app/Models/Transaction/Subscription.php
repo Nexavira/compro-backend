@@ -24,7 +24,7 @@ class Subscription extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            // Custom Attribute mutator handles next_billing_date to bypass BaseModel's Unix timestamp dateFormat
+
         ]);
     }
 

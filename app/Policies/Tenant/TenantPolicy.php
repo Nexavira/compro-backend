@@ -22,13 +22,13 @@ class TenantPolicy extends BasePolicy
     { 
         return $user->can('admin_tenant_tenant_create'); 
     }
-    
+
     public function update(User $user, Tenant $tenant): bool
     { 
         if ($tenant->name === 'Nexavira') return false;
         return $user->can('admin_tenant_tenant_edit');
     }
-    
+
     public function delete(User $user, Tenant $tenant): bool
     { 
         if ($tenant->name === 'Nexavira') return false;

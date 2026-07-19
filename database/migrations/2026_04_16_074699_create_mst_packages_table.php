@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('mst_packages', function (Blueprint $table) {
@@ -18,15 +16,12 @@ return new class extends Migration
             $table->string('code');
             $table->text('description')->nullable();
 
-            // Price
             $table->decimal('original_price', 15, 0)->nullable();
             $table->decimal('price', 15, 0);
             $table->decimal('setup_fee', 15, 0)->default(0);
 
-            // Package Information
             $table->json('features')->nullable();
 
-            // Cycle
             $table->string('billing_cycle')->comment('monthly, annually, custom');
             $table->boolean('is_highlighted')->default(false);
 
@@ -42,9 +37,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('mst_packages');

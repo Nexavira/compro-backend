@@ -47,20 +47,20 @@ class TenantForm
                                 ->label('Nama Pengelola')
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Nama Pengelola is required']),
+                                ->validationMessages(['required' => 'Nama Pengelola wajib diisi']),
                             TextInput::make('user_phone')
                                 ->label('Nomor Telepon')
                                 ->tel()
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Nomor Telepon is required']),
+                                ->validationMessages(['required' => 'Nomor Telepon wajib diisi']),
                             TextInput::make('user_email')
                                 ->label('Email Perusahaan/Pengelola')
                                 ->email()
                                 ->unique(table: 'auth_users', column: 'email')
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Email Perusahaan/Pengelola is required']),
+                                ->validationMessages(['required' => 'Email Perusahaan/Pengelola wajib diisi']),
                         ])->columns(3),
                     ]),
 
@@ -88,7 +88,7 @@ class TenantForm
                                 ])
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Paket Langganan is required']),
+                                ->validationMessages(['required' => 'Paket Langganan wajib diisi']),
                         ]),
                     ]),
             ])
@@ -118,15 +118,15 @@ class TenantForm
             Grid::make(3)
                 ->schema([
                     Group::make()->schema([
-                        Section::make('Client Information')
+                        Section::make('Informasi Klien')
                             ->description('Client name will be used to generate the URL prefix (slug) automatically.')
                             ->columns(2)
                             ->schema([
                                 TextInput::make('name')
-                                    ->label('Client Name')
+                                    ->label('Nama Klien')
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'Client Name is required'])
+                                    ->validationMessages(['required' => 'Client Name wajib diisi'])
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn(string $state, callable $set) => $set('slug', Str::slug($state))),
 
@@ -134,14 +134,14 @@ class TenantForm
                                     ->label('Kode Tenant')
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'Kode Tenant is required'])
+                                    ->validationMessages(['required' => 'Kode Tenant wajib diisi'])
                                     ->unique(table: 'tnt_tenants', ignoreRecord: true),
 
                                 TextInput::make('slug')
-                                    ->label('Slug / URL Prefix')
+                                    ->label('URL Prefix')
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'Slug / URL Prefix is required'])
+                                    ->validationMessages(['required' => 'Slug / URL Prefix wajib diisi'])
                                     ->unique(table: 'tnt_tenants', ignoreRecord: true),
 
                                 \Filament\Forms\Components\Textarea::make('description')
@@ -183,7 +183,7 @@ class TenantForm
                                     ])
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'Global Template is required']),
+                                    ->validationMessages(['required' => 'Global Template wajib diisi']),
 
                                 TextInput::make('custom_domain')
                                     ->label('Custom Domain')

@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class TemplateController extends Controller
 {
-    /**
-     * Get a single global template by its slug.
-     * Note: Global Templates might be accessible to all tenants or specific ones.
-     * Here we just filter by is_active.
-     */
+
     public function show(Request $request, $slug)
     {
         $template = GlobalTemplate::with('pages')
@@ -27,7 +23,6 @@ class TemplateController extends Controller
             ], 404);
         }
 
-        // For templates, we can just grab the blocks of the first page (like 'home') for preview purposes
         $firstPage = $template->pages->first();
         $blocks = $firstPage ? $firstPage->content_blocks : [];
         $sections = [];
@@ -64,9 +59,6 @@ class TemplateController extends Controller
         ]);
     }
 
-    /**
-     * Get all active global templates.
-     */
     public function index(Request $request)
     {
         $templates = GlobalTemplate::where('is_active', 1)

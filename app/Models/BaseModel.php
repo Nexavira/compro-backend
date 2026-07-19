@@ -37,7 +37,7 @@ class BaseModel extends Model
             'deleted_at' => 'datetime:U',
         ];
     }
-    
+
     public function uniqueIds(): array
     {
         return ['uuid'];

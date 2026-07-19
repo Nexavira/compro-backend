@@ -18,22 +18,6 @@ class ExistsData implements ValidationRule
         $this->cols = $cols;
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-     */
-    // public function validate(string $attribute, mixed $value, Closure $fail): void
-    // {
-    //     $query = DB::table($this->table)->where($this->cols, $value)->where('deleted_at', null);
-    //     $result = !empty($query->first()) ? true : false;
-
-    //     if($result == false){
-    //         $fail(':attribute sudah ada.');
-    //     }
-    // }
-
-
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (!$this->table instanceof Model and !$this->table instanceof BaseModel) {

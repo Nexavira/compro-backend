@@ -20,18 +20,18 @@ class SubscriptionResource extends Resource
 {
     protected static ?string $model = Subscription::class;
 
-    protected static ?string $modelLabel = 'Subscription';
-    protected static ?string $pluralModelLabel = 'Subscriptions';
+    protected static ?string $modelLabel = 'Langganan';
+    protected static ?string $pluralModelLabel = 'Langganan';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::CreditCard;
 
     protected static ?string $recordTitleAttribute = 'Subcription';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Transactions';
+    protected static string|UnitEnum|null $navigationGroup = 'Transaksi';
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $slug = 'transaction/subscriptions';
+    protected static ?string $slug = 'transaksi/langganan';
 
     public static function form(Schema $schema): Schema
     {

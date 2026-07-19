@@ -41,7 +41,7 @@ class RoleForm
         return [
             Group::make([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Nama')
                     ->markAsRequired()
                     ->rules(['required'])
                     ->validationMessages([
@@ -55,7 +55,7 @@ class RoleForm
                         }
                     ),
                 TextInput::make('code')
-                    ->label('Code')
+                    ->label('Kode')
                     ->markAsRequired()
                     ->rules(['required'])
                     ->validationMessages([
@@ -69,7 +69,7 @@ class RoleForm
                         }
                     ),
                 Textarea::make('description')
-                    ->label('Description')
+                    ->label('Deskripsi')
             ])->columnSpanFull()
         ];
     }

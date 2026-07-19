@@ -11,13 +11,11 @@ use App\Models\Transaction\Payment;
 use App\Observers\PaymentObserver;
 use App\Observers\TenantObserver;
 
-// Policies
 use App\Policies\AccessControl\RolePolicy;
 use App\Policies\AccessControl\UserPolicy;
 use App\Policies\Tenant\TenantPolicy;
 use App\Policies\Transaction\SubscriptionPolicy;
 
-// Register Services
 use App\Providers\RegisterService\RegisterAuthService;
 use App\Providers\RegisterService\RegisterPackageService;
 use App\Providers\RegisterService\RegisterPermissionService;
@@ -34,12 +32,9 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+
     public function register(): void
     {
-        // $this->app->register(\App\Providers\RegisterService\RegisterRoleService::class);
 
         $this->app->register(RegisterRoleService::class);
         $this->app->register(RegisterAuthService::class);
@@ -50,40 +45,32 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RegisterPackageService::class);
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        // Policy
+
         Gate::policy(Role::class, RolePolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Tenant::class, TenantPolicy::class);
         Gate::policy(Subscription::class, SubscriptionPolicy::class);
 
-        // Observers
         Payment::observe(PaymentObserver::class);
         Tenant::observe(TenantObserver::class);
 
-        // Custom macro for created_at and updated_at as Epoch
         Blueprint::macro('epochTimestamps', function () {
             $this->bigInteger('created_at')->nullable();
             $this->bigInteger('updated_at')->nullable();
         });
 
-        // Custom macro for deleted_at as Epoch
         Blueprint::macro('epochSoftDeletes', function () {
             $this->bigInteger('deleted_at')->nullable();
         });
 
-        // Custom macro for user footprints
         Blueprint::macro('userFootprints', function () {
             $this->integer('created_by')->nullable();
             $this->integer('updated_by')->nullable();
             $this->integer('deleted_by')->nullable();
         });
 
-        // Custom macro for unique constraint that ignores soft-deleted records
         Blueprint::macro('uniqueSoftDelete', function ($columns) {
             $table = $this->getTable();
 
@@ -101,7 +88,6 @@ class AppServiceProvider extends ServiceProvider
             return "CREATE UNIQUE INDEX {$command->indexName} ON {$command->table} ({$command->columnStringForSql}) WHERE deleted_at IS NULL";
         });
 
-        // Permission System
         $this->registerPermissionsToGates();
     }
 

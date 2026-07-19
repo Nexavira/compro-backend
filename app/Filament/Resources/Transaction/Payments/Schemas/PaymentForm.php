@@ -48,11 +48,11 @@ class PaymentForm
                         ->columnSpan(2)
                         ->schema([
                             TextInput::make('invoice_number')
-                                ->label('Invoice Number')
+                                ->label('Nomor Tagihan')
                                 ->disabled()
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Invoice Number is required']),
+                                ->validationMessages(['required' => 'Invoice Number wajib diisi']),
                             Select::make('tenant_id')
                                 ->label('Tenant')
                                 ->relationship('tenant', 'name')
@@ -65,9 +65,9 @@ class PaymentForm
                                 ->disabled()
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Tenant is required']),
+                                ->validationMessages(['required' => 'Tenant wajib diisi']),
                             TextInput::make('description')
-                                ->label('Description')
+                                ->label('Deskripsi')
                                 ->disabled(),
                             Grid::make(2)->schema([
                                 TextInput::make('amount_due')
@@ -99,9 +99,9 @@ class PaymentForm
                                 ])
                                 ->markAsRequired()
                                 ->rules(['required'])
-                                ->validationMessages(['required' => 'Status Invoice is required']),
+                                ->validationMessages(['required' => 'Status Invoice wajib diisi']),
                             TextInput::make('amount_paid')
-                                ->label('Amount Paid')
+                                ->label('Jumlah Dibayar')
                                 ->numeric()
                                 ->prefix('Rp')
                                 ->markAsRequired($isEdit)
@@ -116,7 +116,7 @@ class PaymentForm
                                     'max' => 'Amount Paid cannot be greater than Amount Due',
                                 ]),
                             Select::make('payment_method')
-                                ->label('Payment Method')
+                                ->label('Metode Pembayaran')
                                 ->options([
                                     'bank_transfer' => 'Bank Transfer',
                                     'cash'          => 'Cash',
@@ -129,7 +129,7 @@ class PaymentForm
                                 ])
                                 ->markAsRequired($isEdit)
                                 ->rules($isEdit ? ['required'] : [])
-                                ->validationMessages(['required' => 'Payment Method is required']),
+                                ->validationMessages(['required' => 'Payment Method wajib diisi']),
                             FileUpload::make('proof_of_payment_upload')
                                 ->label('Proof of Payment')
                                 ->image()

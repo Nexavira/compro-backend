@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    /**
-     * Get a single page by its slug for the current tenant.
-     */
+
     public function show(Request $request, $tenant_slug, $slug)
     {
         $tenant = Tenant::where('slug', $tenant_slug)->first();
@@ -47,9 +45,9 @@ class PageController extends Controller
                 }
             }
         }
-        
+
         $meta = is_string($page->meta) ? json_decode($page->meta, true) : ($page->meta ?? []);
-        
+
         $brandSettings = $tenant->settings['brand_settings'] ?? [];
 
         return response()->json([
@@ -69,9 +67,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Get all active pages for the current tenant.
-     */
     public function index(Request $request, $tenant_slug)
     {
         $tenant = Tenant::where('slug', $tenant_slug)->first();

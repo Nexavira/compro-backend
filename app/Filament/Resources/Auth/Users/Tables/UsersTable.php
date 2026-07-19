@@ -35,7 +35,7 @@ class UsersTable
                     ->label('Phone Number')
                     ->searchable(),
                 TextColumn::make('roleUser.role.name')
-                    ->label('Role')
+                    ->label('Peran')
                     ->badge()
                     ->color('info')
                     ->default('No Role Assigned'),
@@ -43,7 +43,7 @@ class UsersTable
             ->filters([
                 TrashedFilter::make(),
                 // SelectFilter::make('role')
-                //     ->label('Role')
+                //     ->label('Peran')
                 //     ->relationship('roleUser', 'role_id')
                 //     ->options(
                 //         Role::all()->pluck('name', 'id')->toArray()

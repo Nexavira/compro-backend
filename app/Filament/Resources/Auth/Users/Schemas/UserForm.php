@@ -102,7 +102,7 @@ class UserForm
                         ])->relationship('userDetail'),
                         Group::make([
                             Select::make('role_id')
-                                ->label('Role')
+                                ->label('Peran')
                                 ->options(Role::all()->pluck('name', 'id'))
                                 ->native(false)
                                 ->searchable()
@@ -140,7 +140,7 @@ class UserForm
                                 }
                             ),
                         TextInput::make('password')
-                            ->label('Password')
+                            ->label('Kata Sandi')
                             ->password()
                             ->markAsRequired()
                             ->rules([

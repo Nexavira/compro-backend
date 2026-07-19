@@ -21,18 +21,18 @@ class GlobalTemplateResource extends Resource
 {
     protected static ?string $model = GlobalTemplate::class;
 
-    protected static ?string $modelLabel = 'Global Template';
-    protected static ?string $pluralModelLabel = 'Global Templates';
+    protected static ?string $modelLabel = 'Template Global';
+    protected static ?string $pluralModelLabel = 'Template Global';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentDuplicate;
 
     protected static ?string $recordTitleAttribute = 'GlobalTemplate';
 
-    protected static string|UnitEnum|null $navigationGroup = 'CMS';
+    protected static string|UnitEnum|null $navigationGroup = 'Sistem Konten';
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $slug = 'global-template-management/global-templates';
+    protected static ?string $slug = 'sistem-konten/template-global';
 
     public static function form(Schema $schema): Schema
     {

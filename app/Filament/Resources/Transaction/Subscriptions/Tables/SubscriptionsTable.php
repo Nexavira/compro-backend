@@ -30,7 +30,7 @@ class SubscriptionsTable
                 TextColumn::make('tenant.name')
                     ->label('Tenant'),
                 TextColumn::make('package.name')
-                    ->label('Package'),
+                    ->label('Paket'),
                 TextColumn::make('billing_cycle')
                     ->label('Billing Cycle')
                     ->formatStateUsing(fn($state) => ucfirst($state)),

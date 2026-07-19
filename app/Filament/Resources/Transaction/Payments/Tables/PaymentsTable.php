@@ -18,7 +18,7 @@ class PaymentsTable
         return $table
             ->columns([
                 TextColumn::make('invoice_number')
-                    ->label('Invoice Number')
+                    ->label('Nomor Tagihan')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('tenant.name')
@@ -29,7 +29,7 @@ class PaymentsTable
                     ->money('IDR', locale: 'id')
                     ->sortable(),
                 TextColumn::make('amount_paid')
-                    ->label('Amount Paid')
+                    ->label('Jumlah Dibayar')
                     ->money('IDR', locale: 'id')
                     ->placeholder('Rp 0'),
                 TextColumn::make('due_date')

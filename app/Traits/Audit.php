@@ -47,7 +47,6 @@ trait Audit
         $object->{'deleted_by'} = null;
     }
 
-
     public function activeAndRemoveData($object, $dto)
     {
         if (isset($dto['action']) && $dto['action'] ==  1) {
@@ -73,8 +72,6 @@ trait Audit
         $object->save();
         return $message;
     }
-
-    // Audit untuk integrasi
 
     public function prepareAuditIntegrationInsert($object)
     {

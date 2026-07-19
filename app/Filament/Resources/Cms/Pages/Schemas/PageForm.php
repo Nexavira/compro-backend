@@ -187,8 +187,8 @@ class PageForm
                                                         ->label('Promotion Items')
                                                         ->schema([
                                                             TextInput::make('id')->label('ID')->required(),
-                                                            TextInput::make('title')->label('Title')->required(),
-                                                            Textarea::make('description')->label('Description'),
+                                                            TextInput::make('title')->label('Judul')->required(),
+                                                            Textarea::make('description')->label('Deskripsi'),
                                                         ])->collapsible()
                                                 ])->columns(2),
 
@@ -223,7 +223,7 @@ class PageForm
                                                 ->icon('heroicon-o-information-circle')
                                                 ->schema([
                                                     Toggle::make('enabled')->label('Enable Section')->default(true),
-                                                    TextInput::make('title')->label('Title')->required(),
+                                                    TextInput::make('title')->label('Judul')->required(),
                                                     Textarea::make('story')->label('Story')->rows(3),
                                                     TextInput::make('foundedYear')->label('Founded Year')->numeric(),
                                                     Fieldset::make('Image')
@@ -249,7 +249,7 @@ class PageForm
                                                 ->icon('heroicon-o-book-open')
                                                 ->schema([
                                                     Toggle::make('enabled')->label('Enable Section')->default(true),
-                                                    TextInput::make('title')->label('Title')->required(),
+                                                    TextInput::make('title')->label('Judul')->required(),
                                                     TextInput::make('ctaLabel')->label('CTA Label'),
                                                     TextInput::make('ctaHref')->label('CTA Link'),
                                                     Repeater::make('categories')
@@ -263,8 +263,8 @@ class PageForm
                                                         ->schema([
                                                             TextInput::make('id')->label('Item ID')->required(),
                                                             TextInput::make('categoryId')->label('Category ID')->required(),
-                                                            TextInput::make('name')->label('Name')->required(),
-                                                            Textarea::make('description')->label('Description')->columnSpanFull(),
+                                                            TextInput::make('name')->label('Nama')->required(),
+                                                            Textarea::make('description')->label('Deskripsi')->columnSpanFull(),
                                                             TextInput::make('price')->label('Price')->numeric()->required(),
                                                             TextInput::make('currency')->label('Currency')->default('USD'),
                                                             TagsInput::make('tags')->label('Tags'),
@@ -285,7 +285,7 @@ class PageForm
                                                 ->icon('heroicon-o-photo')
                                                 ->schema([
                                                     Toggle::make('enabled')->label('Enable Section')->default(true),
-                                                    TextInput::make('title')->label('Title')->required(),
+                                                    TextInput::make('title')->label('Judul')->required(),
                                                     Select::make('layout')->label('Layout')->options(['masonry' => 'Masonry', 'grid' => 'Grid'])->default('masonry'),
                                                     Repeater::make('images')
                                                         ->label('Images')
@@ -301,15 +301,15 @@ class PageForm
                                                 ->icon('heroicon-o-chat-bubble-bottom-center-text')
                                                 ->schema([
                                                     Toggle::make('enabled')->label('Enable Section')->default(true),
-                                                    TextInput::make('title')->label('Title')->required(),
+                                                    TextInput::make('title')->label('Judul')->required(),
                                                     TextInput::make('averageRating')->label('Average Rating')->numeric()->step(0.1),
                                                     TextInput::make('totalReviews')->label('Total Reviews')->numeric(),
                                                     Repeater::make('items')
                                                         ->label('Reviews')
                                                         ->schema([
                                                             TextInput::make('id')->label('ID'),
-                                                            TextInput::make('author')->label('Author')->required(),
-                                                            TextInput::make('role')->label('Role'),
+                                                            TextInput::make('author')->label('Penulis')->required(),
+                                                            TextInput::make('role')->label('Peran'),
                                                             TextInput::make('rating')->label('Rating')->numeric()->maxValue(5),
                                                             Textarea::make('content')->label('Review Content')->required()->columnSpanFull(),
                                                         ])->columns(2)->collapsible()

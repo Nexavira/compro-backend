@@ -13,4 +13,14 @@ class CreateApiKey extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            url('/admin') => __('Beranda'),
+            static::getResource()::getNavigationGroup(),
+            static::getResource()::getUrl('index') => static::getResource()::getBreadcrumb(),
+            'Tambah',
+        ];
+    }
 }

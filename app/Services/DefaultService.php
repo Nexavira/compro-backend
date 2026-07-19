@@ -1,5 +1,5 @@
 <?php
-// phpcs:ignoreFile
+
 namespace App\Services;
 
 use App\Services\ServiceInterface;
@@ -63,7 +63,6 @@ abstract class DefaultService implements ServiceInterface
                     $this->results['message'] = $ex->getMessage();
                 }
             }
-            //
 
             return $this->results;
         } else {

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup Password - {{ config('app.name') }}</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -142,24 +141,20 @@
         <div class="logo">
             {{ config('app.name') }}
         </div>
-        
         @if (session('success'))
             <div class="header">
                 <h1>Sukses!</h1>
                 <p>Password Anda telah berhasil diperbarui.</p>
             </div>
-            
             <div class="alert alert-success">
                 Password admin Anda sekarang telah aktif. Silakan gunakan password baru untuk masuk ke sistem.
             </div>
-            
             <a href="{{ url('/admin/login') }}" class="btn">Masuk Ke Dashboard</a>
         @else
             <div class="header">
                 <h1>Setup Password</h1>
                 <p>Atur password untuk mengakses dashboard admin Anda</p>
             </div>
-
             @if ($errors->any())
                 <div class="alert alert-error">
                     <ul style="padding-left: 16px; margin: 0;">
@@ -169,22 +164,18 @@
                     </ul>
                 </div>
             @endif
-
             <form action="{{ url('/admin/password-reset') }}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
                 <input type="hidden" name="email" value="{{ $email }}">
-
                 <div class="form-group">
                     <label for="password">Password Baru</label>
                     <input type="password" id="password" name="password" class="form-control" required placeholder="Minimal 8 karakter" autofocus>
                 </div>
-
                 <div class="form-group">
                     <label for="password_confirmation">Konfirmasi Password Baru</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required placeholder="Ulangi password baru">
                 </div>
-
                 <button type="submit" class="btn">Simpan Password & Aktifkan</button>
             </form>
         @endif

@@ -21,18 +21,18 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $modelLabel = 'Post';
-    protected static ?string $pluralModelLabel = 'Posts';
+    protected static ?string $modelLabel = 'Artikel';
+    protected static ?string $pluralModelLabel = 'Artikel';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
 
     protected static ?string $recordTitleAttribute = 'Post';
 
-    protected static string|UnitEnum|null $navigationGroup = 'CMS';
+    protected static string|UnitEnum|null $navigationGroup = 'Sistem Konten';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $slug = 'cms/posts';
+    protected static ?string $slug = 'sistem-konten/artikel';
 
     public static function form(Schema $schema): Schema
     {

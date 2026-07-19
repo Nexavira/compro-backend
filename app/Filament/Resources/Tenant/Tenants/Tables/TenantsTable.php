@@ -26,14 +26,14 @@ class TenantsTable
                     ->circular()
                     ->defaultImageUrl(url('/images/default-logo.png')),
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('is_suspended')
-                    ->label('Suspended')
+                    ->label('Ditangguhkan')
                     ->sortable()
                     ->badge()
                     ->formatStateUsing(function ($state) {
-                        return $state ? 'Suspended' : 'Active';
+                        return $state ? 'Ditangguhkan' : 'Aktif';
                     })
                     ->color(fn($state) => $state ? 'danger' : 'success'),
             ])

@@ -16,4 +16,13 @@ class ListPages extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    public function getBreadcrumbs(): array
+    {
+        return [
+            url('/admin') => __('Beranda'),
+            static::getResource()::getNavigationGroup(),
+            static::getResource()::getBreadcrumb(),
+        ];
+    }
 }

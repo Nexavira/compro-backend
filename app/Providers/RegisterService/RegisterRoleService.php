@@ -14,13 +14,12 @@ class RegisterRoleService extends AppServiceProvider
 {
     public function register(): void
     {
-        /** Role */
+
         $this->registerService('StoreRoleService', StoreRoleService::class);
         $this->registerService('UpdateRoleService', UpdateRoleService::class);
         $this->registerService('DeleteRoleService', DeleteRoleService::class);
         $this->registerService('GetRoleService', GetRoleService::class);
 
-        /** Role User */
         $this->registerService('AddRoleUserService', AddRoleUserService::class);
         $this->registerService('RemoveRoleUserService', RemoveRoleUserService::class);
     }

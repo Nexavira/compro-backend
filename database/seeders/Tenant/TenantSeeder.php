@@ -4,18 +4,17 @@ namespace Database\Seeders\Tenant;
 
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
+use App\Models\GlobalTemplate;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TenantSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
         $tenant_category_technology = TenantCategory::where('code', 'FNB')->first();
-        $etoile_template = \App\Models\GlobalTemplate::where('slug', 'food-and-beverage')->first();
+        $etoile_template = GlobalTemplate::where('slug', 'food-and-beverage')->first();
         Tenant::create([
             'tenant_category_id' => $tenant_category_technology->id,
             'name' => 'Nexavira',

@@ -22,15 +22,10 @@ class UniqueData implements ValidationRule
         $this->identifier = $identifier;
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-     */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $query = DB::table($this->table)->where($this->column, $value)->where('deleted_at', null);
-        
+
         if(Str::isUuid($this->identifier)) {
             $this->identifier != null ? $query->where('uuid', '!=', $this->identifier) : null;
         }else {
@@ -38,7 +33,7 @@ class UniqueData implements ValidationRule
         }
 
         $result = empty($query->first()) ? true : false;
-        
+
         if($result == false){
             $fail('Atribut :attribute sudah digunakan.');
         }

@@ -12,10 +12,9 @@ class RegisterPermissionService extends AppServiceProvider
 {
     public function register(): void
     {
-        /** Permission */
+
         $this->registerService('GetPermissionService', GetPermissionService::class);
 
-        /** Permission Role */
         $this->registerService('AddPermissionRoleService', AddPermissionRoleService::class);
         $this->registerService('RemovePermissionRoleService', RemovePermissionRoleService::class);
         $this->registerService('UpdatePermissionRoleService', UpdatePermissionRoleService::class);

@@ -19,16 +19,16 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $modelLabel = 'User';
-    protected static ?string $pluralModelLabel = 'Users';
+    protected static ?string $modelLabel = 'Pengguna';
+    protected static ?string $pluralModelLabel = 'Pengguna';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::UserGroup;
 
     protected static ?string $recordTitleAttribute = 'User';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Access Control';
+    protected static string|UnitEnum|null $navigationGroup = 'Kontrol Akses';
 
-    protected static ?string $slug = 'access-control/users';
+    protected static ?string $slug = 'kontrol-akses/pengguna';
 
     public static function form(Schema $schema): Schema
     {

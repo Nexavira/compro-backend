@@ -20,9 +20,6 @@ class WelcomeTenantMail extends Mailable
     public User $user;
     public string $resetUrl;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(Tenant $tenant, User $user, string $resetUrl)
     {
         $this->tenant = $tenant;
@@ -30,9 +27,6 @@ class WelcomeTenantMail extends Mailable
         $this->resetUrl = $resetUrl;
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -40,9 +34,6 @@ class WelcomeTenantMail extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
@@ -50,11 +41,6 @@ class WelcomeTenantMail extends Mailable
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, Attachment>
-     */
     public function attachments(): array
     {
         return [];

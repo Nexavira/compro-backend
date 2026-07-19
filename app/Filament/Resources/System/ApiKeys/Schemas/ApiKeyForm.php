@@ -50,7 +50,7 @@ class ApiKeyForm
                                 ->description('This key will be used by the Frontend (Nuxt/Next.js) to access Tenant data.')
                                 ->schema([
                                     TextInput::make('name')
-                                        ->label('Name')
+                                        ->label('Nama')
                                         ->placeholder('Example: Nuxt.js Frontend Production')
                                         ->markAsRequired()
                                         ->rules(['required'])

@@ -11,21 +11,19 @@ class UploadFileService extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $file = $dto['file'];
-        
+
         $sys_file = new File();
 
         $sys_file->tenant_id = $dto['tenant_id'] ?? null;
         $sys_file->related_id = $dto['related_id'] ?? null;
         $sys_file->related_type = $dto['related_type'] ?? null;
-        
-        // Determine visibility and corresponding storage disk
+
         $is_public = isset($dto['is_public']) ? (int) $dto['is_public'] : 1;
         $disk = $is_public === 1 ? 'public' : 'local';
 
-        // Construct storage path securely
         $pathPrefix = 'uploads/';
         $pathPrefix .= $sys_file->tenant_id ? 'tenants/' . $sys_file->tenant_id : 'general';
-        
+
         $path = $file->store($pathPrefix, $disk);
 
         $sys_file->file_name = basename($path);
@@ -39,7 +37,7 @@ class UploadFileService extends DefaultService implements ServiceInterface
 
         $this->prepareAuditActive($sys_file);
         $this->prepareAuditInsert($sys_file);
-        
+
         $sys_file->save();
 
         $this->results['data'] = $sys_file;
@@ -49,7 +47,7 @@ class UploadFileService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'file' => ['required', 'file', 'max:51200'], // Max 50MB
+            'file' => ['required', 'file', 'max:51200'], 
             'tenant_id' => ['nullable', 'integer'],
             'related_id' => ['nullable', 'integer'],
             'related_type' => ['nullable', 'string'],
