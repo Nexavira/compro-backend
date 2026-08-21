@@ -2,7 +2,6 @@
 
 namespace App\Models\Tenant;
 
-use App\Models\ApiKey;
 use App\Models\BaseModel;
 use App\Models\System\File;
 use App\Models\GlobalTemplate;
@@ -44,11 +43,6 @@ class Tenant extends BaseModel
     public function getFaviconUrlAttribute()
     {
         return $this->favicon?->url;
-    }
-
-    public function getActiveApiKey()
-    {
-        return $this->hasOne(ApiKey::class, 'tenant_id')->where('is_active', 1);
     }
 
     public static function resolveFromRequest($host)
