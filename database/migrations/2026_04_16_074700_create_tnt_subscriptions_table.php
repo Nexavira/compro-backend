@@ -18,9 +18,12 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained('mst_packages')->onDelete('cascade');
             $table->string('package_name');
             $table->string('billing_cycle')->comment('monthly,annually');
-            $table->string('status')->comment('active, past_due, canceled');
+            $table->string('status')->comment('trial, active, past_due, canceled');
 
             $table->date('next_billing_date');
+            $table->date('trial_end_at')->nullable();
+            $table->date('start_at')->nullable();
+            $table->date('end_at')->nullable();
             $table->decimal('amount', 15, 0);
 
             $table->integer('is_active')->default(1);

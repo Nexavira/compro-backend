@@ -16,6 +16,12 @@ use App\Models\Transaction\Subscription;
 use App\Models\Master\Package;
 use App\Models\Transaction\Payment;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use App\Services\TemplateCloningService;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeTenantMail;
+use Illuminate\Support\Facades\Log;
 
 class CreateTenant extends CreateRecord
 {
@@ -86,14 +92,21 @@ class CreateTenant extends CreateRecord
     {
         return DB::transaction(function () use ($data) {
             $tenantData = collect($data)->except(['user_name', 'user_email', 'user_phone', 'user_password', 'user_password_confirmation', 'subscription_plan'])->toArray();
-            $tenantData['is_suspended'] = 1; // Tenant is suspended by default until payment is paid
+            
+            $package = null;
+            if (!empty($data['subscription_plan'])) {
+                $package = Package::find($data['subscription_plan']);
+            }
+
+            // Tenant is active if trial_days > 0, otherwise suspended until paid
+            $tenantData['is_suspended'] = ($package && $package->trial_days > 0) ? 0 : 1; 
+            
             $tenant = static::getModel()::create($tenantData);
 
+            $adminUser = null;
             if (isset($data['user_email'])) {
-                // Create pass
-                $str = strtolower(substr($data['user_email'], 0, 6));
-                $md = Carbon::now()->startOfDay()->format('md');
-                $pass = $md.$str;
+                // Create random pass
+                $pass = Str::random(16);
 
                 // Create Admin User
                 $user = User::create([
@@ -119,24 +132,28 @@ class CreateTenant extends CreateRecord
                         'role_id' => $role->id,
                     ]);
                 }
+                
+                $adminUser = $user;
             }
 
             // Create Subscription and Payment
-            if (!empty($data['subscription_plan'])) {
-                $package = Package::find($data['subscription_plan']);
-                if ($package) {
-                    $subscription = Subscription::create([
-                        'tenant_id' => $tenant->id,
-                        'package_id' => $package->id,
-                        'subscription_number' => 'SUB-' . strtoupper(uniqid()),
-                        'package_name' => $package->name,
-                        'billing_cycle' => $package->billing_cycle,
-                        'status' => 'pending',
-                        'next_billing_date' => $package->billing_cycle === 'annually' ? now()->addYear() : now()->addMonth(),
-                        'amount' => $package->price,
-                    ]);
+            if ($package) {
+                $status = $package->trial_days > 0 ? 'trial' : 'pending';
+                $trialEndAt = $package->trial_days > 0 ? now()->addDays($package->trial_days) : null;
 
-                    // Generate Invoice Number: INV-{SEQUENCE}/{TENANT_CODE}/{MM}/{YYYY}
+                $subscription = Subscription::create([
+                    'tenant_id' => $tenant->id,
+                    'package_id' => $package->id,
+                    'subscription_number' => 'SUB-' . strtoupper(uniqid()),
+                    'package_name' => $package->name,
+                    'billing_cycle' => $package->billing_cycle,
+                    'status' => $status,
+                    'next_billing_date' => $package->billing_cycle === 'annually' ? now()->addYear() : now()->addMonth(),
+                    'trial_end_at' => $trialEndAt,
+                    'amount' => $package->price,
+                ]);
+
+                // Generate Invoice Number: INV-{SEQUENCE}/{TENANT_CODE}/{MM}/{YYYY}
                     $paymentCount = Payment::where('tenant_id', $tenant->id)->count();
                     $sequenceStr = str_pad($paymentCount + 1, 3, '0', STR_PAD_LEFT);
                     $monthStr = now()->format('m');
@@ -154,6 +171,23 @@ class CreateTenant extends CreateRecord
                         'is_active' => 1,
                         'version' => 0,
                     ]);
+                // If trial, clone templates and send welcome email immediately
+                if ($package->trial_days > 0) {
+                    if ($tenant->global_template_id && $tenant->globalTemplate) {
+                        $cloningService = new TemplateCloningService();
+                        $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
+                    }
+
+                    if ($adminUser) {
+                        $token = Password::createToken($adminUser);
+                        $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($adminUser->email));
+                        $recipientEmail = app()->environment('production') ? $adminUser->email : 'nexavira26@gmail.com';
+                        try {
+                            Mail::to($recipientEmail)->send(new WelcomeTenantMail($tenant, $adminUser, $resetUrl));
+                        } catch (\Exception $e) {
+                            Log::error('Failed to send welcome email for trial: ' . $e->getMessage());
+                        }
+                    }
                 }
             }
 

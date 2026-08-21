@@ -3,6 +3,7 @@
 namespace App\Filament\Pages\Auth;
 
 use Filament\Auth\Pages\Login as BaseLogin;
+use Filament\Schemas\Components\Component;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +25,7 @@ class CustomLogin extends BaseLogin
         return 'Masuk ke TerasSapa';
     }
 
-    protected function getEmailFormComponent(): \Filament\Schemas\Components\Component
+    protected function getEmailFormComponent(): Component
     {
         return parent::getEmailFormComponent()
             ->validationMessages([
@@ -33,7 +34,7 @@ class CustomLogin extends BaseLogin
             ]);
     }
 
-    protected function getPasswordFormComponent(): \Filament\Schemas\Components\Component
+    protected function getPasswordFormComponent(): Component
     {
         return parent::getPasswordFormComponent()
             ->validationMessages([

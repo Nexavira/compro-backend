@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('custom_domain')->nullable();
             $table->json('settings')->nullable();
+            $table->string('concierge_status')->nullable()->comment('none, requested, completed');
             $table->integer('is_suspended')->default(1);
 
             $table->integer('is_active')->default(1);

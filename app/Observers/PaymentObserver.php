@@ -32,6 +32,8 @@ class PaymentObserver
                 $subscription->next_billing_date = $subscription->billing_cycle === 'annually'
                     ? $baseDate->copy()->addYearNoOverflow()
                     : $baseDate->copy()->addMonthNoOverflow();
+                $subscription->start_at = now();
+                $subscription->end_at = $subscription->next_billing_date;
                 $subscription->save();
 
                 if ($tenant) {
