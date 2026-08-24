@@ -21,6 +21,10 @@ class Package extends BaseModel
         'deleted_at',
     ];
 
+    protected $casts = [
+        'features' => 'array',
+    ];
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);

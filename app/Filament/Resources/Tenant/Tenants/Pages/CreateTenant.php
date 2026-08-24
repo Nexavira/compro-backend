@@ -153,6 +153,8 @@ class CreateTenant extends CreateRecord
                     'amount' => $package->price,
                 ]);
 
+                $dueDate = $package->trial_days > 0 ? now()->addDays($package->trial_days) : now()->addDays(3);
+
                 // Generate Invoice Number: INV-{SEQUENCE}/{TENANT_CODE}/{MM}/{YYYY}
                     $paymentCount = Payment::where('tenant_id', $tenant->id)->count();
                     $sequenceStr = str_pad($paymentCount + 1, 3, '0', STR_PAD_LEFT);
@@ -166,7 +168,7 @@ class CreateTenant extends CreateRecord
                         'invoice_number' => $invoiceNumber,
                         'description' => 'Pembayaran Langganan ' . $package->name,
                         'amount_due' => $package->price,
-                        'due_date' => now()->addDays(3),
+                        'due_date' => $dueDate,
                         'status' => 'unpaid',
                         'is_active' => 1,
                         'version' => 0,

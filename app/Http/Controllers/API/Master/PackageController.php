@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Master;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\PackageRequest\GetPackageRequest;
 use App\Http\Resources\API\Package\GetPackageResource;
-use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
@@ -15,12 +14,12 @@ class PackageController extends Controller
 
         $data = null;
         if (isset($package['data'])) {
-            $data = ( isset($package['data']->id)) ? new GetPackageResource($package['data']) :
-            GetPackageResource::collection($package['data']);
+            $data = (isset($package['data']->id)) ? new GetPackageResource($package['data']) :
+                GetPackageResource::collection($package['data']);
         }
 
         return response()->json([
-            'success' => ( isset($package['error']) ? false : true ),
+            'success' => (isset($package['error']) ? false : true),
             'message' => $package['message'],
             'data' => $data,
             'pagination' => $package['pagination'] ?? null

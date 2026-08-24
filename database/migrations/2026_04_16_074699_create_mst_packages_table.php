@@ -14,6 +14,8 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('code');
+            $table->string('website_type')->nullable()->comment('company_profile, ecommerce');
+            $table->string('tier')->nullable()->comment('basic, pro, custom');
             $table->text('description')->nullable();
 
             $table->decimal('original_price', 15, 0)->nullable();

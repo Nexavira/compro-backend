@@ -12,8 +12,12 @@ return new class extends Migration
         Schema::create('cms_global_templates', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('title');
             $table->foreignId('tenant_category_id')->nullable()->constrained('tnt_tenant_categories')->nullOnDelete();
+            
+            // Kolom tier untuk memisahkan template basic/pro
+            $table->string('tier')->default('basic')->comment('basic, pro');
+
+            $table->string('title');
             $table->text('description')->nullable();
             $table->string('slug');
             $table->json('brand_settings')->nullable();

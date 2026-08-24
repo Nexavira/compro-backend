@@ -37,10 +37,10 @@ class TenantForm
         return $schema->components([
             Wizard::make([
                 Step::make('1. Data Perusahaan')
-                    ->description('Informasi profil GOR/Tenant')
+                    ->description('Informasi profil Perusahaan/Klien')
                     ->schema(self::getTenantComponents()),
                 Step::make('2. Akun Akses')
-                    ->description('Email yang akan menerima link setup password')
+                    ->description('Email yang akan menerima tautan pengaturan kata sandi')
                     ->schema([
                         Section::make('Kredensial Admin Tenant')->schema([
                             TextInput::make('user_name')
@@ -65,7 +65,7 @@ class TenantForm
                     ]),
 
                 Step::make('3. Langganan')
-                    ->description('Pilih paket untuk membuat tagihan (Invoice)')
+                    ->description('Pilih paket untuk langganan Klien')
                     ->schema([
                         Section::make('Setup Langganan')->schema([
                             Select::make('subscription_plan')
@@ -96,7 +96,7 @@ class TenantForm
                 ->skippable(false)
                 ->submitAction(new HtmlString(Blade::render(<<<BLADE
                     <x-filament::button type="submit" size="sm">
-                        Create
+                        Buat Klien
                     </x-filament::button>
                 BLADE))),
         ]);
@@ -119,14 +119,14 @@ class TenantForm
                 ->schema([
                     Group::make()->schema([
                         Section::make('Informasi Klien')
-                            ->description('Client name will be used to generate the URL prefix (slug) automatically.')
+                            ->description('Nama klien akan digunakan untuk membuat URL Prefix (Slug) secara otomatis.')
                             ->columns(2)
                             ->schema([
                                 TextInput::make('name')
                                     ->label('Nama Klien')
                                     ->markAsRequired()
                                     ->rules(['required'])
-                                    ->validationMessages(['required' => 'Client Name wajib diisi'])
+                                    ->validationMessages(['required' => 'Nama Klien wajib diisi'])
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn(string $state, callable $set) => $set('slug', Str::slug($state))),
 
@@ -149,7 +149,7 @@ class TenantForm
                                     ->columnSpanFull(),
 
                                 Select::make('tenant_category_id')
-                                    ->label('Category')
+                                    ->label('Kategori Klien')
                                     ->relationship('tenantCategory', 'name')
                                     ->native(false)
                                     ->searchable()
@@ -160,12 +160,12 @@ class TenantForm
                                     ->columnSpanFull()
                                     ->live(),
                             ]),
-                        Section::make('Technical Configuration')
-                            ->description('Set UI theme and custom domain for this tenant.')
+                        Section::make('Konfigurasi Teknis')
+                            ->description('Atur tema antarmuka dan domain kustom untuk klien ini.')
                             ->columns(2)
                             ->schema([
                                 Select::make('global_template_id')
-                                    ->label('Global Template (Theme)')
+                                    ->label('Template Global (Tema)')
                                     ->options(function (callable $get) {
                                         $categoryId = $get('tenant_category_id');
                                         if (!$categoryId) {
@@ -186,7 +186,7 @@ class TenantForm
                                     ->validationMessages(['required' => 'Global Template wajib diisi']),
 
                                 TextInput::make('custom_domain')
-                                    ->label('Custom Domain')
+                                    ->label('Domain Kustom')
                                     ->placeholder('client.com')
                                     ->prefix('https://'),
                             ]),
@@ -195,21 +195,22 @@ class TenantForm
                         Section::make('Status')
                             ->schema([
                                 Toggle::make('is_suspended')
-                                    ->label('Suspend Tenant?')
+                                    ->label('Tangguhkan Klien?')
                                     ->helperText(new HtmlString("
-                                        If active, the tenant will not be able to access the system.<br>
-                                        <span style='color:red'>Red = Suspend / In Active</span> . <span style='color:green'>Green = Active</span>
+                                        Jika ditangguhkan (merah), klien tidak akan bisa mengakses sistem.<br>
+                                        <span style='color:red'>Merah = Ditangguhkan</span> . <span style='color:green'>Hijau = Aktif</span>
                                     "))
                                     ->onColor('danger')
                                     ->offColor('success')
-                                    ->default(true),
+                                    ->default(true)
+                                    ->hidden(fn (string $operation): bool => $operation === 'create'),
                             ]),
 
                         Section::make('Branding')
-                            ->description('Upload logo and favicon.')
+                            ->description('Unggah logo dan favicon perusahaan.')
                             ->schema([
                                 FileUpload::make('logo_upload')
-                                    ->label('Company Logo')
+                                    ->label('Logo Perusahaan')
                                     ->image()
                                     ->disk('public')
                                     ->directory('tenants/logos')
