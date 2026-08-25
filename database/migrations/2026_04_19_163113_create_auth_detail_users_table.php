@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('auth_user_details', function (Blueprint $table) {
+        Schema::create('auth_detail_users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->integer('photo_id')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('auth_user_details');
+        Schema::dropIfExists('auth_detail_users');
     }
 };

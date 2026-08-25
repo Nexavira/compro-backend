@@ -9,13 +9,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Auth\User;
-use App\Models\Auth\UserDetail;
+use App\Models\Auth\DetailUser;
 use App\Models\Auth\RoleUser;
 use App\Models\Auth\Role;
 use App\Models\Transaction\Subscription;
 use App\Models\Master\Package;
 use App\Models\Transaction\Payment;
-use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Services\TemplateCloningService;
 use Illuminate\Support\Facades\Password;
@@ -92,15 +91,15 @@ class CreateTenant extends CreateRecord
     {
         return DB::transaction(function () use ($data) {
             $tenantData = collect($data)->except(['user_name', 'user_email', 'user_phone', 'user_password', 'user_password_confirmation', 'subscription_plan'])->toArray();
-            
+
             $package = null;
             if (!empty($data['subscription_plan'])) {
                 $package = Package::find($data['subscription_plan']);
             }
 
             // Tenant is active if trial_days > 0, otherwise suspended until paid
-            $tenantData['is_suspended'] = ($package && $package->trial_days > 0) ? 0 : 1; 
-            
+            $tenantData['is_suspended'] = ($package && $package->trial_days > 0) ? 0 : 1;
+
             $tenant = static::getModel()::create($tenantData);
 
             $adminUser = null;
@@ -116,8 +115,8 @@ class CreateTenant extends CreateRecord
                     'version' => 0,
                 ]);
 
-                // Create UserDetail
-                UserDetail::create([
+                // Create DetailUser
+                DetailUser::create([
                     'user_id' => $user->id,
                     'tenant_id' => $tenant->id,
                     'full_name' => $data['user_name'] ?? 'Admin ' . $tenant->name,
@@ -132,7 +131,7 @@ class CreateTenant extends CreateRecord
                         'role_id' => $role->id,
                     ]);
                 }
-                
+
                 $adminUser = $user;
             }
 
@@ -156,23 +155,23 @@ class CreateTenant extends CreateRecord
                 $dueDate = $package->trial_days > 0 ? now()->addDays($package->trial_days) : now()->addDays(3);
 
                 // Generate Invoice Number: INV-{SEQUENCE}/{TENANT_CODE}/{MM}/{YYYY}
-                    $paymentCount = Payment::where('tenant_id', $tenant->id)->count();
-                    $sequenceStr = str_pad($paymentCount + 1, 3, '0', STR_PAD_LEFT);
-                    $monthStr = now()->format('m');
-                    $yearStr = now()->format('Y');
-                    $invoiceNumber = "INV-{$sequenceStr}/{$tenant->code}/{$monthStr}/{$yearStr}";
+                $paymentCount = Payment::where('tenant_id', $tenant->id)->count();
+                $sequenceStr = str_pad($paymentCount + 1, 3, '0', STR_PAD_LEFT);
+                $monthStr = now()->format('m');
+                $yearStr = now()->format('Y');
+                $invoiceNumber = "INV-{$sequenceStr}/{$tenant->code}/{$monthStr}/{$yearStr}";
 
-                    Payment::create([
-                        'tenant_id' => $tenant->id,
-                        'subscription_id' => $subscription->id,
-                        'invoice_number' => $invoiceNumber,
-                        'description' => 'Pembayaran Langganan ' . $package->name,
-                        'amount_due' => $package->price,
-                        'due_date' => $dueDate,
-                        'status' => 'unpaid',
-                        'is_active' => 1,
-                        'version' => 0,
-                    ]);
+                Payment::create([
+                    'tenant_id' => $tenant->id,
+                    'subscription_id' => $subscription->id,
+                    'invoice_number' => $invoiceNumber,
+                    'description' => 'Pembayaran Langganan ' . $package->name,
+                    'amount_due' => $package->price,
+                    'due_date' => $dueDate,
+                    'status' => 'unpaid',
+                    'is_active' => 1,
+                    'version' => 0,
+                ]);
                 // If trial, clone templates and send welcome email immediately
                 if ($package->trial_days > 0) {
                     if ($tenant->global_template_id && $tenant->globalTemplate) {

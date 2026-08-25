@@ -27,26 +27,26 @@
         </div>
 
         @if(auth()->user()->roleUser?->role?->code === 'tenant_admin')
-            @php
-                $tenant = auth()->user()->userDetail?->tenant;
-            @endphp
-            @if($tenant && $tenant->concierge_status !== 'completed')
-                <div style="margin-top: 1rem; padding: 1rem; background-color: #ecfdf5; border: 1px dashed #34d399; border-radius: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
-                    <div>
-                        <h3 style="font-weight: 700; color: #065f46; margin-bottom: 0.25rem;">Butuh Bantuan Setup? (Layanan Concierge)</h3>
-                        <p style="font-size: 0.875rem; color: #047857;">Dapatkan bantuan setup website secara gratis dari tim profesional kami. Cukup kirimkan permintaan!</p>
-                    </div>
-                    <div>
-                        @if($tenant->concierge_status === 'requested')
-                            <span style="background-color: #059669; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 600;">Permintaan Terkirim - Menunggu Tim Kami</span>
-                        @else
-                            <button wire:click="requestConcierge" wire:loading.attr="disabled" style="background-color: #059669; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.2s;">
-                                Minta Setup Gratis
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            @endif
+        @php
+        $tenant = auth()->user()->detailUser?->tenant;
+        @endphp
+        @if($tenant && $tenant->concierge_status !== 'completed')
+        <div style="margin-top: 1rem; padding: 1rem; background-color: #ecfdf5; border: 1px dashed #34d399; border-radius: 0.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h3 style="font-weight: 700; color: #065f46; margin-bottom: 0.25rem;">Butuh Bantuan Setup? (Layanan Concierge)</h3>
+                <p style="font-size: 0.875rem; color: #047857;">Dapatkan bantuan setup website secara gratis dari tim profesional kami. Cukup kirimkan permintaan!</p>
+            </div>
+            <div>
+                @if($tenant->concierge_status === 'requested')
+                <span style="background-color: #059669; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 600;">Permintaan Terkirim - Menunggu Tim Kami</span>
+                @else
+                <button wire:click="requestConcierge" wire:loading.attr="disabled" style="background-color: #059669; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.2s;">
+                    Minta Setup Gratis
+                </button>
+                @endif
+            </div>
+        </div>
+        @endif
         @endif
     </x-filament::section>
 </x-filament-widgets::widget>

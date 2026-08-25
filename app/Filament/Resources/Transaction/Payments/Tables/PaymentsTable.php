@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Transaction\Payments\Tables;
 
 use App\Filament\Resources\Transaction\Payments\PaymentResource;
-use App\Models\Auth\UserDetail;
+use App\Models\Auth\DetailUser;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
@@ -78,7 +78,7 @@ class PaymentsTable
                         ->color('success')
                         ->hidden(fn($record) => $record->status === 'paid')
                         ->url(function ($record) {
-                            $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
+                            $adminDetail = DetailUser::where('tenant_id', $record->tenant_id)->first();
                             $phone = $adminDetail?->phone_number ?? '';
 
                             // Format phone number to international format (62...)
@@ -99,7 +99,7 @@ class PaymentsTable
                         ->color('success')
                         ->visible(fn($record) => $record->status === 'paid')
                         ->url(function ($record) {
-                            $adminDetail = UserDetail::where('tenant_id', $record->tenant_id)->first();
+                            $adminDetail = DetailUser::where('tenant_id', $record->tenant_id)->first();
                             $phone = $adminDetail?->phone_number ?? '';
 
                             if (str_starts_with($phone, '0')) {

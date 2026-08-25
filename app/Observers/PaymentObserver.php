@@ -3,8 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Transaction\Payment;
-use App\Models\Auth\UserDetail;
-use App\Models\Auth\User;
+use App\Models\Auth\DetailUser;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeTenantMail;
@@ -14,10 +13,7 @@ use App\Services\TemplateCloningService;
 class PaymentObserver
 {
 
-    public function created(Payment $payment): void
-    {
-
-    }
+    public function created(Payment $payment): void {}
 
     public function updated(Payment $payment): void
     {
@@ -81,7 +77,7 @@ class PaymentObserver
                 ->exists();
 
             if ($isFirstPayment && $tenant) {
-                $adminDetail = UserDetail::where('tenant_id', $payment->tenant_id)->first();
+                $adminDetail = DetailUser::where('tenant_id', $payment->tenant_id)->first();
                 if ($adminDetail && $adminDetail->user) {
                     $user = $adminDetail->user;
                     $token = Password::createToken($user);
@@ -100,18 +96,9 @@ class PaymentObserver
         }
     }
 
-    public function deleted(Payment $payment): void
-    {
+    public function deleted(Payment $payment): void {}
 
-    }
+    public function restored(Payment $payment): void {}
 
-    public function restored(Payment $payment): void
-    {
-
-    }
-
-    public function forceDeleted(Payment $payment): void
-    {
-
-    }
+    public function forceDeleted(Payment $payment): void {}
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DetailUser extends BaseModel
 {
-    protected $table = 'auth_user_details';
+    protected $table = 'auth_detail_users';
 
     public function user()
     {
@@ -66,16 +66,16 @@ class DetailUser extends BaseModel
 
     protected static function booted()
     {
-        static::saved(function ($userDetail) {
-            if ($userDetail->photo_id) {
-                File::where('id', $userDetail->photo_id)
-                    ->where(function ($query) use ($userDetail) {
+        static::saved(function ($detailUser) {
+            if ($detailUser->photo_id) {
+                File::where('id', $detailUser->photo_id)
+                    ->where(function ($query) use ($detailUser) {
                         $query->whereNull('related_id')
-                            ->orWhere('related_id', '!=', $userDetail->id);
+                            ->orWhere('related_id', '!=', $detailUser->id);
                     })
                     ->update([
-                        'related_id'   => $userDetail->id,
-                        'related_type' => get_class($userDetail),
+                        'related_id'   => $detailUser->id,
+                        'related_type' => get_class($detailUser),
                     ]);
             }
         });

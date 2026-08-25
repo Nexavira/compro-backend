@@ -22,16 +22,16 @@ class UsersTable
             ->columns([
                 ImageColumn::make('photo_id')
                     ->label('Profile Picture')
-                    ->getStateUsing(fn ($record) => $record->userDetail?->photo?->file_path ? url('storage/' . $record->userDetail->photo->file_path) : null)
+                    ->getStateUsing(fn($record) => $record->detailUser?->photo?->file_path ? url('storage/' . $record->detailUser->photo->file_path) : null)
                     ->circular()
-                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->userDetail?->full_name ?? 'User') . '&color=FFFFFF&background=111827'),
-                TextColumn::make('userDetail.full_name')
+                    ->defaultImageUrl(fn($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->detailUser?->full_name ?? 'User') . '&color=FFFFFF&background=111827'),
+                TextColumn::make('detailUser.full_name')
                     ->label('Full Name')
                     ->searchable(),
                 TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
-                TextColumn::make('userDetail.phone_number')
+                TextColumn::make('detailUser.phone_number')
                     ->label('Phone Number')
                     ->searchable(),
                 TextColumn::make('roleUser.role.name')
@@ -60,7 +60,7 @@ class UsersTable
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make()
-                        ->before(fn ($record) => $record->update(['is_active' => false])),
+                        ->before(fn($record) => $record->update(['is_active' => false])),
                 ]),
             ])
             ->toolbarActions([
@@ -68,8 +68,8 @@ class UsersTable
                     DeleteBulkAction::make()
                         ->action(function (Collection $records) {
                             $records->each(function ($record) {
-                                $isMaster = ($record->roleUser->role->code === 'master_admin') || 
-                                        (method_exists($record, 'role') && $record->roleUser->role?->code === 'master_admin');
+                                $isMaster = ($record->roleUser->role->code === 'master_admin') ||
+                                    (method_exists($record, 'role') && $record->roleUser->role?->code === 'master_admin');
 
                                 if (! $isMaster) {
                                     $record->delete();

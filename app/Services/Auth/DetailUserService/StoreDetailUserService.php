@@ -18,7 +18,7 @@ class StoreDetailUserService extends DefaultService implements ServiceInterface
         $dto = $this->prepare($dto);
         $model = new DetailUser;
 
-        $model->photo_id = $dto['photo_id'];
+        $model->photo_id = $dto['photo_id'] ?? null;
         $model->user_id = $dto['user_id'];
         $model->full_name = $dto['full_name'];
         $model->phone_number = $dto['phone_number'];

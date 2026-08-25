@@ -15,8 +15,8 @@ class WelcomeBannerWidget extends Widget
     public function requestConcierge()
     {
         $user = auth()->user();
-        if ($user && $user->userDetail && $user->userDetail->tenant) {
-            $tenant = $user->userDetail->tenant;
+        if ($user && $user->detailUser && $user->detailUser->tenant) {
+            $tenant = $user->detailUser->tenant;
             if ($tenant->concierge_status !== 'completed' && $tenant->concierge_status !== 'requested') {
                 $tenant->concierge_status = 'requested';
                 $tenant->save();

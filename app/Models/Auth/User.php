@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function getNameAttribute()
     {
-        return "{$this->userDetail?->full_name}";
+        return "{$this->detailUser?->full_name}";
     }
 
     public function getTenants(Panel $panel): array|Collection
@@ -79,8 +79,8 @@ class User extends Authenticatable
             return Tenant::all();
         }
 
-        if ($this->userDetail && $this->userDetail->tenant) {
-            return collect([$this->userDetail->tenant]);
+        if ($this->detailUser && $this->detailUser->tenant) {
+            return collect([$this->detailUser->tenant]);
         }
 
         return collect();
@@ -92,6 +92,6 @@ class User extends Authenticatable
             return true;
         }
 
-        return $this->userDetail && $this->userDetail->tenant_id == $tenant->id;
+        return $this->detailUser && $this->detailUser->tenant_id == $tenant->id;
     }
 }

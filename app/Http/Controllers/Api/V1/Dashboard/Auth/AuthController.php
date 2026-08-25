@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function doLogin (Request $req) {
+    public function doLogin(Request $req)
+    {
         $input_dto = [
             'email' => $req->email,
             'password' => $req->password,
@@ -16,27 +17,29 @@ class AuthController extends Controller
         $do_login  = app('DoLoginService')->execute($input_dto);
 
         return response()->json([
-            'success' => ( isset($do_login['error']) ? false : true ),
+            'success' => (isset($do_login['error']) ? false : true),
             'message' => $do_login['message'],
             'data' => $do_login['data'],
-        ])->setStatusCode(( isset($do_login['error']) ? 401 : 200 ));
+        ])->setStatusCode((isset($do_login['error']) ? 401 : 200));
     }
 
-    public function doLogout () {
+    public function doLogout()
+    {
         $do_logout  = app('DoLogoutService')->execute([]);
 
         return response()->json([
-            'success' => ( isset($do_logout['error']) ? false : true ),
+            'success' => (isset($do_logout['error']) ? false : true),
             'message' => $do_logout['message'],
             'data' => $do_logout['data'],
         ]);
     }
 
-    public function getUserSessionInformation (Request $request) {
+    public function getUserSessionInformation(Request $request)
+    {
 
         $user = $request->user();
 
-        if(!$user) {
+        if (!$user) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not found',
@@ -55,15 +58,15 @@ class AuthController extends Controller
         return [
             'uuid' => $user->uuid,
             'email' => $user->email,
-            'name' => $user->userDetail->full_name,
+            'name' => $user->detailUser->full_name,
             'photo' => $photo,
             'role' => [
                 'uuid' => $user->roleUser->role->uuid,
                 'name' => $user->roleUser->role->name,
             ],
             'user_information' => [
-                'name' => $user->userDetail->full_name,
-                'phone_number' => $user->userDetail->phone_number,
+                'name' => $user->detailUser->full_name,
+                'phone_number' => $user->detailUser->phone_number,
             ]
         ];
     }

@@ -53,7 +53,7 @@ class UserForm
                     ->directory('profile-photos')
                     ->alignCenter()
                     ->formatStateUsing(fn($record) => $record?->photo?->file_path)
-            ])->relationship('userDetail')
+            ])->relationship('detailUser')
                 ->columnSpanFull(),
             Grid::make(2)
                 ->schema([
@@ -99,7 +99,7 @@ class UserForm
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ]),
-                        ])->relationship('userDetail'),
+                        ])->relationship('detailUser'),
                         Group::make([
                             Select::make('role_id')
                                 ->label('Peran')
