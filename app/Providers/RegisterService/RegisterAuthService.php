@@ -8,6 +8,7 @@ use App\Services\Auth\UserService\RegisterUserService;
 use App\Services\AuthService\DoLoginService;
 use App\Services\AuthService\DoLogoutService;
 use App\Services\Auth\UserService\StoreUserService;
+use App\Services\Auth\UserService\VerifyOtpService;
 
 class RegisterAuthService extends AppServiceProvider
 {
@@ -17,8 +18,8 @@ class RegisterAuthService extends AppServiceProvider
         $this->registerService('DoLogoutService', DoLogoutService::class);
 
         $this->registerService('StoreUserService', StoreUserService::class);
-        $this->registerService('RegisterUserService', RegisterUserService::class);
-
         $this->registerService('StoreDetailUserService', StoreDetailUserService::class);
+        $this->registerService('RegisterUserService', RegisterUserService::class);
+        $this->registerService('VerifyOtpService', VerifyOtpService::class);
     }
 }
