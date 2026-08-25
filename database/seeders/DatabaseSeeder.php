@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             TenantCategorySeeder::class,
-            GlobalTemplateSeeder::class,
-            GlobalTemplateAboutPageSeeder::class,
+            // GlobalTemplateSeeder::class,
+            // GlobalTemplateAboutPageSeeder::class,
             TenantSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
