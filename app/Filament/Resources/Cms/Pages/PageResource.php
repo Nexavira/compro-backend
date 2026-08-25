@@ -28,6 +28,8 @@ class PageResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Page';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|UnitEnum|null $navigationGroup = 'Sistem Konten';
 
     protected static ?int $navigationSort = 2;

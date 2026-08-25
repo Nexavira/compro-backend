@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use App\Models\System\File;
 use App\Models\GlobalTemplate;
 use App\Models\CMS\Page;
+use App\Models\Auth\User;
 
 class Tenant extends BaseModel
 {
@@ -64,5 +65,12 @@ class Tenant extends BaseModel
     public function pages()
     {
         return $this->hasMany(Page::class, 'tenant_id', 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'tnt_tenant_user', 'tenant_id', 'user_id')
+                    ->withPivot('role')
+                    ->withTimestamps();
     }
 }

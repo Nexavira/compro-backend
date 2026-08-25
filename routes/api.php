@@ -1,30 +1,30 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\TenantHandlerApi;
-use App\Models\CMS\Page;
 
-Route::post('do-login', [App\Http\Controllers\API\Auth\AuthController::class, 'doLogin']);
+Route::prefix('v1')->group(function () {
 
-Route::group(['middleware' => 'auth:api'], function () {
-    require __DIR__ . '/api/auth/auth.php';
-    require __DIR__ . '/api/auth/role.php';
-    require __DIR__ . '/api/auth/permission.php';
-    require __DIR__ . '/api/system/file.php';
-    require __DIR__ . '/api/tenant/tenant.php';
+    Route::post('do-login', [App\Http\Controllers\Api\V1\Dashboard\Auth\AuthController::class, 'doLogin'])->name('login');
+
+    Route::group(['middleware' => 'auth:api'], function () {
+        require __DIR__ . '/api/v1/dashboard/auth/auth.php';
+        require __DIR__ . '/api/v1/dashboard/auth/role.php';
+        require __DIR__ . '/api/v1/dashboard/auth/permission.php';
+        require __DIR__ . '/api/v1/dashboard/system/file.php';
+        require __DIR__ . '/api/v1/dashboard/tenant/tenant.php';
+    });
+
+    require __DIR__ . '/api/v1/portal/index.php';
+
+
+    // Route::get('/templates', [App\Http\Controllers\Api\V1\Portal\Cms\TemplateController::class, 'index']);
+    // Route::get('/templates/{slug}', [App\Http\Controllers\Api\V1\Portal\Cms\TemplateController::class, 'show']);
+
+    Route::group(['prefix' => 't/{tenant_slug}'], function () {
+        Route::get('/pages', [App\Http\Controllers\Api\V1\Tenant\Cms\PageController::class, 'index']);
+        Route::get('/pages/{slug}', [App\Http\Controllers\Api\V1\Tenant\Cms\PageController::class, 'show']);
+
+        Route::get('/posts', [App\Http\Controllers\Api\V1\Tenant\Cms\PostController::class, 'index']);
+        Route::get('/posts/{slug}', [App\Http\Controllers\Api\V1\Tenant\Cms\PostController::class, 'show']);
+    });
 });
-
-Route::group(['prefix' => 'v1/t/{tenant_slug}'], function () {
-
-    Route::get('/pages', [App\Http\Controllers\API\Cms\PageController::class, 'index']);
-    Route::get('/pages/{slug}', [App\Http\Controllers\API\Cms\PageController::class, 'show']);
-
-    Route::get('/posts', [App\Http\Controllers\API\Cms\PostController::class, 'index']);
-    Route::get('/posts/{slug}', [App\Http\Controllers\API\Cms\PostController::class, 'show']);
-});
-
-Route::get('/v1/templates', [App\Http\Controllers\API\Cms\TemplateController::class, 'index']);
-Route::get('/v1/templates/{slug}', [App\Http\Controllers\API\Cms\TemplateController::class, 'show']);
-
-Route::get('/v1/packages', [App\Http\Controllers\API\Master\PackageController::class, 'get']);

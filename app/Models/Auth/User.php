@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Models\Tenant\Tenant;
+use App\Models\Tenant\TenantUser;
 use App\Traits\Blameable;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -52,14 +53,19 @@ class User extends Authenticatable
         return ['uuid'];
     }
 
-    public function userDetail()
+    public function detailUser()
     {
-        return $this->hasOne(UserDetail::class, 'user_id', 'id');
+        return $this->hasOne(DetailUser::class, 'user_id', 'id');
     }
 
     public function roleUser()
     {
         return $this->hasOne(RoleUser::class, 'user_id', 'id');
+    }
+
+    public function tenantUser()
+    {
+        return $this->hasOne(TenantUser::class, 'user_id', 'id');
     }
 
     public function getNameAttribute()

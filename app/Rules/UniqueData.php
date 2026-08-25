@@ -4,6 +4,8 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -15,7 +17,7 @@ class UniqueData implements ValidationRule
 
     protected $column;
 
-    public function __construct($table, $column, $identifier = null)
+    public function __construct($table, $column = null, $identifier = null)
     {
         $this->table = $table;
         $this->column = $column;
@@ -24,7 +26,15 @@ class UniqueData implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $query = DB::table($this->table)->where($this->column, $value)->where('deleted_at', null);
+        $columnToCheck = $this->column ?? $attribute;
+
+        if ($this->table instanceof Model || $this->table instanceof BaseModel) {
+            $query = $this->table->newQuery();
+        } else {
+            $query = DB::table($this->table);
+        }
+
+        $query = $query->where($columnToCheck, $value)->whereNull('deleted_at');
 
         if(Str::isUuid($this->identifier)) {
             $this->identifier != null ? $query->where('uuid', '!=', $this->identifier) : null;

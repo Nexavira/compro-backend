@@ -22,9 +22,14 @@ class RoleSeeder extends Seeder
                     'description' => 'Ini adalah role Internal',
                 ],
                 [
-                    'name' => 'Tenant Admin',
-                    'code' => 'tenant_admin',
-                    'description' => 'Ini adalah role Tenant Admin',
+                    'name' => 'Owner',
+                    'code' => 'owner',
+                    'description' => 'Ini adalah role Owner Tenant',
+                ],
+                [
+                    'name' => 'Staff',
+                    'code' => 'staff',
+                    'description' => 'Ini adalah role Staff Tenant',
                 ]
             ];
 

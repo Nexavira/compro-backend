@@ -17,16 +17,20 @@ class UserSeeder extends Seeder
             'version' => 0,
         ]);
 
-        $admin->userDetail()->create([
+        $admin->detailUser()->create([
             'user_id' => $admin->id,
-            'tenant_id' => 1,
             'full_name' => 'Master Admin',
             'phone_number' => '08123456789',
         ]);
 
         $admin->roleUser()->create([
-            'user_id' => $admin->id,
             'role_id' => 1,
+            'user_id' => $admin->id,
+        ]);
+
+        $admin->tenantUser()->create([
+            'tenant_id' => 1,
+            'user_id' => $admin->id,
         ]);
     }
 }

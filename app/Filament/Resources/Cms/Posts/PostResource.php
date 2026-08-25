@@ -28,6 +28,8 @@ class PostResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Post';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|UnitEnum|null $navigationGroup = 'Sistem Konten';
 
     protected static ?int $navigationSort = 1;

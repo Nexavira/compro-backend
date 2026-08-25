@@ -8,7 +8,6 @@ use App\Services\ServiceInterface;
 
 class GetPackageService extends DefaultService implements ServiceInterface
 {
-
     public function process($dto)
     {
         $dto['per_page'] = $dto['per_page'] ?? 10;
