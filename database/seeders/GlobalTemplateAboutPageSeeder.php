@@ -12,7 +12,7 @@ class GlobalTemplateAboutPageSeeder extends Seeder
 
   public function run(): void
   {
-    $filePath = database_path('seeders/about-template-data.json');
+    $filePath = database_path('seeders/JsonData/about-template-data.json');
     $jsonString = file_get_contents($filePath);
     $aboutDataArray = collect(json_decode($jsonString, true));
 
