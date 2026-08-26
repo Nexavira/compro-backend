@@ -14,7 +14,6 @@ class GetTenantResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'slug' => $this->slug,
-            'theme_code' => $this->theme_code,
             'custom_domain' => $this->custom_domain,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

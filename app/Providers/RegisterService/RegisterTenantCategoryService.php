@@ -3,7 +3,7 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\TenantCategoryService\GetTenantCategoryService;
+use App\Services\TenantCategory\GetTenantCategoryService;
 
 class RegisterTenantCategoryService extends AppServiceProvider
 {

@@ -78,9 +78,9 @@ class PaymentsTable
                         ->color('success')
                         ->hidden(fn($record) => $record->status === 'paid')
                         ->url(function ($record) {
-                            $adminDetail = DetailUser::where('tenant_id', $record->tenant_id)->first();
-                            $phone = $adminDetail?->phone_number ?? '';
-
+                            // $adminDetail = DetailUser::where('tenant_id', $record->tenant_id)->first();
+                            // $phone = $adminDetail?->phone_number ?? '';
+                            $phone = 628123244279;
                             // Format phone number to international format (62...)
                             if (str_starts_with($phone, '0')) {
                                 $phone = '62' . substr($phone, 1);

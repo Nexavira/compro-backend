@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Services\AuthService;
+namespace App\Services\Auth;
 
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
-use Exception;
 
 class DoLogoutService extends DefaultService implements ServiceInterface
 {

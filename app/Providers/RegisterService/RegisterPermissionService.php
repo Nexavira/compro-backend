@@ -3,10 +3,10 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\AuthService\PermissionRoleService\AddPermissionRoleService;
-use App\Services\AuthService\PermissionRoleService\RemovePermissionRoleService;
-use App\Services\AuthService\PermissionRoleService\UpdatePermissionRoleService;
-use App\Services\AuthService\PermissionService\GetPermissionService;
+use App\Services\Auth\Permission\GetPermissionService;
+use App\Services\Auth\PermissionRole\AddPermissionRoleService;
+use App\Services\Auth\PermissionRole\RemovePermissionRoleService;
+use App\Services\Auth\PermissionRole\UpdatePermissionRoleService;
 
 class RegisterPermissionService extends AppServiceProvider
 {

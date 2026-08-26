@@ -1,13 +1,14 @@
 <?php
-namespace App\Services\AuthService;
 
-use App\Exceptions\CustomException;
+namespace App\Services\Auth;
+
 use App\Models\Auth\User;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
-class DoLoginService extends DefaultService implements ServiceInterface {
+class DoLoginService extends DefaultService implements ServiceInterface
+{
 
     public function process($dto)
     {
@@ -28,14 +29,13 @@ class DoLoginService extends DefaultService implements ServiceInterface {
             'token' => $user->createToken('MyApp')->accessToken
         ];
         $this->results['message'] = "User successfully logged in";
-
     }
 
-    public function rules ($dto) {
+    public function rules($dto)
+    {
         return [
             'email' => ['required'],
             'password' => ['required']
         ];
     }
-
 }

@@ -3,7 +3,7 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\PackageService\GetPackageService;
+use App\Services\Package\GetPackageService;
 
 class RegisterPackageService extends AppServiceProvider
 {

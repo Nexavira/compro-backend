@@ -16,10 +16,10 @@ class Role extends BaseModel
     public function permissions()
     {
         return $this->belongsToMany(
-            Permission::class, 
-            'auth_permission_role', 
-            'role_id', 
+            Permission::class,
+            'auth_permission_role',
+            'role_id',
             'permission_id'
-        ); 
+        );
     }
 }

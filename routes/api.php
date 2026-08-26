@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    Route::post('do-login', [App\Http\Controllers\Api\V1\Dashboard\Auth\AuthController::class, 'doLogin'])->name('login');
-
-    Route::group(['middleware' => 'auth:api'], function () {
-        require __DIR__ . '/api/v1/dashboard/auth/auth.php';
-        require __DIR__ . '/api/v1/dashboard/auth/role.php';
-        require __DIR__ . '/api/v1/dashboard/auth/permission.php';
-        require __DIR__ . '/api/v1/dashboard/system/file.php';
-        require __DIR__ . '/api/v1/dashboard/tenant/tenant.php';
-    });
-
     require __DIR__ . '/api/v1/portal/index.php';
+
+    // Route::group(['middleware' => 'auth:api'], function () {
+    //     require __DIR__ . '/api/v1/dashboard/auth/auth.php';
+    //     require __DIR__ . '/api/v1/dashboard/auth/role.php';
+    //     require __DIR__ . '/api/v1/dashboard/auth/permission.php';
+    //     require __DIR__ . '/api/v1/dashboard/system/file.php';
+    //     require __DIR__ . '/api/v1/dashboard/tenant/tenant.php';
+    // });
+
 
 
     // Route::get('/templates', [App\Http\Controllers\Api\V1\Portal\Cms\TemplateController::class, 'index']);

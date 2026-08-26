@@ -3,7 +3,7 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\SystemService\UploadFileService;
+use App\Services\System\UploadFileService;
 
 class RegisterSystemService extends AppServiceProvider
 {

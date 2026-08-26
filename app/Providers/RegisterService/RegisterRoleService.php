@@ -3,12 +3,12 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\RoleService\StoreRoleService;
-use App\Services\RoleService\UpdateRoleService;
-use App\Services\RoleService\DeleteRoleService;
-use App\Services\RoleService\GetRoleService;
-use App\Services\AuthService\RoleUserService\AddRoleUserService;
-use App\Services\AuthService\RoleUserService\RemoveRoleUserService;
+use App\Services\Auth\Role\DeleteRoleService;
+use App\Services\Auth\Role\GetRoleService;
+use App\Services\Auth\Role\StoreRoleService;
+use App\Services\Auth\Role\UpdateRoleService;
+use App\Services\Auth\RoleUser\AddRoleUserService;
+use App\Services\Auth\RoleUser\RemoveRoleUserService;
 
 class RegisterRoleService extends AppServiceProvider
 {
