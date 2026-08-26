@@ -77,9 +77,9 @@ class PaymentObserver
                 ->exists();
 
             if ($isFirstPayment && $tenant) {
-                $adminDetail = DetailUser::where('tenant_id', $payment->tenant_id)->first();
-                if ($adminDetail && $adminDetail->user) {
-                    $user = $adminDetail->user;
+                $tenantUser = \App\Models\Tenant\TenantUser::where('tenant_id', $payment->tenant_id)->first();
+                if ($tenantUser && $tenantUser->user) {
+                    $user = $tenantUser->user;
                     $token = Password::createToken($user);
 
                     $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($user->email));

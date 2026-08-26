@@ -68,6 +68,9 @@ class CreateTenantService extends DefaultService implements ServiceInterface
             $subEndAt = $package->billing_cycle === 'annually' ? now()->addYear() : now()->addMonth();
             $subNextBillingDate = $subEndAt;
             $subAmount = 0;
+        } else {
+            $subEndAt = $package->billing_cycle === 'annually' ? now()->addYear() : now()->addMonth();
+            $subNextBillingDate = $subEndAt;
         }
 
         $subscriptionService = app('StoreSubscriptionService')->execute([
