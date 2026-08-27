@@ -13,14 +13,14 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_category_id')->nullable()->constrained('tnt_tenant_categories')->nullOnDelete();
-            
+            $table->foreignId('package_id')->nullable()->constrained('mst_packages')->nullOnDelete();
+
             // Kolom tier untuk memisahkan template basic/pro
             $table->string('tier')->default('basic')->comment('basic, pro');
 
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('slug');
-            $table->json('brand_settings')->nullable();
+            $table->jsonb('brand_settings')->nullable();
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
@@ -28,9 +28,7 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->uniqueSoftDelete(['slug']);
-
-            $table->index(['slug', 'deleted_at']);
+            $table->index(['tenant_category_id', 'package_id', 'deleted_at']);
         });
     }
 

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Tenant\Tenant;
 use App\Models\CMS\Page;
-use App\Models\GlobalTemplatePage;
+// use App\Models\GlobalTemplatePage;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;
@@ -26,19 +26,21 @@ class TenantService
             return;
         }
 
-        $globalPages = GlobalTemplatePage::where('global_template_id', $tenant->global_template_id)->get();
+        // note: global template page sudah tidak ada
+        
+        // $globalPages = GlobalTemplatePage::where('global_template_id', $tenant->global_template_id)->get();
 
-        foreach ($globalPages as $globalPage) {
-            Page::create([
-                'tenant_id' => $tenant->id,
-                'title' => $globalPage->title,
-                'slug' => $globalPage->slug,
-                'content_blocks' => $globalPage->content_blocks,
-                'meta' => $globalPage->meta,
-                'is_active' => 1,
-                'version' => 0,
-            ]);
-        }
+        // foreach ($globalPages as $globalPage) {
+        //     Page::create([
+        //         'tenant_id' => $tenant->id,
+        //         'title' => $globalPage->title,
+        //         'slug' => $globalPage->slug,
+        //         'content_blocks' => $globalPage->content_blocks,
+        //         'meta' => $globalPage->meta,
+        //         'is_active' => 1,
+        //         'version' => 0,
+        //     ]);
+        // }
     }
 
     /**

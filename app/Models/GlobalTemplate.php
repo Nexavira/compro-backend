@@ -31,9 +31,4 @@ class GlobalTemplate extends BaseModel
     {
         return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
     }
-
-    public function pages()
-    {
-        return $this->hasMany(GlobalTemplatePage::class, 'global_template_id', 'id');
-    }
 }

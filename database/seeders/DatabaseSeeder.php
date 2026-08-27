@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Database\Seeders\Auth\PermissionSeeder;
 use Database\Seeders\Auth\RoleSeeder;
 use Database\Seeders\Auth\UserSeeder;
+use Database\Seeders\GlobalTemplate\GlobalTemplateSeeder;
 use Database\Seeders\Master\PackageSeeder;
 use Database\Seeders\Tenant\TenantCategorySeeder;
 use Database\Seeders\Tenant\TenantSeeder;
@@ -20,12 +21,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             TenantCategorySeeder::class,
-            // GlobalTemplateSeeder::class,
-            // GlobalTemplateAboutPageSeeder::class,
+            PackageSeeder::class,
             TenantSeeder::class,
+            GlobalTemplateSeeder::class,
+            // GlobalTemplateAboutPageSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
-            PackageSeeder::class,
         ]);
     }
 }

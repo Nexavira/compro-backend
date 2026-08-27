@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('cms_pages', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
+            $table->foreignId('tenant_template_id')->constrained('cms_tenant_templates')->onDelete('cascade');
             $table->string('title');
             $table->string('slug');
             $table->jsonb('template_data')->nullable();
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->epochTimestamps();
             $table->epochSoftDeletes();
 
-            $table->uniqueSoftDelete(['tenant_id', 'slug']);
+            $table->uniqueSoftDelete(['tenant_template_id', 'slug']);
 
-            $table->index(['tenant_id', 'slug', 'deleted_at']);
+            $table->index(['tenant_template_id', 'slug', 'deleted_at']);
         });
     }
 

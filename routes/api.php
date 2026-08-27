@@ -19,6 +19,8 @@ Route::prefix('v1')->group(function () {
     // Route::get('/templates', [App\Http\Controllers\Api\V1\Portal\Cms\TemplateController::class, 'index']);
     // Route::get('/templates/{slug}', [App\Http\Controllers\Api\V1\Portal\Cms\TemplateController::class, 'show']);
 
+    Route::get('/global-templates', [App\Http\Controllers\Api\V1\Portal\Cms\GlobalTemplateController::class, 'get']);
+
     Route::group(['prefix' => 't/{tenant_slug}'], function () {
         Route::get('/pages', [App\Http\Controllers\Api\V1\Tenant\Cms\PageController::class, 'index']);
         Route::get('/pages/{slug}', [App\Http\Controllers\Api\V1\Tenant\Cms\PageController::class, 'show']);

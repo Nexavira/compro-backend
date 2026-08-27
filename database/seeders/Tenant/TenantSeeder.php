@@ -14,7 +14,7 @@ class TenantSeeder extends Seeder
     public function run(): void
     {
         $tenant_category_technology = TenantCategory::where('code', 'FNB')->first();
-        $etoile_template = GlobalTemplate::where('slug', 'food-and-beverage')->first();
+        $etoile_template = GlobalTemplate::where('is_active', 1)->first();
         Tenant::create([
             'tenant_category_id' => $tenant_category_technology->id,
             'name' => 'Nexavira',
