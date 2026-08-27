@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLoginRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLogoutRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\GetUserSessionInformationRequest;
+use App\Http\Resources\Api\V1\Portal\Auth\GetUserSessionInformationResource;
+use App\Models\Tenant\TenantUser;
 
 class AuthController extends Controller
 {
@@ -39,37 +41,19 @@ class AuthController extends Controller
 
     public function getUserSessionInformation(GetUserSessionInformationRequest $request)
     {
-        $user = $request->user();
+        $result = app('GetUserSessionInformationService')->execute($request->all());
 
-        if (!$user) {
-            return response()->json([
-                'success' => false,
-                'message' => 'User not found',
-            ], 404);
+        $data = null;
+        if (isset($result['data'])) {
+            $data = (isset($result['data']->id)) ? new GetUserSessionInformationResource($result['data']) :
+                GetUserSessionInformationResource::collection($result['data']);
         }
 
-        $photo = null;
-        if (isset($user->photo)) {
-            $photo = [
-                "uuid" => $user->photo->uuid,
-                "original_file_name" => $user->photo->original_name,
-                "url" => $user->photo->url
-            ];
-        }
-
-        return [
-            'uuid' => $user->uuid,
-            'email' => $user->email,
-            'name' => $user->detailUser->full_name,
-            'photo' => $photo,
-            'role' => [
-                'uuid' => $user->roleUser->role->uuid,
-                'name' => $user->roleUser->role->name,
-            ],
-            'user_information' => [
-                'name' => $user->detailUser->full_name,
-                'phone_number' => $user->detailUser->phone_number,
-            ]
-        ];
+        return response()->json([
+            'success' => (isset($result['error']) ? false : true),
+            'message' => $result['message'],
+            'data' => $data,
+            'pagination' => $result['pagination'] ?? null
+        ], $result['response_code'] ?? 200);
     }
 }

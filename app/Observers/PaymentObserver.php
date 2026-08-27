@@ -7,6 +7,7 @@ use App\Models\Auth\DetailUser;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeTenantMail;
+use App\Models\Tenant\TenantUser;
 use Illuminate\Support\Facades\Log;
 use App\Services\TemplateCloningService;
 
@@ -77,7 +78,7 @@ class PaymentObserver
                 ->exists();
 
             if ($isFirstPayment && $tenant) {
-                $tenantUser = \App\Models\Tenant\TenantUser::where('tenant_id', $payment->tenant_id)->first();
+                $tenantUser = TenantUser::where('tenant_id', $payment->tenant_id)->first();
                 if ($tenantUser && $tenantUser->user) {
                     $user = $tenantUser->user;
                     $token = Password::createToken($user);

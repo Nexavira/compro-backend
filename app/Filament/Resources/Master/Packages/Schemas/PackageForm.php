@@ -11,6 +11,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\HtmlString;
 
 class PackageForm
 {
@@ -127,7 +128,7 @@ class PackageForm
                                 if (!$text) return null;
 
                                 if (!empty($state['is_highlighted'])) {
-                                    return new \Illuminate\Support\HtmlString(
+                                    return new HtmlString(
                                         '<span style="color: #10b981; font-weight: 500;">' . e($text) . '</span>'
                                     );
                                 }

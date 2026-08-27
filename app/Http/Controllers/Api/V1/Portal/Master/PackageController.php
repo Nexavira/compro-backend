@@ -10,19 +10,19 @@ class PackageController extends Controller
 {
     public function get(GetPackageRequest $request)
     {
-        $package = app('GetPackageService')->execute($request->all());
+        $result = app('GetPackageService')->execute($request->all());
 
         $data = null;
-        if (isset($package['data'])) {
-            $data = (isset($package['data']->id)) ? new GetPackageResource($package['data']) :
-                GetPackageResource::collection($package['data']);
+        if (isset($result['data'])) {
+            $data = (isset($result['data']->id)) ? new GetPackageResource($result['data']) :
+                GetPackageResource::collection($result['data']);
         }
 
         return response()->json([
-            'success' => (isset($package['error']) ? false : true),
-            'message' => $package['message'],
+            'success' => (isset($result['error']) ? false : true),
+            'message' => $result['message'],
             'data' => $data,
-            'pagination' => $package['pagination'] ?? null
-        ], $package['response_code']);
+            'pagination' => $result['pagination'] ?? null
+        ], $result['response_code']);
     }
 }

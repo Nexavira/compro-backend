@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Transaction\Payments\Tables;
 
 use App\Filament\Resources\Transaction\Payments\PaymentResource;
 use App\Models\Auth\DetailUser;
+use App\Models\Tenant\TenantUser;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
@@ -77,7 +78,7 @@ class PaymentsTable
                         ->color('success')
                         ->hidden(fn($record) => $record->status === 'paid')
                         ->url(function ($record) {
-                            $tenantUser = \App\Models\Tenant\TenantUser::where('tenant_id', $record->tenant_id)->first();
+                            $tenantUser = TenantUser::where('tenant_id', $record->tenant_id)->first();
                             $phone = $tenantUser?->user?->detailUser?->phone_number ?? '';
                             // Format phone number to international format (62...)
                             if (str_starts_with($phone, '0')) {

@@ -3,6 +3,7 @@
 namespace App\Services\System;
 
 use App\Models\System\File;
+use App\Models\Tenant\Tenant;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 
@@ -12,7 +13,7 @@ class UploadFileService extends DefaultService implements ServiceInterface
     {
         $file = $dto['file'];
 
-        $sys_file = new File();
+        $sys_file = new File;
 
         $sys_file->tenant_id = $dto['tenant_id'] ?? null;
         $sys_file->related_id = $dto['related_id'] ?? null;
@@ -44,11 +45,22 @@ class UploadFileService extends DefaultService implements ServiceInterface
         $this->results['message'] = "File successfully uploaded";
     }
 
+    public function prepare($dto)
+    {
+        if (isset($dto['tenant_uuid']) && $dto['tenant_uuid'] != '') {
+            $tenant = Tenant::where('uuid', $dto['tenant_uuid'])->first();
+            if ($tenant) {
+                $dto['tenant_id'] = $tenant->id;
+            }
+        }
+        return $dto;
+    }
+
     public function rules($dto)
     {
         return [
             'file' => ['required', 'file', 'max:51200'],
-            'tenant_id' => ['nullable', 'integer'],
+            'tenant_id' => ['required', 'integer'],
             'related_id' => ['nullable', 'integer'],
             'related_type' => ['nullable', 'string'],
             'is_public' => ['nullable', 'integer', 'in:0,1'],

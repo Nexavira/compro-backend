@@ -10,6 +10,7 @@ use App\Services\Auth\User\StoreUserService;
 use App\Services\Auth\User\VerifyOtpService;
 use App\Services\Auth\DoLoginService;
 use App\Services\Auth\DoLogoutService;
+use App\Services\Auth\GetUserSessionInformationService;
 
 class RegisterAuthService extends AppServiceProvider
 {
@@ -23,5 +24,6 @@ class RegisterAuthService extends AppServiceProvider
         $this->registerService('RegisterUserService', RegisterUserService::class);
         $this->registerService('VerifyOtpService', VerifyOtpService::class);
         $this->registerService('AddRoleUserService', AddRoleUserService::class);
+        $this->registerService('GetUserSessionInformationService', GetUserSessionInformationService::class);
     }
 }

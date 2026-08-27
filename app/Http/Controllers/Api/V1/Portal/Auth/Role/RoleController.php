@@ -10,19 +10,19 @@ class RoleController extends Controller
 {
     public function get(GetRoleRequest $request)
     {
-        $role = app('GetRoleService')->execute($request->all());
+        $result = app('GetRoleService')->execute($request->all());
 
         $data = null;
-        if (isset($role['data'])) {
-            $data = (isset($role['data']->id)) ? new GetRoleResource($role['data']) :
-                GetRoleResource::collection($role['data']);
+        if (isset($result['data'])) {
+            $data = (isset($result['data']->id)) ? new GetRoleResource($result['data']) :
+                GetRoleResource::collection($result['data']);
         }
 
         return response()->json([
-            'success' => (isset($role['error']) ? false : true),
-            'message' => $role['message'],
+            'success' => (isset($result['error']) ? false : true),
+            'message' => $result['message'],
             'data' => $data,
-            'pagination' => $role['pagination'] ?? null
-        ], $role['response_code']);
+            'pagination' => $result['pagination'] ?? null
+        ], $result['response_code']);
     }
 }
