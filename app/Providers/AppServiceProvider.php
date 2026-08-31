@@ -23,6 +23,9 @@ use App\Providers\RegisterService\RegisterRoleService;
 use App\Providers\RegisterService\RegisterSystemService;
 use App\Providers\RegisterService\RegisterTenantCategoryService;
 use App\Providers\RegisterService\RegisterTenantService;
+use App\Providers\RegisterService\RegisterGlobalTemplateService;
+use App\Providers\RegisterService\RegisterTenantTemplateService;
+use app\Providers\RegisterService\RegisterPageService;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\Gate;
@@ -42,6 +45,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RegisterTenantService::class);
         $this->app->register(RegisterTenantCategoryService::class);
         $this->app->register(RegisterPackageService::class);
+        $this->app->register(RegisterGlobalTemplateService::class);
+        $this->app->register(RegisterTenantTemplateService::class);
+        $this->app->register(RegisterPageService::class);
     }
 
     public function boot(): void

@@ -10,12 +10,24 @@ class GlobalTemplateController extends Controller
 {
     public function get(Request $request)
     {
-        $templates = GlobalTemplate::where('is_active', 1)
-            ->get();
+        $result = app('GetGlobalTemplateService')->execute($request->all());
 
         return response()->json([
-            'success' => true,
-            'data'    => $templates
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data'    => $result['data']
         ]);
     }
+
+    public function create(Request $request)
+    {
+        $result = app('StoreGlobalTemplateService')->execute($request->all());
+
+        return response()->json([
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data' => $result['data'],
+        ], $result['response_code']);
+    }
+
 }

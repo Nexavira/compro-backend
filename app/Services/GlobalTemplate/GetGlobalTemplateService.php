@@ -22,18 +22,9 @@ class GetGlobalTemplateService extends DefaultService implements ServiceInterfac
         if (isset($dto['search_param']) and $dto['search_param'] != null) {
             $model->where(function ($q) use ($dto) {
                 $q->where('name', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('code', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('description', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('type', 'ILIKE', '%' . $dto['search_param'] . '%');
+                    ->orwhere('title', 'ILIKE', '%' . $dto['search_param'] . '%')
+                    ->orwhere('description', 'ILIKE', '%' . $dto['search_param'] . '%');
             });
-        }
-
-        if (isset($dto['type'])) {
-            $model->where('type', $dto['type']);
-        }
-
-        if (isset($dto['code'])) {
-            $model->where('code', $dto['code']);
         }
 
         if (isset($dto['global_template_id_in'])) {
