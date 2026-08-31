@@ -25,7 +25,7 @@ use App\Providers\RegisterService\RegisterTenantCategoryService;
 use App\Providers\RegisterService\RegisterTenantService;
 use App\Providers\RegisterService\RegisterGlobalTemplateService;
 use App\Providers\RegisterService\RegisterTenantTemplateService;
-use app\Providers\RegisterService\RegisterPageService;
+use App\Providers\RegisterService\RegisterPageService;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\Gate;

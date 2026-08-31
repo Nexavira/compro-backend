@@ -10,12 +10,25 @@ use App\Mail\SendOtpEmail;
 use App\Models\Auth\User;
 use App\Models\Auth\Role;
 use App\Rules\UniqueData;
-use App\Rules\ExistsUuid;
 
 class RegisterUserService extends DefaultService implements ServiceInterface
 {
+    private const CUSTOMER_ROLE_CODE = 'owner';
+
     public function process($dto)
     {
+        $customerRole = Role::query()
+            ->where('code', self::CUSTOMER_ROLE_CODE)
+            ->where('is_active', true)
+            ->first();
+
+        if (!$customerRole) {
+            throw new \RuntimeException('Role customer tidak ditemukan.');
+        }
+
+        // Role registrasi portal ditentukan oleh server, bukan dari input pengguna.
+        $dto['role_uuid'] = $customerRole->uuid;
+
         $otpCode = (string) rand(100000, 999999);
 
         $cacheData = [
@@ -39,7 +52,6 @@ class RegisterUserService extends DefaultService implements ServiceInterface
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'full_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string'],
-            'role_uuid' => ['required', 'uuid', new ExistsUuid(new Role)],
         ];
     }
 }

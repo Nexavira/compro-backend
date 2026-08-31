@@ -30,6 +30,11 @@ class RoleSeeder extends Seeder
                     'name' => 'Staff',
                     'code' => 'staff',
                     'description' => 'Ini adalah role Staff Tenant',
+                ],
+                [
+                    'name' => 'Customer',
+                    'code' => 'customer',
+                    'description' => 'Ini adalah role customer',
                 ]
             ];
 
