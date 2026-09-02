@@ -31,11 +31,6 @@ class RoleSeeder extends Seeder
                     'code' => 'staff',
                     'description' => 'Ini adalah role Staff Tenant',
                 ],
-                [
-                    'name' => 'Customer',
-                    'code' => 'customer',
-                    'description' => 'Ini adalah role customer',
-                ]
             ];
 
         foreach ($datas as $data) {

@@ -29,20 +29,13 @@ class ResetPasswordService extends DefaultService implements ServiceInterface
             return;
         }
 
-        $cacheKey = "otp_reset_password_{$user->email}";
-        $cachedOtp = Cache::get($cacheKey);
+        $cacheKey = "otp_reset_password_verified_{$user->email}";
+        $isVerified = Cache::get($cacheKey);
 
-        if (!$cachedOtp) {
+        if (!$isVerified) {
             $this->results['error'] = true;
             $this->results['response_code'] = 400;
-            $this->results['message'] = 'Kode OTP telah kedaluwarsa atau tidak valid. Silakan minta kode baru.';
-            return;
-        }
-
-        if ((string)$cachedOtp !== (string)$dto['otp_code']) {
-            $this->results['error'] = true;
-            $this->results['response_code'] = 400;
-            $this->results['message'] = 'Kode OTP yang Anda masukkan salah.';
+            $this->results['message'] = 'Sesi verifikasi telah kedaluwarsa atau Anda belum memverifikasi OTP. Silakan mulai ulang proses.';
             return;
         }
 
@@ -71,7 +64,6 @@ class ResetPasswordService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'otp_code' => ['required', 'string', 'min:6'],
             'old_password' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8']
         ];

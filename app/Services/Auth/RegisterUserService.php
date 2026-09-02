@@ -10,6 +10,7 @@ use App\Mail\SendOtpEmail;
 use App\Models\Auth\User;
 use App\Models\Auth\Role;
 use App\Rules\UniqueData;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterUserService extends DefaultService implements ServiceInterface
 {
@@ -48,7 +49,7 @@ class RegisterUserService extends DefaultService implements ServiceInterface
     {
         return [
             'email' => ['required', 'email', new UniqueData(new User)],
-            // 'password' => ['required', 'string', \Illuminate\Validation\Rules\Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
+            'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
             'full_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string'],
         ];

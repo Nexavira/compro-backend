@@ -14,20 +14,13 @@ class ForgotPasswordService extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $cacheKey = "otp_forgot_password_{$dto['email']}";
-        $cachedOtp = Cache::get($cacheKey);
+        $cacheKey = "otp_forgot_password_verified_{$dto['email']}";
+        $isVerified = Cache::get($cacheKey);
 
-        if (!$cachedOtp) {
+        if (!$isVerified) {
             $this->results['error'] = true;
             $this->results['response_code'] = 400;
-            $this->results['message'] = 'Kode OTP telah kedaluwarsa atau tidak valid. Silakan minta kode baru.';
-            return;
-        }
-
-        if ((string)$cachedOtp !== (string)$dto['otp_code']) {
-            $this->results['error'] = true;
-            $this->results['response_code'] = 400;
-            $this->results['message'] = 'Kode OTP yang Anda masukkan salah.';
+            $this->results['message'] = 'Sesi verifikasi telah kedaluwarsa atau Anda belum memverifikasi OTP. Silakan mulai ulang proses.';
             return;
         }
 
@@ -65,7 +58,6 @@ class ForgotPasswordService extends DefaultService implements ServiceInterface
     {
         return [
             'email' => ['required', 'email'],
-            'otp_code' => ['required', 'string', 'min:6'],
             'password' => ['required', 'string', 'min:8']
         ];
     }

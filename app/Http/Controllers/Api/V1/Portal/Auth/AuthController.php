@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1\Portal\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLoginRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLogoutRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\ForgotPasswordRequest;
@@ -12,7 +11,6 @@ use App\Http\Requests\Api\V1\Portal\Auth\VerifyOtpRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\GetUserSessionInformationRequest;
 use App\Http\Resources\Api\V1\Portal\Auth\GetUserSessionInformationResource;
-use App\Models\Tenant\TenantUser;
 
 class AuthController extends Controller
 {
