@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests\Api\V1\Portal\System;
 
+use App\Helpers\FormRequestApi;
 use App\Models\System\File;
 use App\Models\Tenant\Tenant;
 use App\Rules\ExistsUuid;
-use Illuminate\Foundation\Http\FormRequest;
 
-class GetFileRequest extends FormRequest
+class GetFileRequest extends FormRequestApi
 {
     public function authorize(): bool
     {

@@ -21,13 +21,13 @@ class GetUserSessionInformationResource extends JsonResource
         $tenants = TenantUser::where('user_id', $this->id)
             ->with('tenant')
             ->get()
-            ->map(function ($tntUser) {
-                if (!$tntUser->tenant) return null;
+            ->map(function ($tnt_user) {
+                if (!$tnt_user->tenant) return null;
                 return [
-                    'uuid' => $tntUser->tenant->uuid,
-                    'name' => $tntUser->tenant->name,
-                    'slug' => $tntUser->tenant->slug,
-                    'is_suspended' => $tntUser->tenant->is_suspended,
+                    'uuid' => $tnt_user->tenant->uuid,
+                    'name' => $tnt_user->tenant->name,
+                    'slug' => $tnt_user->tenant->slug,
+                    'is_suspended' => $tnt_user->tenant->is_suspended,
                 ];
             })->filter()->values();
 

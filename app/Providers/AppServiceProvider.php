@@ -17,15 +17,11 @@ use App\Policies\Tenant\TenantPolicy;
 use App\Policies\Transaction\SubscriptionPolicy;
 
 use App\Providers\RegisterService\RegisterAuthService;
-use App\Providers\RegisterService\RegisterPackageService;
-use App\Providers\RegisterService\RegisterPermissionService;
-use App\Providers\RegisterService\RegisterRoleService;
+use App\Providers\RegisterService\RegisterCmsService;
+use App\Providers\RegisterService\RegisterMasterService;
 use App\Providers\RegisterService\RegisterSystemService;
-use App\Providers\RegisterService\RegisterTenantCategoryService;
 use App\Providers\RegisterService\RegisterTenantService;
-use App\Providers\RegisterService\RegisterGlobalTemplateService;
-use App\Providers\RegisterService\RegisterTenantTemplateService;
-use App\Providers\RegisterService\RegisterPageService;
+use App\Providers\RegisterService\RegisterTransactionService;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\Gate;
@@ -38,21 +34,16 @@ class AppServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->register(RegisterRoleService::class);
         $this->app->register(RegisterAuthService::class);
-        $this->app->register(RegisterPermissionService::class);
+        $this->app->register(RegisterCmsService::class);
+        $this->app->register(RegisterMasterService::class);
         $this->app->register(RegisterSystemService::class);
         $this->app->register(RegisterTenantService::class);
-        $this->app->register(RegisterTenantCategoryService::class);
-        $this->app->register(RegisterPackageService::class);
-        $this->app->register(RegisterGlobalTemplateService::class);
-        $this->app->register(RegisterTenantTemplateService::class);
-        $this->app->register(RegisterPageService::class);
+        $this->app->register(RegisterTransactionService::class);
     }
 
     public function boot(): void
     {
-
         Gate::policy(Role::class, RolePolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Tenant::class, TenantPolicy::class);

@@ -64,6 +64,6 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->with('detailUser.tenant', 'detailUser.photo', 'roleUser.role');
+        return parent::getEloquentQuery()->with('tenantUser.tenant', 'detailUser.photo', 'roleUser.role');
     }
 }

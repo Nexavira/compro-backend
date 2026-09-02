@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLoginRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\DoLogoutRequest;
+use App\Http\Requests\Api\V1\Portal\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Api\V1\Portal\Auth\SendOtpRequest;
+use App\Http\Requests\Api\V1\Portal\Auth\VerifyOtpRequest;
+use App\Http\Requests\Api\V1\Portal\Auth\ResetPasswordRequest;
 use App\Http\Requests\Api\V1\Portal\Auth\GetUserSessionInformationRequest;
 use App\Http\Resources\Api\V1\Portal\Auth\GetUserSessionInformationResource;
 use App\Models\Tenant\TenantUser;
@@ -54,6 +58,50 @@ class AuthController extends Controller
             'message' => $result['message'],
             'data' => $data,
             'pagination' => $result['pagination'] ?? null
+        ], $result['response_code'] ?? 200);
+    }
+
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+        $result = app('ForgotPasswordService')->execute($request->all());
+
+        return response()->json([
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data' => $result['data'] ?? null,
+        ], $result['response_code'] ?? 200);
+    }
+
+    public function sendOtp(SendOtpRequest $request)
+    {
+        $result = app('SendOtpService')->execute($request->all());
+
+        return response()->json([
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data' => $result['data'] ?? null,
+        ], $result['response_code'] ?? 200);
+    }
+
+    public function verifyOtp(VerifyOtpRequest $request)
+    {
+        $result = app('VerifyOtpService')->execute($request->all());
+
+        return response()->json([
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data' => $result['data'] ?? null,
+        ], $result['response_code'] ?? 200);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $result = app('ResetPasswordService')->execute($request->all());
+
+        return response()->json([
+            'success' => isset($result['error']) ? false : true,
+            'message' => $result['message'],
+            'data' => $result['data'] ?? null,
         ], $result['response_code'] ?? 200);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Services\Auth;
 
-use App\Models\Tenant\TenantUser;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 

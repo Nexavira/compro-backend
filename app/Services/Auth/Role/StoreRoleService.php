@@ -13,7 +13,7 @@ class StoreRoleService extends DefaultService implements ServiceInterface
     public function process($dto)
     {
         $dto = $this->prepare($dto);
-        $role = new Role();
+        $role = new Role;
 
         $role->name = $dto['name'];
         $role->code = $dto['code'] ?? null;

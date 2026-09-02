@@ -23,13 +23,8 @@ class GetRoleService extends DefaultService implements ServiceInterface
             $model->where(function ($q) use ($dto) {
                 $q->where('name', 'ILIKE', '%' . $dto['search_param'] . '%')
                     ->orwhere('code', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('description', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('type', 'ILIKE', '%' . $dto['search_param'] . '%');
+                    ->orwhere('description', 'ILIKE', '%' . $dto['search_param'] . '%');
             });
-        }
-
-        if (isset($dto['type'])) {
-            $model->where('type', $dto['type']);
         }
 
         if (isset($dto['code'])) {

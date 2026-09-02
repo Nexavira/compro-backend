@@ -79,11 +79,8 @@ class User extends Authenticatable
             return Tenant::all();
         }
 
-        if ($this->detailUser && $this->detailUser->tenant) {
-            return collect([$this->detailUser->tenant]);
-        }
-
-        return collect();
+        $tenantIds = TenantUser::where('user_id', $this->id)->pluck('tenant_id');
+        return Tenant::whereIn('id', $tenantIds)->get();
     }
 
     public function canAccessTenant(Model $tenant): bool
@@ -92,6 +89,8 @@ class User extends Authenticatable
             return true;
         }
 
-        return $this->detailUser && $this->detailUser->tenant_id == $tenant->id;
+        return TenantUser::where('user_id', $this->id)
+            ->where('tenant_id', $tenant->id)
+            ->exists();
     }
 }

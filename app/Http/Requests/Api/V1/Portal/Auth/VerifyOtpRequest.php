@@ -15,7 +15,8 @@ class VerifyOtpRequest extends FormRequestApi
     {
         return [
             'email' => ['required', 'email'],
-            'otp_code' => ['required', 'string', 'size:6'],
+            'otp_code' => ['required', 'string', 'min:6'],
+            'type' => ['required', 'string', 'in:register,forgot_password,reset_password'],
         ];
     }
 }

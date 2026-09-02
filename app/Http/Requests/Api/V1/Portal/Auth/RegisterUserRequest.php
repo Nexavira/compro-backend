@@ -17,7 +17,7 @@ class RegisterUserRequest extends FormRequestApi
             'full_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:20'],
             'email' => ['required', 'email', 'unique:auth_users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
         ];
     }
 }

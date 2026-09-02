@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\CMS;
+namespace App\Models\Cms;
 
 use App\Models\BaseModel;
 use App\Models\Tenant\Tenant;
