@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
-            $table->foreignId('subscription_id')->nullable()->constrained('tnt_subscriptions')->onDelete('cascade');
+            $table->foreignId('subscription_id')->nullable()->constrained('trx_subscriptions')->onDelete('cascade');
 
             $table->string('invoice_number')->unique();
             $table->text('description')->nullable();

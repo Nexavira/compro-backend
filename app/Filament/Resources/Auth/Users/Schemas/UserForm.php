@@ -83,6 +83,8 @@ class UserForm
                                     'min_digits' => 'Phone Number must be at least 10 digits',
                                     'max_digits' => 'Phone Number cannot exceed 14 digits',
                                 ]),
+                        ])->relationship('detailUser'),
+                        Group::make([
                             Select::make('tenant_id')
                                 ->label('Tenant')
                                 ->options(Tenant::all()->pluck('name', 'id'))
@@ -99,7 +101,7 @@ class UserForm
                                 ->extraAttributes([
                                     'style' => 'cursor: pointer !important;',
                                 ]),
-                        ])->relationship('detailUser'),
+                        ])->relationship('tenantUser'),
                         Group::make([
                             Select::make('role_id')
                                 ->label('Peran')

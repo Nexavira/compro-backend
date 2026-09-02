@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Subscription extends BaseModel
 {
-    protected $table = 'tnt_subscriptions';
+    protected $table = 'trx_subscriptions';
 
     public function tenant()
     {
@@ -23,9 +23,7 @@ class Subscription extends BaseModel
 
     public function casts(): array
     {
-        return array_merge(parent::casts(), [
-
-        ]);
+        return array_merge(parent::casts(), []);
     }
 
     protected function nextBillingDate(): Attribute

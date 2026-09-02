@@ -16,13 +16,13 @@ class GlobalTemplateSeeder extends Seeder
 
 
     GlobalTemplate::create([
-        'tenant_category_id' => 1,
-        'package_id' => 1,
-        'tier' => 'basic',
-        'title' => 'Home Template',
-        'description' => 'This is the default template for all tenants.',
-        'is_active' => 1,
-        'brand_settings' => json_encode($settingDataArray['data']),
+      'tenant_category_id' => 1,
+      'package_id' => 1,
+      'tier' => 'basic',
+      'title' => 'Home Template',
+      'description' => 'This is the default template for all tenants.',
+      'is_active' => 1,
+      'brand_settings' => json_encode($settingDataArray['data']),
     ]);
   }
 }

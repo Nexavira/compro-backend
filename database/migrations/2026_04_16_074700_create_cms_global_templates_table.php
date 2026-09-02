@@ -15,7 +15,6 @@ return new class extends Migration
             $table->foreignId('tenant_category_id')->nullable()->constrained('tnt_tenant_categories')->nullOnDelete();
             $table->foreignId('package_id')->nullable()->constrained('mst_packages')->nullOnDelete();
 
-            // Kolom tier untuk memisahkan template basic/pro
             $table->string('tier')->default('basic')->comment('basic, pro');
 
             $table->string('title');
