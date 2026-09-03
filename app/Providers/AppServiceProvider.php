@@ -21,13 +21,7 @@ use App\Providers\RegisterService\RegisterCmsService;
 use App\Providers\RegisterService\RegisterMasterService;
 use App\Providers\RegisterService\RegisterSystemService;
 use App\Providers\RegisterService\RegisterTenantService;
-<<<<<<< HEAD
 use App\Providers\RegisterService\RegisterTransactionService;
-=======
-use App\Providers\RegisterService\RegisterGlobalTemplateService;
-use App\Providers\RegisterService\RegisterTenantTemplateService;
-use App\Providers\RegisterService\RegisterPageService;
->>>>>>> 31070bc1c8510597d8d8554d7e2537c82e530ef8
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 use Illuminate\Support\Facades\Gate;
