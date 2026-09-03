@@ -15,10 +15,6 @@ class ResetPasswordRequest extends FormRequestApi
     public function rules(): array
     {
         return [
-<<<<<<< HEAD
-=======
-            'otp_code' => ['required', 'string', 'min:6'],
->>>>>>> 31070bc1c8510597d8d8554d7e2537c82e530ef8
             'old_password' => ['required', 'string'],
             'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
         ];

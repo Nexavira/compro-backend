@@ -97,14 +97,9 @@ class VerifyOtpService extends DefaultService implements ServiceInterface
             $this->results['data'] = $user;
             $this->results['message'] = 'Verifikasi OTP berhasil. Akun Anda telah aktif.';
         } else {
-<<<<<<< HEAD
             Cache::put("otp_{$type}_verified_{$email}", true, now()->addMinutes(15));
             Cache::forget($cacheKey);
 
-=======
-            // For forgot_password and reset_password, we don't forget the cache here
-            // because they need the OTP to actually submit the new password in the next step.
->>>>>>> 31070bc1c8510597d8d8554d7e2537c82e530ef8
             $this->results['data'] = ['email' => $email, 'type' => $type];
             $this->results['message'] = 'Verifikasi OTP berhasil. Silakan masukkan password baru Anda.';
         }
