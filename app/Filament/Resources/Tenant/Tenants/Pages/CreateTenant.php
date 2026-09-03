@@ -118,7 +118,6 @@ class CreateTenant extends CreateRecord
                 // Create DetailUser
                 DetailUser::create([
                     'user_id' => $user->id,
-                    'tenant_id' => $tenant->id,
                     'full_name' => $data['user_name'] ?? 'Admin ' . $tenant->name,
                     'phone_number' => $data['user_phone'] ?? '0',
                 ]);
@@ -147,12 +146,12 @@ class CreateTenant extends CreateRecord
                     'package_name' => $package->name,
                     'billing_cycle' => $package->billing_cycle,
                     'status' => $status,
-                    'next_billing_date' => $package->billing_cycle === 'annually' ? now()->addYear() : now()->addMonth(),
+                    'next_billing_date' => $package->trial_days > 0 ? now()->addDays($package->trial_days) : now()->addDay(),
                     'trial_end_at' => $trialEndAt,
                     'amount' => $package->price,
                 ]);
 
-                $dueDate = $package->trial_days > 0 ? now()->addDays($package->trial_days) : now()->addDays(3);
+                $dueDate = $package->trial_days > 0 ? now()->addDays($package->trial_days) : now()->addDay();
 
                 // Generate Invoice Number: INV-{SEQUENCE}/{TENANT_CODE}/{MM}/{YYYY}
                 $paymentCount = Payment::where('tenant_id', $tenant->id)->count();
