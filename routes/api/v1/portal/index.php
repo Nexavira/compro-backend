@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Portal\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Portal\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Portal\Auth\Role\RoleController;
+use App\Http\Controllers\Api\V1\Portal\Cms\GlobalTemplateController;
 use App\Http\Controllers\Api\V1\Portal\Master\PackageController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ Route::prefix('portal')->group(function () {
         Route::prefix('package')->group(function () {
             Route::get('{package_uuid?}', [PackageController::class, 'get']);
         });
+        Route::prefix('global-template')->group(function () {
+            Route::get('{global_template_uuid?}', [GlobalTemplateController::class, 'get']);
+        });
     });
 
     // Perlu Login
@@ -31,5 +35,6 @@ Route::prefix('portal')->group(function () {
         require __DIR__ . '/tenant.php';
         require __DIR__ . '/file.php';
         require __DIR__ . '/transaction.php';
+        require __DIR__ . '/global-template.php';
     });
 });
