@@ -24,6 +24,9 @@ Route::prefix('portal')->group(function () {
         Route::prefix('package')->group(function () {
             Route::get('{package_uuid?}', [PackageController::class, 'get']);
         });
+        Route::prefix('global-template')->group(function () {
+            Route::get('{global_template_uuid?}', [GlobalTemplateController::class, 'get']);
+        });
     });
 
     Route::prefix('cms')->group(function () {
@@ -40,5 +43,6 @@ Route::prefix('portal')->group(function () {
         require __DIR__ . '/tenant.php';
         require __DIR__ . '/file.php';
         require __DIR__ . '/transaction.php';
+        require __DIR__ . '/global-template.php';
     });
 });
