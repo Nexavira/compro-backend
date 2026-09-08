@@ -2,7 +2,7 @@
 
 namespace App\Services\Cms\GlobalTemplate;
 
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 
@@ -21,8 +21,7 @@ class GetGlobalTemplateService extends DefaultService implements ServiceInterfac
 
         if (isset($dto['search_param']) and $dto['search_param'] != null) {
             $model->where(function ($q) use ($dto) {
-                $q->where('name', 'ILIKE', '%' . $dto['search_param'] . '%')
-                    ->orwhere('title', 'ILIKE', '%' . $dto['search_param'] . '%')
+                $q->where('title', 'ILIKE', '%' . $dto['search_param'] . '%')
                     ->orwhere('description', 'ILIKE', '%' . $dto['search_param'] . '%');
             });
         }

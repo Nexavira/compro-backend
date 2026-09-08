@@ -49,7 +49,6 @@ class UploadPaymentProofService extends DefaultService implements ServiceInterfa
             $payment->proof_of_payment_id = $uploadResult['data']->id;
             $payment->status = 'pending_verification';
             $payment->payment_date = now();
-            $payment->amount_paid = $dto['amount_paid'] ?? 0;
             $payment->save();
 
             DB::commit();

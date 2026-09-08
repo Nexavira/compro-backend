@@ -28,8 +28,8 @@ class UpdatePermissionRoleRequest extends FormRequestApi
     public function rules()
     {
         return [
-            'role_uuid' => ['required','uuid', new ExistsUuid(new Role())],
-            'permission_uuid' => ['required','uuid', new ExistsUuid(new Permission())]
+            'role_uuid' => ['required', 'uuid', new ExistsUuid(new Role)],
+            'permission_uuid' => ['required', 'uuid', new ExistsUuid(new Permission)]
         ];
     }
 }

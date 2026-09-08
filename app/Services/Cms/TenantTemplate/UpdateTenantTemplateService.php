@@ -2,8 +2,8 @@
 
 namespace App\Services\Cms\TenantTemplate;
 
-use App\Models\CMS\TenantTemplate;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\TenantTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use App\Rules\ExistsId;
 use App\Rules\ExistsUuid;
@@ -46,10 +46,10 @@ class UpdateTenantTemplateService extends DefaultService implements ServiceInter
     {
         return [
             'tenant_template_uuid' => ['required', 'uuid', new ExistsUuid(new TenantTemplate)],
-            'tenant_id' => ['nullable', 'integer', new ExistsId(new Tenant())],
-            'tenant_uuid' => ['nullable', 'uuid', new ExistsUuid(new Tenant())],
-            'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate())],
-            'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate())],
+            'tenant_id' => ['nullable', 'integer', new ExistsId(new Tenant)],
+            'tenant_uuid' => ['nullable', 'uuid', new ExistsUuid(new Tenant)],
+            'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate)],
+            'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'template_settings' => ['nullable'],
         ];
     }

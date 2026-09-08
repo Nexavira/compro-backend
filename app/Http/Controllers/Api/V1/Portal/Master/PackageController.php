@@ -10,7 +10,7 @@ class PackageController extends Controller
 {
     public function get(GetPackageRequest $request)
     {
-        $result = app('GetPackageService')->execute($request->all());
+        $result = app('GetPackageService')->execute($request->validated());
 
         $data = null;
         if (isset($result['data'])) {

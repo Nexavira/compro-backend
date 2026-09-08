@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\CMS\Page;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -21,7 +21,7 @@ class TemplateCloningService
             $currentSettings['brand_settings'] = $template->brand_settings;
 
             $tenant->settings = $currentSettings;
-            $tenant->saveQuietly(); 
+            $tenant->saveQuietly();
 
             $templatePages = $template->pages;
 

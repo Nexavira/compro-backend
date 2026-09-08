@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 use App\Services\TemplateCloningService;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeTenantMail;
+use App\Mail\PaymentSuccessMail;
 use Illuminate\Support\Facades\Log;
 
 class CreateTenant extends CreateRecord
@@ -179,11 +179,9 @@ class CreateTenant extends CreateRecord
                     }
 
                     if ($adminUser) {
-                        $token = Password::createToken($adminUser);
-                        $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($adminUser->email));
                         $recipientEmail = app()->environment('production') ? $adminUser->email : 'nexavira26@gmail.com';
                         try {
-                            Mail::to($recipientEmail)->send(new WelcomeTenantMail($tenant, $adminUser, $resetUrl));
+                            Mail::to($recipientEmail)->send(new PaymentSuccessMail($tenant, $adminUser));
                         } catch (\Exception $e) {
                             Log::error('Failed to send welcome email for trial: ' . $e->getMessage());
                         }

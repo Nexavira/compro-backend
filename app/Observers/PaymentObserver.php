@@ -6,7 +6,8 @@ use App\Models\Transaction\Payment;
 use App\Models\Auth\DetailUser;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\WelcomeTenantMail;
+use App\Mail\PaymentSuccessMail;
+use App\Mail\PaymentRejectedMail;
 use App\Models\Tenant\TenantUser;
 use Illuminate\Support\Facades\Log;
 use App\Services\TemplateCloningService;
@@ -81,22 +82,35 @@ class PaymentObserver
                 $tenantUser = TenantUser::where('tenant_id', $payment->tenant_id)->first();
                 if ($tenantUser && $tenantUser->user) {
                     $user = $tenantUser->user;
-                    $token = Password::createToken($user);
-
-                    $resetUrl = url('/admin/password-reset/' . $token . '?email=' . urlencode($user->email));
 
                     $recipientEmail = app()->environment('production') ? $user->email : 'nexavira26@gmail.com';
 
                     try {
-                        Mail::to($recipientEmail)->send(new WelcomeTenantMail($tenant, $user, $resetUrl));
+                        Mail::to($recipientEmail)->send(new PaymentSuccessMail($tenant, $user));
                     } catch (\Exception $e) {
                         Log::error('Failed to send welcome email: ' . $e->getMessage());
                     }
                 }
             }
         }
-    }
 
+        if ($payment->isDirty('status') && $payment->status === 'rejected') {
+            $tenant = $payment->tenant;
+            if ($tenant) {
+                $tenantUser = TenantUser::where('tenant_id', $tenant->id)->first();
+                if ($tenantUser && $tenantUser->user) {
+                    $user = $tenantUser->user;
+                    $recipientEmail = app()->environment('production') ? $user->email : 'nexavira26@gmail.com';
+
+                    try {
+                        Mail::to($recipientEmail)->send(new PaymentRejectedMail($tenant, $user));
+                    } catch (\Exception $e) {
+                        Log::error('Failed to send payment rejected email: ' . $e->getMessage());
+                    }
+                }
+            }
+        }
+    }
     public function deleted(Payment $payment): void {}
 
     public function restored(Payment $payment): void {}

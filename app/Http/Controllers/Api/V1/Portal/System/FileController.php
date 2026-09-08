@@ -11,7 +11,7 @@ class FileController extends Controller
 {
     public function get(GetFileRequest $request)
     {
-        $result = app('GetFileService')->execute($request->all());
+        $result = app('GetFileService')->execute($request->validated());
 
         $data = null;
         if (isset($result['data'])) {

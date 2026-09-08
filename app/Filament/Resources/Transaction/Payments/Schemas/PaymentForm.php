@@ -104,6 +104,7 @@ class PaymentForm
                                 ->label('Jumlah Dibayar')
                                 ->numeric()
                                 ->prefix('Rp')
+                                ->formatStateUsing(fn ($state, $record) => $state ?? $record?->amount_due)
                                 ->markAsRequired($isEdit)
                                 ->rules([
                                     $isEdit ? 'required' : 'nullable',

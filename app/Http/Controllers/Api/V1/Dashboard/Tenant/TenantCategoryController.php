@@ -10,7 +10,7 @@ class TenantCategoryController extends Controller
 {
     public function get(GetTenantCategoryRequest $request)
     {
-        $tenant_category = app('GetTenantCategoryService')->execute($request->all());
+        $tenant_category = app('GetTenantCategoryService')->execute($request->validated());
 
         $data = null;
         if (isset($tenant_category['data'])) {

@@ -26,7 +26,7 @@ class GetRoleRequest extends FormRequestApi
     public function rules()
     {
         return [
-            "role_uuid" => ['nullable', 'uuid', new ExistsUuid(new Role())] 
+            "role_uuid" => ['nullable', 'uuid', new ExistsUuid(new Role)]
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Portal\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller

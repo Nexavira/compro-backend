@@ -2,7 +2,6 @@
 
 namespace App\Services\Cms\Page;
 
-use App\Models\CMS\Page;
 use App\Models\CMS\TenantTemplate;
 use App\Rules\ExistsId;
 use App\Rules\ExistsUuid;
@@ -45,10 +44,10 @@ class UpdatePageService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'page_id' => ['required', 'integer', new ExistsId(new Page())],
-            'page_uuid' => ['required', 'uuid', new ExistsUuid(new Page())],
-            'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate())],
-            'tenant_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplate())],
+            'page_id' => ['required', 'integer', new ExistsId(new Page)],
+            'page_uuid' => ['required', 'uuid', new ExistsUuid(new Page)],
+            'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate)],
+            'tenant_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplate)],
             'title' => ['nullable', 'string'],
             'slug' => ['nullable', 'string'],
             'template_data' => ['nullable'],

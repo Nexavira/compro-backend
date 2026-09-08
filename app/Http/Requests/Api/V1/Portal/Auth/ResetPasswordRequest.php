@@ -17,6 +17,7 @@ class ResetPasswordRequest extends FormRequestApi
         return [
             'old_password' => ['required', 'string'],
             'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
+            'password_confirmation' => ['required', 'string'],
         ];
     }
 }

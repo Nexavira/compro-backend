@@ -26,7 +26,7 @@ class DeleteRoleRequest extends FormRequestApi
     public function rules()
     {
         return [
-            "role_uuid" => ['required','uuid', new ExistsUuid(new Role())]
+            "role_uuid" => ['required', 'uuid', new ExistsUuid(new Role)]
         ];
     }
 }

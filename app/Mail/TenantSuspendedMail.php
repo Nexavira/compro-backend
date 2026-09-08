@@ -7,42 +7,34 @@ use App\Models\Tenant\Tenant;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeTenantMail extends Mailable
+class TenantSuspendedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     public Tenant $tenant;
     public User $user;
-    public string $resetUrl;
 
-    public function __construct(Tenant $tenant, User $user, string $resetUrl)
+    public function __construct(Tenant $tenant, User $user)
     {
         $this->tenant = $tenant;
         $this->user = $user;
-        $this->resetUrl = $resetUrl;
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Selamat Datang di ' . config('app.name') . ' - Setup Akun Anda',
+            subject: 'Layanan Ditangguhkan - Tagihan ' . config('app.name') . ' Belum Dibayar',
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcome_tenant',
+            view: 'emails.tenant_suspended',
         );
-    }
-
-    public function attachments(): array
-    {
-        return [];
     }
 }

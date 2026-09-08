@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Tenant\Tenants\Schemas;
 
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Master\Package;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -203,7 +203,7 @@ class TenantForm
                                     ->onColor('danger')
                                     ->offColor('success')
                                     ->default(true)
-                                    ->hidden(fn (string $operation): bool => $operation === 'create'),
+                                    ->hidden(fn(string $operation): bool => $operation === 'create'),
                             ]),
 
                         Section::make('Branding')

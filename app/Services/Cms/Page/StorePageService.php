@@ -42,8 +42,8 @@ class StorePageService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate())],
-            'tenant_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplate())],
+            'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate)],
+            'tenant_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplate)],
             'title' => ['required', 'string'],
             'slug' => ['required', 'string'],
             'template_data' => ['nullable'],

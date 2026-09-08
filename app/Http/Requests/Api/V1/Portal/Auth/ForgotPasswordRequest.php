@@ -17,6 +17,7 @@ class ForgotPasswordRequest extends FormRequestApi
         return [
             'email' => ['required', 'email', 'exists:auth_users,email'],
             'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
+            'password_confirmation' => ['required', 'string'],
         ];
     }
 }
