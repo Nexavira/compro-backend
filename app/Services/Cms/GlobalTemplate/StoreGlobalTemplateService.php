@@ -2,7 +2,7 @@
 
 namespace App\Services\Cms\GlobalTemplate;
 
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Master\Package;
 use App\Models\Tenant\TenantCategory;
 use App\Rules\ExistsId;
@@ -17,7 +17,7 @@ class StoreGlobalTemplateService extends DefaultService implements ServiceInterf
     public function process($dto)
     {
         $dto = $this->prepare($dto);
-        $global_template = new GlobalTemplate();
+        $global_template = new GlobalTemplate;
 
         $global_template->tenant_category_id = $dto['tenant_category_id'] ?? null;
         $global_template->package_id = $dto['package_id'] ?? null;
@@ -50,10 +50,10 @@ class StoreGlobalTemplateService extends DefaultService implements ServiceInterf
     public function rules($dto)
     {
         return [
-            'tenant_category_id' => ['nullable', 'integer', new ExistsId(new TenantCategory())],
-            'tenant_category_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantCategory())],
-            'package_id' => ['nullable', 'integer', new ExistsId(new Package())],
-            'package_uuid' => ['nullable', 'uuid', new ExistsUuid(new Package())],
+            'tenant_category_id' => ['nullable', 'integer', new ExistsId(new TenantCategory)],
+            'tenant_category_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantCategory)],
+            'package_id' => ['nullable', 'integer', new ExistsId(new Package)],
+            'package_uuid' => ['nullable', 'uuid', new ExistsUuid(new Package)],
             'tier' => ['required', 'string', 'in:basic,pro'],
             'title' => ['required', new UniqueData('auth_roles', 'name' ?? null)],
             'description' => ['nullable'],

@@ -9,7 +9,7 @@ class FileController extends Controller
 {
     public function upload(Request $request)
     {
-        $dto = $request->all();
+        $dto = $request->validated();
 
         if ($request->hasFile('file')) {
             $dto['file'] = $request->file('file');

@@ -7,7 +7,7 @@ use App\Filament\Resources\Cms\GlobalTemplates\Pages\EditGlobalTemplate;
 use App\Filament\Resources\Cms\GlobalTemplates\Pages\ListGlobalTemplates;
 use App\Filament\Resources\Cms\GlobalTemplates\Schemas\GlobalTemplateForm;
 use App\Filament\Resources\Cms\GlobalTemplates\Tables\GlobalTemplatesTable;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

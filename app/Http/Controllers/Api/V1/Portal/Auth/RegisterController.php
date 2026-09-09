@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function register(RegisterUserRequest $request)
     {
-        $result = app('RegisterUserService')->execute($request->all());
+        $result = app('RegisterUserService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,

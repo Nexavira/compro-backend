@@ -26,7 +26,7 @@ class GetPermissionRequest extends FormRequestApi
     public function rules()
     {
         return [
-            "permission_uuid" => ['nullable', 'uuid', new ExistsUuid(new Permission())] 
+            "permission_uuid" => ['nullable', 'uuid', new ExistsUuid(new Permission)]
         ];
     }
 }

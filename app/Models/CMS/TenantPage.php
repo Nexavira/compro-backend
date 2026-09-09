@@ -3,9 +3,9 @@
 namespace App\Models\CMS;
 
 use App\Models\BaseModel;
-use App\Models\Tenant\Tenant;
 
-class Page extends BaseModel
+
+class TenantPage extends BaseModel
 {
     protected $table = 'cms_pages';
 
@@ -17,8 +17,8 @@ class Page extends BaseModel
         ]);
     }
 
-    public function tenant()
+    public function tenantTemplate()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsTo(TenantTemplate::class);
     }
 }

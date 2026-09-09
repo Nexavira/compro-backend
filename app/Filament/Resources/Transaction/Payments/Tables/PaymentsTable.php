@@ -98,8 +98,8 @@ class PaymentsTable
                         ->color('success')
                         ->visible(fn($record) => $record->status === 'paid')
                         ->url(function ($record) {
-                            $adminDetail = DetailUser::where('tenant_id', $record->tenant_id)->first();
-                            $phone = $adminDetail?->phone_number ?? '';
+                            $tenantUser = TenantUser::where('tenant_id', $record->tenant_id)->first();
+                            $phone = $tenantUser?->user?->detailUser?->phone_number ?? '';
 
                             if (str_starts_with($phone, '0')) {
                                 $phone = '62' . substr($phone, 1);

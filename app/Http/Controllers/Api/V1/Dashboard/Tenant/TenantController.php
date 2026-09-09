@@ -11,7 +11,7 @@ class TenantController extends Controller
 {
     public function get(GetTenantRequest $request)
     {
-        $tenant = app('GetTenantService')->execute($request->all());
+        $tenant = app('GetTenantService')->execute($request->validated());
 
         $data = null;
         if (isset($tenant['data'])) {
@@ -29,7 +29,7 @@ class TenantController extends Controller
 
     public function store(StoreTenantRequest $request)
     {
-        $tenant = app('StoreTenantService')->execute($request->all());
+        $tenant = app('StoreTenantService')->execute($request->validated());
 
         return response()->json([
             'success' => ( isset($tenant['error']) ? false : true ),

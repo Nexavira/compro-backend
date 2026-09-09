@@ -49,11 +49,7 @@ class RegisterUserService extends DefaultService implements ServiceInterface
     {
         return [
             'email' => ['required', 'email', new UniqueData(new User)],
-<<<<<<< HEAD
             'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
-=======
-            // 'password' => ['required', 'string', \Illuminate\Validation\Rules\Password::min(8)->mixedCase()->numbers()->symbols(), 'confirmed'],
->>>>>>> 31070bc1c8510597d8d8554d7e2537c82e530ef8
             'full_name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string'],
         ];

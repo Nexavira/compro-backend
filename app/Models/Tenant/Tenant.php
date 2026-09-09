@@ -4,7 +4,7 @@ namespace App\Models\Tenant;
 
 use App\Models\BaseModel;
 use App\Models\System\File;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\CMS\Page;
 use App\Models\Auth\User;
 
@@ -70,7 +70,7 @@ class Tenant extends BaseModel
     public function users()
     {
         return $this->belongsToMany(User::class, 'tnt_tenant_user', 'tenant_id', 'user_id')
-                    ->withPivot('role')
-                    ->withTimestamps();
+            ->withPivot('role')
+            ->withTimestamps();
     }
 }

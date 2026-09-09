@@ -9,7 +9,7 @@ class TenantController extends Controller
 {
     public function create(CreateTenantRequest $request)
     {
-        $result = app('CreateTenantService')->execute($request->all());
+        $result = app('CreateTenantService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,

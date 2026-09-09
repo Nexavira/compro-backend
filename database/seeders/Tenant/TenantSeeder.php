@@ -2,10 +2,9 @@
 
 namespace Database\Seeders\Tenant;
 
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
-use App\Models\GlobalTemplate;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TenantSeeder extends Seeder

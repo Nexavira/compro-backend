@@ -13,7 +13,7 @@ class RoleController extends Controller
 {
     public function get(GetRoleRequest $request)
     {
-        $role = app('GetRoleService')->execute($request->all());
+        $role = app('GetRoleService')->execute($request->validated());
 
         $data = null;
         if (isset($role['data'])) {
@@ -46,7 +46,7 @@ class RoleController extends Controller
 
     public function update (UpdateRoleRequest $request)
     {
-        $role = app('UpdateRoleService')->execute($request->all());
+        $role = app('UpdateRoleService')->execute($request->validated());
 
         return response()->json([
             'success' => ( isset($role['error']) ? false : true ),
@@ -57,7 +57,7 @@ class RoleController extends Controller
     public function destroy (DeleteRoleRequest $request)
     {
 
-        $role = app('DeleteRoleService')->execute($request->all());
+        $role = app('DeleteRoleService')->execute($request->validated());
 
         return response()->json([
             'success' => ( isset($role['error']) ? false : true ),

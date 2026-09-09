@@ -28,7 +28,7 @@ class UpdateRoleRequest extends FormRequestApi
     {
         $role_uuid = $this->role_uuid;
         return [
-            'role_uuid' => ['required','uuid', new ExistsUuid(new Role())],
+            'role_uuid' => ['required', 'uuid', new ExistsUuid(new Role)],
             'name' => ['required'],
             'code' => ['required']
         ];

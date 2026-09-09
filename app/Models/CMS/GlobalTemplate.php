@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Cms;
 
+use App\Models\BaseModel;
 use App\Models\Tenant\TenantCategory;
-use Illuminate\Database\Eloquent\Model;
 
 class GlobalTemplate extends BaseModel
 {

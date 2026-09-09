@@ -9,7 +9,7 @@ class TransactionController extends Controller
 {
     public function uploadPaymentProof(UploadPaymentProofRequest $request, $payment_uuid)
     {
-        $result = app('UploadPaymentProofService')->execute($request->all());
+        $result = app('UploadPaymentProofService')->execute($request->validated());
 
         return response()->json([
             'success' => (isset($result['error']) ? false : true),

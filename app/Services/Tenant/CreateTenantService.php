@@ -2,6 +2,7 @@
 
 namespace App\Services\Tenant;
 
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Master\Package;
 use App\Models\System\File;
 use App\Models\Tenant\TenantCategory;
@@ -23,6 +24,18 @@ class CreateTenantService extends DefaultService implements ServiceInterface
             return;
         }
         $tenant = $tenantService['data'];
+
+        $tenantTemplateService = app('StoreTenantTemplateService')->execute([
+            'tenant_id' => $tenant->id,
+            'global_template_id' => $dto['global_template_id'],
+            'is_active' => 1,
+            'template_settings' => null,
+        ], true);
+        if (isset($tenantTemplateService['error'])) {
+            $this->results = $tenantTemplateService;
+            return;
+        }
+        $tenantTemplate = $tenantTemplateService['data'];
 
         $tenantUserService = app('AddTenantUserService')->execute([
             'tenant_id' => $tenant->id,
@@ -125,6 +138,7 @@ class CreateTenantService extends DefaultService implements ServiceInterface
 
         $this->results['data'] = [
             'tenant' => $tenant,
+            'tenant_template' => $tenantTemplate,
             'subscription' => $subscription,
             'payment' => $payment
         ];
@@ -147,6 +161,10 @@ class CreateTenantService extends DefaultService implements ServiceInterface
             $dto['package_id'] = $this->findIdByUuid(Package::query(), $dto['package_uuid']);
         }
 
+        if (isset($dto['global_template_uuid']) and $dto['global_template_uuid'] != '') {
+            $dto['global_template_id'] = $this->findIdByUuid(GlobalTemplate::query(), $dto['global_template_uuid']);
+        }
+
         return $dto;
     }
 
@@ -163,6 +181,7 @@ class CreateTenantService extends DefaultService implements ServiceInterface
             'description' => ['nullable', 'string'],
             'is_suspended' => ['required', 'integer', 'in:0,1'],
             'package_uuid' => ['required', 'uuid', new ExistsUuid(new Package)],
+            'global_template_uuid' => ['required', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'role_detail' => ['nullable', 'string', 'max:255'],
             'is_trial' => ['required', 'boolean'],
         ];

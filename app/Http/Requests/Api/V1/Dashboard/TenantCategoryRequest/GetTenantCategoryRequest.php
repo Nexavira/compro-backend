@@ -26,7 +26,7 @@ class GetTenantCategoryRequest extends FormRequestApi
     public function rules()
     {
         return [
-            "tenant_category_uuid" => ['nullable', 'uuid', new ExistsUuid(new TenantCategory())] 
+            "tenant_category_uuid" => ['nullable', 'uuid', new ExistsUuid(new TenantCategory)]
         ];
     }
 }

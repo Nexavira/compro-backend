@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
     public function get(GetRoleRequest $request)
     {
-        $result = app('GetRoleService')->execute($request->all());
+        $result = app('GetRoleService')->execute($request->validated());
 
         $data = null;
         if (isset($result['data'])) {

@@ -43,7 +43,7 @@ class AuthController extends Controller
 
     public function getUserSessionInformation(GetUserSessionInformationRequest $request)
     {
-        $result = app('GetUserSessionInformationService')->execute($request->all());
+        $result = app('GetUserSessionInformationService')->execute($request->validated());
 
         $data = null;
         if (isset($result['data'])) {
@@ -61,7 +61,7 @@ class AuthController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request)
     {
-        $result = app('ForgotPasswordService')->execute($request->all());
+        $result = app('ForgotPasswordService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     public function sendOtp(SendOtpRequest $request)
     {
-        $result = app('SendOtpService')->execute($request->all());
+        $result = app('SendOtpService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
@@ -83,7 +83,7 @@ class AuthController extends Controller
 
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        $result = app('VerifyOtpService')->execute($request->all());
+        $result = app('VerifyOtpService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
@@ -94,7 +94,7 @@ class AuthController extends Controller
 
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $result = app('ResetPasswordService')->execute($request->all());
+        $result = app('ResetPasswordService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,

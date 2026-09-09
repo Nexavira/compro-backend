@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Tenant\Tenant;
 use App\Models\CMS\Page;
-// use App\Models\GlobalTemplatePage;
+// use App\Models\Cms\GlobalTemplatePage;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +27,7 @@ class TenantService
         }
 
         // note: global template page sudah tidak ada
-        
+
         // $globalPages = GlobalTemplatePage::where('global_template_id', $tenant->global_template_id)->get();
 
         // foreach ($globalPages as $globalPage) {

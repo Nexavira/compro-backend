@@ -2,7 +2,7 @@
 
 namespace App\Services\Cms\TenantTemplate;
 
-use App\Models\TenantTemplate;
+use App\Models\Cms\TenantTemplate;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 

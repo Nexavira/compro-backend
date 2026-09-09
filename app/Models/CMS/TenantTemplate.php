@@ -3,7 +3,7 @@
 namespace App\Models\CMS;
 
 use App\Models\BaseModel;
-use App\Models\GlobalTemplate;
+use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 
 class TenantTemplate extends BaseModel

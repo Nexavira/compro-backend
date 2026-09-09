@@ -11,7 +11,7 @@ class PermissionController extends Controller
 {
     public function get(GetPermissionRequest $request)
     {
-        $permission = app('GetPermissionService')->execute($request->all());
+        $permission = app('GetPermissionService')->execute($request->validated());
 
         $data = null;
         if (isset($permission['data'])) {
@@ -29,7 +29,7 @@ class PermissionController extends Controller
 
     public function updatePermissionRole(UpdatePermissionRoleRequest $request)
     {
-        $permission = app('UpdatePermissionRoleService')->execute($request->all());
+        $permission = app('UpdatePermissionRoleService')->execute($request->validated());
 
         return response()->json([
             'success' => (isset($permission['error']) ? false : true),
