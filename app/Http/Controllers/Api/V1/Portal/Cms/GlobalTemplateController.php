@@ -30,7 +30,7 @@ class GlobalTemplateController extends Controller
 
     public function create(Request $request)
     {
-        $result = app('StoreGlobalTemplateService')->execute($request->validated());
+        $result = app('StoreGlobalTemplateService')->execute($request->all());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
