@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Portal\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cms\GlobalTemplate;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\Portal\Cms\GlobalTemplate\GetGlobalTemplateRequest;
+use App\Http\Requests\Api\V1\Portal\Cms\GlobalTemplate\StoreGlobalTemplateRequest;
 use App\Http\Resources\Api\V1\Portal\Cms\GlobalTemplate\GetGlobalTemplateResource;
 
 class GlobalTemplateController extends Controller
@@ -28,9 +27,9 @@ class GlobalTemplateController extends Controller
         ], $result['response_code'] ?? 200);
     }
 
-    public function create(Request $request)
+    public function create(StoreGlobalTemplateRequest $request)
     {
-        $result = app('StoreGlobalTemplateService')->execute($request->all());
+        $result = app('StoreGlobalTemplateService')->execute($request->validated());
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,

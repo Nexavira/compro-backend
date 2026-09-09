@@ -55,8 +55,8 @@ class StoreGlobalTemplateService extends DefaultService implements ServiceInterf
             'tenant_category_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantCategory)],
             'package_id' => ['nullable', 'integer', new ExistsId(new Package)],
             'package_uuid' => ['nullable', 'uuid', new ExistsUuid(new Package)],
-            'tier' => ['required', 'string', 'in:basic,pro'],
-            'title' => ['required', new UniqueData('auth_roles', 'name' ?? null)],
+            'tier' => ['required', 'string'],
+            'title' => ['required', 'string', new UniqueData('cms_global_templates', 'title' ?? null)],
             'description' => ['nullable'],
             'brand_settings' => ['nullable'],
         ];

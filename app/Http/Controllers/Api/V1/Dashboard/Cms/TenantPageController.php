@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Dashboard\Cms\TenantPage\GetTenantPageRequest;
 use App\Http\Requests\Api\V1\Dashboard\Cms\TenantPage\StoreTenantPageRequest;
 use App\Http\Requests\Api\V1\Dashboard\Cms\TenantPage\UpdateTenantPageRequest;
-use App\Http\Resources\Api\V1\Dashboard\Cms\TenantPage\GetGetTenantPageResource;
+use App\Http\Resources\Api\V1\Dashboard\Cms\TenantPage\GetTenantPageResource;
+use Illuminate\Http\Request;
 
 class TenantPageController extends Controller
 {
@@ -16,8 +17,8 @@ class TenantPageController extends Controller
 
         $data = null;
         if (isset($result['data'])) {
-            $data = (isset($result['data']->id)) ? new GetGetTenantPageResource($result['data']) :
-                GetGetTenantPageResource::collection($result['data']);
+            $data = (isset($result['data']->id)) ? new GetTenantPageResource($result['data']) :
+                GetTenantPageResource::collection($result['data']);
         }
 
         return response()->json([
@@ -32,7 +33,7 @@ class TenantPageController extends Controller
     {
         $result = app('StoreTenantPageService')->execute($request->validated());
 
-        $data = isset($result['data']) ? new GetGetTenantPageResource($result['data']) : null;
+        $data = isset($result['data']) ? new GetTenantPageResource($result['data']) : null;
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
@@ -45,7 +46,7 @@ class TenantPageController extends Controller
     {
         $result = app('UpdateTenantPageService')->execute($request->validated());
 
-        $data = isset($result['data']) ? new GetGetTenantPageResource($result['data']) : null;
+        $data = isset($result['data']) ? new GetTenantPageResource($result['data']) : null;
 
         return response()->json([
             'success' => isset($result['error']) ? false : true,
