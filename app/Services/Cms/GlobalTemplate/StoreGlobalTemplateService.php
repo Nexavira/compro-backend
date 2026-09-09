@@ -25,6 +25,7 @@ class StoreGlobalTemplateService extends DefaultService implements ServiceInterf
         $global_template->title = $dto['title'];
         $global_template->description = $dto['description'] ?? null;
         $global_template->brand_settings = $dto['brand_settings'] ?? null;
+        $global_template->slug = $dto['slug'] ?? null;
 
         $this->prepareAuditActive($global_template);
         $this->prepareAuditInsert($global_template);

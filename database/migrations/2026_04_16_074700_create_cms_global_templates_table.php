@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->jsonb('brand_settings')->nullable();
+            $table->string('slug')->nullable();
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);
