@@ -27,7 +27,7 @@ class GetTenantPageRequest extends FormRequestApi
             'sort_by' => ['nullable', 'string'],
             'sort_type' => ['nullable', 'string', 'in:asc,desc'],
             'with_pagination' => ['nullable', 'boolean'],
-            'tenant_page_uuid' => ['nullable', 'string', 'exists:cms_pages,uuid'],
+            'tenant_page_uuid' => ['nullable', 'string', 'exists:cms_tenant_pages,uuid'],
             'tenant_template_uuid' => ['nullable', 'string', 'exists:cms_tenant_templates,uuid'],
         ];
     }

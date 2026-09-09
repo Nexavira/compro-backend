@@ -7,7 +7,7 @@ use App\Models\BaseModel;
 
 class TenantPage extends BaseModel
 {
-    protected $table = 'cms_pages';
+    protected $table = 'cms_tenant_pages';
 
     public function casts(): array
     {

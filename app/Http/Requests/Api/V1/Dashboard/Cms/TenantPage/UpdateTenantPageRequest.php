@@ -21,7 +21,7 @@ class UpdateTenantPageRequest extends FormRequestApi
     public function rules(): array
     {
         return [
-            'tenant_page_uuid' => ['required', 'string', 'exists:cms_pages,uuid'],
+            'tenant_page_uuid' => ['required', 'string', 'exists:cms_tenant_pages,uuid'],
             'tenant_template_uuid' => ['nullable', 'string', 'exists:cms_tenant_templates,uuid'],
             'title' => ['nullable', 'string'],
             'slug' => ['nullable', 'string'],

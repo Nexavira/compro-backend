@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('cms_pages', function (Blueprint $table) {
+        Schema::create('cms_tenant_pages', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_template_id')->constrained('cms_tenant_templates')->onDelete('cascade');
@@ -31,6 +31,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('cms_pages');
+        Schema::dropIfExists('cms_tenant_pages');
     }
 };

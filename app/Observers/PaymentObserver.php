@@ -10,7 +10,6 @@ use App\Mail\PaymentSuccessMail;
 use App\Mail\PaymentRejectedMail;
 use App\Models\Tenant\TenantUser;
 use Illuminate\Support\Facades\Log;
-use App\Services\TemplateCloningService;
 
 class PaymentObserver
 {
@@ -68,10 +67,6 @@ class PaymentObserver
                 $tenant->is_suspended = 0;
                 $tenant->save();
 
-                if ($tenant->global_template_id && $tenant->globalTemplate) {
-                    $cloningService = new TemplateCloningService();
-                    $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
-                }
             }
 
             $isFirstPayment = !Payment::where('tenant_id', $payment->tenant_id)
