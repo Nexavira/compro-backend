@@ -5,6 +5,7 @@ namespace App\Models\CMS;
 use App\Models\BaseModel;
 use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class TenantTemplate extends BaseModel
 {
@@ -13,7 +14,7 @@ class TenantTemplate extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            'template_settings' => 'jsonb',
+            'template_settings' => AsArrayObject::class,
         ]);
     }
 

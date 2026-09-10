@@ -27,7 +27,7 @@ class CreateTenantService extends DefaultService implements ServiceInterface
 
         $tenantTemplateService = app('StoreTenantTemplateService')->execute([
             'tenant_id' => $tenant->id,
-            'global_template_id' => $dto['global_template_id'],
+            'global_template_id' => $dto['global_template_id'] ?? null,
             'is_active' => 1,
             'template_settings' => null,
         ], true);

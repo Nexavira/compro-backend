@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
-            $table->foreignId('global_template_id')->constrained('cms_global_templates')->onDelete('cascade');
+            $table->foreignId('global_template_id')->nullable()->constrained('cms_global_templates')->onDelete('cascade');
             $table->jsonb('template_settings')->nullable();
 
             $table->integer('is_active')->default(1);
