@@ -171,17 +171,17 @@ class CreateTenantService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'name' => ['required', 'string', 'max:255', new UniqueData('tnt_tenants', 'name')],
-            'slug' => ['nullable', 'string', 'max:255', new UniqueData('tnt_tenants', 'slug')],
-            'tenant_category_uuid' => ['required', 'uuid', new ExistsUuid(new TenantCategory)],
+            'package_uuid' => ['required', 'uuid', new ExistsUuid(new Package())],
+            'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
+            'tenant_category_uuid' => ['required', 'uuid', new ExistsUuid(new TenantCategory())],
             'logo_uuid' => ['nullable', 'uuid', new ExistsUuid(new File)],
             'favicon_uuid' => ['nullable', 'uuid', new ExistsUuid(new File)],
+            'name' => ['required', 'string', 'max:255', new UniqueData('tnt_tenants', 'name')],
+            'slug' => ['nullable', 'string', 'max:255', new UniqueData('tnt_tenants', 'slug')],
             'custom_domain' => ['nullable', 'string', 'max:255'],
             'settings' => ['nullable', 'json'],
             'description' => ['nullable', 'string'],
             'is_suspended' => ['required', 'integer', 'in:0,1'],
-            'package_uuid' => ['required', 'uuid', new ExistsUuid(new Package)],
-            'global_template_uuid' => ['required', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'role_detail' => ['nullable', 'string', 'max:255'],
             'is_trial' => ['required', 'boolean'],
         ];
