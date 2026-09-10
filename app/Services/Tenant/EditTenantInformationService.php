@@ -36,10 +36,7 @@ class EditTenantInformationService extends DefaultService implements ServiceInte
     public function prepare($dto)
     {
         $dto['tenant_id'] = $this->findIdByUuid(Tenant::query(), $dto['tenant_uuid']);
-
-        if (isset($dto['name']) and $dto['name'] != '') {
-            $dto['slug'] = Str::slug($dto['name']);
-        }
+        
         if (isset($dto['logo_uuid']) and $dto['logo_uuid'] != '') {
             $dto['logo_id'] = $this->findIdByUuid(File::query(), $dto['logo_uuid']);
         }
