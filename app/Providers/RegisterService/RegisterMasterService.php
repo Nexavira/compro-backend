@@ -10,6 +10,6 @@ class RegisterMasterService extends AppServiceProvider
     public function register(): void
     {
         // Package
-        $this->registerService('GetPackageService', GetPackageService::class);
+        // $this->registerService('GetPackageService', GetPackageService::class);
     }
 }

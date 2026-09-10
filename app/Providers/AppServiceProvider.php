@@ -19,6 +19,7 @@ use App\Policies\Transaction\SubscriptionPolicy;
 use App\Providers\RegisterService\RegisterAuthService;
 use App\Providers\RegisterService\RegisterCmsService;
 use App\Providers\RegisterService\RegisterMasterService;
+use App\Providers\RegisterService\RegisterPackageService;
 use App\Providers\RegisterService\RegisterSystemService;
 use App\Providers\RegisterService\RegisterTenantService;
 use App\Providers\RegisterService\RegisterTransactionService;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RegisterSystemService::class);
         $this->app->register(RegisterTenantService::class);
         $this->app->register(RegisterTransactionService::class);
+        $this->app->register(RegisterPackageService::class);
     }
 
     public function boot(): void

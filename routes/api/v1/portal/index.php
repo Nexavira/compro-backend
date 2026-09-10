@@ -29,7 +29,7 @@ Route::prefix('portal')->group(function () {
     Route::prefix('cms')->group(function () {
         Route::prefix('global-template')->group(function () {
             Route::get('{global_template_uuid?}', [GlobalTemplateController::class, 'get']);
-            Route::post('create', [GlobalTemplateController::class, 'create']);
+            Route::post('create', [GlobalTemplateController::class, 'create']); // test only because no auth
         });
 
     });
@@ -40,6 +40,7 @@ Route::prefix('portal')->group(function () {
         require __DIR__ . '/tenant.php';
         require __DIR__ . '/file.php';
         require __DIR__ . '/transaction.php';
+        require __DIR__ . '/package.php';
         // require __DIR__ . '/global-template.php';
     });
 });

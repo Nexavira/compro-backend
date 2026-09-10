@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Portal\Master;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Portal\Master\PackageRequest\GetPackageRequest;
+use App\Http\Requests\Api\V1\Portal\Master\PackageRequest\UpdatePackageRequest;
 use App\Http\Resources\Api\V1\Portal\Master\Package\GetPackageResource;
 
 class PackageController extends Controller
@@ -22,6 +23,18 @@ class PackageController extends Controller
             'success' => (isset($result['error']) ? false : true),
             'message' => $result['message'],
             'data' => $data,
+            'pagination' => $result['pagination'] ?? null
+        ], $result['response_code']);
+    }
+
+    public function update(UpdatePackageRequest $request)
+    {
+        $result = app('UpdatePackageService')->execute($request->validated());
+
+        return response()->json([
+            'success' => (isset($result['error']) ? false : true),
+            'message' => $result['message'],
+            'data' => $result['data'] ?? null,
             'pagination' => $result['pagination'] ?? null
         ], $result['response_code']);
     }
