@@ -9,6 +9,7 @@ use App\Services\Tenant\GetTenantService;
 use App\Services\Tenant\StoreTenantService;
 use App\Services\Tenant\TenantCategory\GetTenantCategoryService;
 use App\Services\Tenant\Cms\PublicGetTenantPageService;
+use App\Services\Tenant\EditTenantInformationService;
 
 class RegisterTenantService extends AppServiceProvider
 {
@@ -20,5 +21,6 @@ class RegisterTenantService extends AppServiceProvider
         $this->registerService('AddTenantUserService', AddTenantUserService::class);
         $this->registerService('GetTenantCategoryService', GetTenantCategoryService::class);
         $this->registerService('PublicGetTenantPageService', PublicGetTenantPageService::class);
+        $this->registerService('EditTenantInformationService', EditTenantInformationService::class);
     }
 }
