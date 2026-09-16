@@ -21,6 +21,7 @@ class EditTenantInformationService extends DefaultService implements ServiceInte
 
         $tenant->name = $dto['name'] ?? $tenant->name;
         $tenant->slug = $dto['slug'] ?? $tenant->slug;
+        $tenant->tenant_category_id = $dto['tenant_category_id'] ?? $tenant->tenant_category_id;
         $tenant->logo_id = $dto['logo_id'] ?? $tenant->logo_id;
         $tenant->favicon_id = $dto['favicon_id'] ?? $tenant->favicon_id;
         $tenant->settings = $dto['settings'] ?? $tenant->settings;
@@ -52,14 +53,18 @@ class EditTenantInformationService extends DefaultService implements ServiceInte
 
     public function rules($dto)
     {
+        $tenantUuid = $dto['tenant_uuid'] ?? null;
+
         return [
+            'tenant_uuid' => ['required', 'uuid', new ExistsUuid(new Tenant)],
+            'tenant_category_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantCategory)],
             'logo_id' => ['nullable', 'integer', new ExistsId(new File)],
             'logo_uuid' => ['nullable', 'uuid', new ExistsUuid(new File)],
             'favicon_id' => ['nullable', 'integer', new ExistsId(new File)],
             'favicon_uuid' => ['nullable', 'uuid', new ExistsUuid(new File)],
 
-            'name' => ['required', 'string', 'max:255', new UniqueData('tnt_tenants', 'name')],
-            'slug' => ['nullable', 'string', 'max:255', new UniqueData('tnt_tenants', 'slug')],
+            'name' => ['required', 'string', 'max:255', new UniqueData('tnt_tenants', 'name', $tenantUuid)],
+            'slug' => ['nullable', 'string', 'max:255', new UniqueData('tnt_tenants', 'slug', $tenantUuid)],
             'settings' => ['nullable', 'json'],
             'description' => ['nullable', 'string'],
         ];

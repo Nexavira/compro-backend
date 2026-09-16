@@ -18,9 +18,9 @@ class UpdateTenantTemplateService extends DefaultService implements ServiceInter
         $dto = $this->prepare($dto);
         $global_template = TenantTemplate::find($dto['tenant_template_id']);
 
-        $global_template->tenant_id = $dto['tenant_id'];
-        $global_template->global_template_id = $dto['global_template_id'];
-        $global_template->template_settings = $dto['template_settings'];
+        $global_template->tenant_id = $dto['tenant_id'] ?? $global_template->tenant_id;
+        $global_template->global_template_id = $dto['global_template_id'] ?? $global_template->global_template_id;
+        $global_template->template_settings = $dto['template_settings'] ?? $global_template->template_settings;
 
         $this->prepareAuditUpdate($global_template);
         $global_template->save();
@@ -33,6 +33,10 @@ class UpdateTenantTemplateService extends DefaultService implements ServiceInter
     {
         if (isset($dto['tenant_template_uuid'])) {
             $dto['tenant_template_id'] = $this->findIdByUuid(TenantTemplate::query(), $dto['tenant_template_uuid']);
+        }
+
+        if (isset($dto['tenant_uuid'])) {
+            $dto['tenant_id'] = $this->findIdByUuid(Tenant::query(), $dto['tenant_uuid']);
         }
 
         if (isset($dto['global_template_uuid'])) {
