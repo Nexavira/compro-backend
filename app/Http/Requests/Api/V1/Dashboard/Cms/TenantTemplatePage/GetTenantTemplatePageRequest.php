@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Dashboard\Cms\TenantPage;
+namespace App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplatePage;
 
 use App\Helpers\FormRequestApi;
 
-class GetTenantPageRequest extends FormRequestApi
+class GetTenantTemplatePageRequest extends FormRequestApi
 {
     public function authorize(): bool
     {
@@ -14,7 +14,7 @@ class GetTenantPageRequest extends FormRequestApi
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'tenant_page_uuid' => $this->tenant_page_uuid
+            'tenant_template_page_uuid' => $this->tenant_template_page_uuid
         ]);
     }
 
@@ -27,7 +27,7 @@ class GetTenantPageRequest extends FormRequestApi
             'sort_by' => ['nullable', 'string'],
             'sort_type' => ['nullable', 'string', 'in:asc,desc'],
             'with_pagination' => ['nullable', 'boolean'],
-            'tenant_page_uuid' => ['nullable', 'string', 'exists:cms_tenant_pages,uuid'],
+            'tenant_template_page_uuid' => ['nullable', 'string', 'exists:cms_tenant_template_pages,uuid'],
             'tenant_template_uuid' => ['nullable', 'string', 'exists:cms_tenant_templates,uuid'],
         ];
     }

@@ -30,6 +30,6 @@ class TenantTemplate extends BaseModel
 
     public function pages()
     {
-        return $this->hasMany(TenantPage::class, 'tenant_template_id', 'id');
+        return $this->hasMany(TenantTemplatePage::class, 'tenant_template_id', 'id');
     }
 }

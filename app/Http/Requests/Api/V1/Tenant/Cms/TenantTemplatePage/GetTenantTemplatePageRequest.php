@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Tenant\Cms\TenantPage;
+namespace App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplatePage;
 
 use App\Helpers\FormRequestApi;
 
-class GetTenantPageRequest extends FormRequestApi
+class GetTenantTemplatePageRequest extends FormRequestApi
 {
     public function authorize(): bool
     {

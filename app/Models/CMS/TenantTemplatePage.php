@@ -3,17 +3,16 @@
 namespace App\Models\CMS;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
-
-class TenantPage extends BaseModel
+class TenantTemplatePage extends BaseModel
 {
-    protected $table = 'cms_tenant_pages';
+    protected $table = 'cms_tenant_template_pages';
 
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            'content_blocks' => 'json',
-            'meta' => 'json',
+            'template_data' => AsArrayObject::class
         ]);
     }
 

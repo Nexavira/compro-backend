@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Api\V1\Dashboard\Cms\TenantPage;
+namespace App\Http\Resources\Api\V1\Dashboard\Cms\TenantTemplatePage;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetTenantPageResource extends JsonResource
+class GetTenantTemplatePageResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

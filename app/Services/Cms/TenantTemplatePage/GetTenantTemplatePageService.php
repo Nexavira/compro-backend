@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Cms\TenantPage;
+namespace App\Services\Cms\TenantTemplatePage;
 
-use App\Models\Cms\TenantPage;
+use App\Models\CMS\TenantTemplatePage;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 
-class GetTenantPageService extends DefaultService implements ServiceInterface
+class GetTenantTemplatePageService extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
@@ -15,7 +15,7 @@ class GetTenantPageService extends DefaultService implements ServiceInterface
         $dto['sort_by'] = $dto['sort_by'] ?? 'updated_at';
         $dto['sort_type'] = $dto['sort_type'] ?? 'desc';
 
-        $model = TenantPage::with(['tenantTemplate'])
+        $model = TenantTemplatePage::with(['tenantTemplate'])
             ->where('deleted_at', null)
             ->orderBy($dto['sort_by'], $dto['sort_type']);
 
@@ -43,7 +43,7 @@ class GetTenantPageService extends DefaultService implements ServiceInterface
             $data = $model->get();
         }
 
-        $this->results['message'] = "Tenant Page successfully fetched";
+        $this->results['message'] = "Tenant Template Page successfully fetched";
         $this->results['data'] = $data;
     }
 }

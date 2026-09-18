@@ -2,15 +2,15 @@
 
 namespace App\Services\Tenant\Cms;
 
-use App\Models\Cms\TenantPage;
+use App\Models\CMS\TenantTemplatePage;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 
-class PublicGetTenantPageService extends DefaultService implements ServiceInterface
+class PublicGetTenantTemplatePageService extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
-        $query = TenantPage::query()
+        $query = TenantTemplatePage::query()
             ->with(['tenantTemplate.tenant'])
             ->whereHas('tenantTemplate.tenant', function ($q) use ($dto) {
                 if (isset($dto['tenant_slug'])) {

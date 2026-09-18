@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Services\Cms\TenantPage;
+namespace App\Services\Cms\TenantTemplatePage;
 
-use App\Models\Cms\TenantPage;
 use App\Models\Cms\TenantTemplate;
+use App\Models\CMS\TenantTemplatePage;
 use App\Rules\ExistsId;
 use App\Rules\ExistsUuid;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 
-class StoreTenantPageService extends DefaultService implements ServiceInterface
+class StoreTenantTemplatePageService extends DefaultService implements ServiceInterface
 {
     public function process($dto)
     {
         $dto = $this->prepare($dto);
-        $page = new TenantPage();
+        $page = new TenantTemplatePage();
 
         $page->tenant_template_id = $dto['tenant_template_id'] ?? null;
         $page->title = $dto['title'] ?? null;
@@ -42,7 +42,7 @@ class StoreTenantPageService extends DefaultService implements ServiceInterface
     public function rules($dto)
     {
         return [
-            'tenant_template_id' => ['required', 'integer', new ExistsId(new TenantTemplate)],
+            'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate)],
             'tenant_template_uuid' => ['required', 'uuid', new ExistsUuid(new TenantTemplate)],
             'title' => ['required', 'string'],
             'slug' => ['required', 'string'],

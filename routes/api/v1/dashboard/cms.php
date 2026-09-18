@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantTemplateController;
-use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantPageController;
+use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantTemplatePageController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('dashboard')->group(function () {
@@ -13,9 +13,9 @@ Route::prefix('dashboard')->group(function () {
         });
 
         Route::prefix('tenant-page')->group(function () {
-            Route::get('{tenant_page_uuid?}', [TenantPageController::class, 'get']);
-            Route::post('create', [TenantPageController::class, 'create']);
-            Route::patch('update', [TenantPageController::class, 'update']);
+            Route::get('{tenant_template_page_uuid?}', [TenantTemplatePageController::class, 'get']);
+            Route::post('create', [TenantTemplatePageController::class, 'create']);
+            Route::patch('update', [TenantTemplatePageController::class, 'update']);
         });
     });
 });

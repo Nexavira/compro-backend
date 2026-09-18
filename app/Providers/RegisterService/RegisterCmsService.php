@@ -12,9 +12,9 @@ use App\Services\Cms\TenantTemplate\UpdateTenantTemplateService;
 use App\Services\Cms\TenantTemplate\CreateTenantTemplateService;
 use App\Services\Cms\TenantTemplate\EditTenantTemplateService;
 
-use App\Services\Cms\TenantPage\GetTenantPageService;
-use App\Services\Cms\TenantPage\StoreTenantPageService;
-use App\Services\Cms\TenantPage\UpdateTenantPageService;
+use App\Services\Cms\TenantTemplatePage\GetTenantTemplatePageService;
+use App\Services\Cms\TenantTemplatePage\StoreTenantTemplatePageService;
+use App\Services\Cms\TenantTemplatePage\UpdateTenantTemplatePageService;
 
 class RegisterCmsService extends AppServiceProvider
 {
@@ -32,8 +32,8 @@ class RegisterCmsService extends AppServiceProvider
         $this->registerService('EditTenantTemplateService', EditTenantTemplateService::class);
 
         // Tenant Page
-        $this->registerService('GetTenantPageService', GetTenantPageService::class);
-        $this->registerService('StoreTenantPageService', StoreTenantPageService::class);
-        $this->registerService('UpdateTenantPageService', UpdateTenantPageService::class);
+        $this->registerService('GetTenantTemplatePageService', GetTenantTemplatePageService::class);
+        $this->registerService('StoreTenantTemplatePageService', StoreTenantTemplatePageService::class);
+        $this->registerService('UpdateTenantTemplatePageService', UpdateTenantTemplatePageService::class);
     }
 }
