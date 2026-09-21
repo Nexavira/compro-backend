@@ -4,8 +4,8 @@ namespace App\Services\Cms\TenantTemplate;
 
 use App\Models\Cms\TenantTemplate;
 use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
-use App\Models\Cms\TenantPage;
 use App\Rules\ExistsId;
 use App\Rules\ExistsUuid;
 use App\Services\DefaultService;
@@ -32,7 +32,7 @@ class CreateTenantTemplateService extends DefaultService implements ServiceInter
             // Store pages
             if (isset($dto['pages']) && is_array($dto['pages'])) {
                 foreach ($dto['pages'] as $pageData) {
-                    $page = new TenantPage();
+                    $page = new TenantTemplatePage();
                     $page->tenant_template_id = $global_template->id;
                     $page->title = $pageData['title'];
                     $page->slug = $pageData['slug'];

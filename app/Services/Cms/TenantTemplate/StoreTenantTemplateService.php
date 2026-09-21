@@ -21,6 +21,7 @@ class StoreTenantTemplateService extends DefaultService implements ServiceInterf
         $global_template->tenant_id = $dto['tenant_id'] ?? null;
         $global_template->global_template_id = $dto['global_template_id'] ?? null;
         $global_template->template_settings = $dto['template_settings'] ?? null;
+        $global_template->is_active = $dto['is_active'] ?? 1;
 
         $this->prepareAuditActive($global_template);
         $this->prepareAuditInsert($global_template);
