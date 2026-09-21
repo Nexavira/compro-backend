@@ -11,10 +11,19 @@ class GetTenantTemplatePageRequest extends FormRequestApi
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'tenant_slug' => $this->route('tenant_slug') ?? $this->tenant_slug,
+            'slug' => $this->route('slug') ?? $this->slug,
+        ]);
+    }
+
     public function rules(): array
     {
         return [
             'tenant_slug' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

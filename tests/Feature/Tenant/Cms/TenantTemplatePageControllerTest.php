@@ -83,6 +83,23 @@ class TenantTemplatePageControllerTest extends TestCase
     }
 
     /**
+     * Test get public tenant template pages without page slug successfully.
+     */
+    public function test_get_public_tenant_template_pages_without_slug_successfully(): void
+    {
+        $url = "/api/v1/t/{$this->tenant->slug}/cms/page";
+
+        $response = $this->getJson($url);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Berhasil mengambil data halaman.',
+            ])
+            ->assertJsonCount(1, 'data');
+    }
+
+    /**
      * Test get public tenant template page returns 404 when page slug not found.
      */
     public function test_get_public_tenant_template_page_returns_404_when_page_not_found(): void

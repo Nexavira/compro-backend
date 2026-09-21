@@ -12,7 +12,7 @@ Route::prefix('dashboard')->group(function () {
             Route::patch('update', [TenantTemplateController::class, 'update']);
         });
 
-        Route::prefix('tenant-page')->group(function () {
+        Route::prefix('tenant-template-page')->group(function () {
             Route::get('{tenant_template_page_uuid?}', [TenantTemplatePageController::class, 'get']);
             Route::post('create', [TenantTemplatePageController::class, 'create']);
             Route::patch('update', [TenantTemplatePageController::class, 'update']);

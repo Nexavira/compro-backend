@@ -7,7 +7,7 @@ Route::prefix('t')->group(function () {
     Route::prefix('{tenant_slug}')->group(function () {
         Route::prefix('cms')->group(function () {
             Route::prefix('page')->group(function () {
-                Route::get('{slug}', [TenantTemplatePageController::class, 'get']);
+                Route::get('{slug?}', [TenantTemplatePageController::class, 'get']);
             });
         });
     });

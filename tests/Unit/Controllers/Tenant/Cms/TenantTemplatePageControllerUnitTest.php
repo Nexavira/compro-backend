@@ -10,6 +10,7 @@ use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\Redirector;
 use Tests\TestCase;
 
 class TenantTemplatePageControllerUnitTest extends TestCase
@@ -71,9 +72,14 @@ class TenantTemplatePageControllerUnitTest extends TestCase
      */
     public function test_controller_get_public_page_returns_json_response(): void
     {
-        $payload = ['tenant_slug' => $this->tenant->slug];
+        $payload = [
+            'tenant_slug' => $this->tenant->slug,
+            'slug' => $this->tenantTemplatePage->slug,
+        ];
         $request = GetTenantTemplatePageRequest::create("/api/v1/t/{$this->tenant->slug}/cms/page/{$this->tenantTemplatePage->slug}", 'GET', $payload);
         $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
 
         $response = $this->controller->get($request, $this->tenant->slug, $this->tenantTemplatePage->slug);
 
@@ -82,5 +88,27 @@ class TenantTemplatePageControllerUnitTest extends TestCase
         $this->assertTrue($responseData['success']);
         $this->assertEquals('Berhasil mengambil data halaman.', $responseData['message']);
         $this->assertEquals('unit-public-page', $responseData['data']['slug']);
+    }
+
+    /**
+     * Test direct get method call without page slug on Tenant TenantTemplatePageController.
+     */
+    public function test_controller_get_public_pages_without_slug_returns_json_response(): void
+    {
+        $payload = [
+            'tenant_slug' => $this->tenant->slug,
+        ];
+        $request = GetTenantTemplatePageRequest::create("/api/v1/t/{$this->tenant->slug}/cms/page", 'GET', $payload);
+        $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
+
+        $response = $this->controller->get($request, $this->tenant->slug);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $responseData = $response->getData(true);
+        $this->assertTrue($responseData['success']);
+        $this->assertEquals('Berhasil mengambil data halaman.', $responseData['message']);
+        $this->assertCount(1, $responseData['data']);
     }
 }

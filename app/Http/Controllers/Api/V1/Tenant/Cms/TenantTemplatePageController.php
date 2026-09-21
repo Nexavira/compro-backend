@@ -8,10 +8,15 @@ use App\Http\Resources\Api\V1\Tenant\Cms\TenantTemplatePage\GetTenantTemplatePag
 
 class TenantTemplatePageController extends Controller
 {
-    public function get(GetTenantTemplatePageRequest $request, $slug)
+    public function get(GetTenantTemplatePageRequest $request, $tenant_slug = null, $slug = null)
     {
         $payload = $request->validated();
-        $payload['slug'] = $slug;
+        if ($tenant_slug) {
+            $payload['tenant_slug'] = $tenant_slug;
+        }
+        if ($slug) {
+            $payload['slug'] = $slug;
+        }
 
         $result = app('PublicGetTenantTemplatePageService')->execute($payload);
 
