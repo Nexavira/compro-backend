@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('price', 15, 0);
             $table->decimal('setup_fee', 15, 0)->default(0);
 
-            $table->json('features')->nullable();
+            $table->jsonb('features')->nullable();
             $table->integer('trial_days')->default(0);
 
             $table->string('billing_cycle')->comment('monthly, annually, custom');

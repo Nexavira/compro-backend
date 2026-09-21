@@ -4,6 +4,7 @@ namespace App\Models\System;
 
 use App\Models\BaseModel;
 use App\Models\Tenant\Tenant;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class ActivityLog extends BaseModel
 {
@@ -12,7 +13,7 @@ class ActivityLog extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            'properties' => 'json',
+            'properties' => AsArrayObject::class,
         ]);
     }
 

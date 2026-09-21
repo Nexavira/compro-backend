@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('log_name')->nullable();
             $table->text('description')->nullable();
-            $table->json('properties')->nullable();
+            $table->jsonb('properties')->nullable();
 
             $table->integer('is_active')->default(1);
             $table->integer('version')->default(0);

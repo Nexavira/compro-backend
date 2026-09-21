@@ -4,6 +4,7 @@ namespace App\Models\Master;
 
 use App\Models\BaseModel;
 use App\Models\Transaction\Subscription;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Package extends BaseModel
 {
@@ -22,7 +23,7 @@ class Package extends BaseModel
     ];
 
     protected $casts = [
-        'features' => 'array',
+        'features' => AsArrayObject::class,
     ];
 
     public function subscriptions()

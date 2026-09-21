@@ -7,6 +7,8 @@ use App\Models\System\File;
 use App\Models\Cms\GlobalTemplate;
 use App\Models\CMS\Page;
 use App\Models\Auth\User;
+use App\Models\CMS\TenantTemplatePage;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Tenant extends BaseModel
 {
@@ -17,7 +19,7 @@ class Tenant extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            'settings' => 'array',
+            'settings' => AsArrayObject::class,
         ]);
     }
 
@@ -64,7 +66,7 @@ class Tenant extends BaseModel
 
     public function pages()
     {
-        return $this->hasMany(Page::class, 'tenant_id', 'id');
+        return $this->hasMany(TenantTemplatePage::class, 'tenant_id', 'id');
     }
 
     public function users()

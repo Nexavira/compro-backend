@@ -4,6 +4,7 @@ namespace App\Models\CMS;
 
 use App\Models\BaseModel;
 use App\Models\Tenant\Tenant;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Post extends BaseModel
 {
@@ -12,7 +13,7 @@ class Post extends BaseModel
     public function casts(): array
     {
         return array_merge(parent::casts(), [
-            'metadata' => 'json',
+            'metadata' => AsArrayObject::class,
         ]);
     }
 

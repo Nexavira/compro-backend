@@ -14,7 +14,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_id')->constrained('tnt_tenants')->onDelete('cascade');
             $table->string('title');
-            $table->json('metadata')->nullable();
+            $table->jsonb('metadata')->nullable();
             $table->string('slug');
             $table->text('content')->nullable();
             $table->longText('body')->nullable();
