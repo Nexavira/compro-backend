@@ -9,6 +9,8 @@ use Database\Seeders\GlobalTemplate\GlobalTemplateSeeder;
 use Database\Seeders\Master\PackageSeeder;
 use Database\Seeders\Tenant\TenantCategorySeeder;
 use Database\Seeders\Tenant\TenantSeeder;
+use Database\Seeders\Tenant\TenantTemplatePageSeeder;
+use Database\Seeders\Tenant\TenantTemplateSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             TenantSeeder::class,
             GlobalTemplateSeeder::class,
+            TenantTemplateSeeder::class,
+            TenantTemplatePageSeeder::class,
             // GlobalTemplateAboutPageSeeder::class,
             UserSeeder::class,
             PermissionSeeder::class,
