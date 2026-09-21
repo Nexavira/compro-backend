@@ -67,7 +67,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_tenant_template_pages_list_successfully(): void
     {
-        $response = $this->getJson('/api/v1/dashboard/cms/tenant-page');
+        $response = $this->getJson('/api/v1/dashboard/cms/tenant-template-page');
 
         $response->assertStatus(200)
             ->assertJson([
@@ -88,7 +88,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_tenant_template_pages_with_pagination(): void
     {
-        $response = $this->getJson('/api/v1/dashboard/cms/tenant-page?with_pagination=true&per_page=5&page=1');
+        $response = $this->getJson('/api/v1/dashboard/cms/tenant-template-page?with_pagination=true&per_page=5&page=1');
 
         $response->assertStatus(200)
             ->assertJson([
@@ -108,7 +108,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_single_tenant_template_page_by_uuid(): void
     {
-        $response = $this->getJson('/api/v1/dashboard/cms/tenant-page/' . $this->tenantTemplatePage->uuid);
+        $response = $this->getJson('/api/v1/dashboard/cms/tenant-template-page/' . $this->tenantTemplatePage->uuid);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -127,7 +127,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_tenant_template_pages_filtered_by_tenant_template_uuid(): void
     {
-        $response = $this->getJson('/api/v1/dashboard/cms/tenant-page?tenant_template_uuid=' . $this->tenantTemplate->uuid);
+        $response = $this->getJson('/api/v1/dashboard/cms/tenant-template-page?tenant_template_uuid=' . $this->tenantTemplate->uuid);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -143,7 +143,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_tenant_template_pages_with_search_param(): void
     {
-        $response = $this->getJson('/api/v1/dashboard/cms/tenant-page?search_param=Home');
+        $response = $this->getJson('/api/v1/dashboard/cms/tenant-template-page?search_param=Initial');
 
         $response->assertStatus(200)
             ->assertJson([
@@ -167,7 +167,7 @@ class TenantTemplatePageControllerTest extends TestCase
             'is_active' => 1,
         ];
 
-        $response = $this->postJson('/api/v1/dashboard/cms/tenant-page/create', $payload);
+        $response = $this->postJson('/api/v1/dashboard/cms/tenant-template-page/create', $payload);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -191,7 +191,7 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_create_tenant_template_page_validation_fails_when_required_fields_missing(): void
     {
-        $response = $this->postJson('/api/v1/dashboard/cms/tenant-page/create', []);
+        $response = $this->postJson('/api/v1/dashboard/cms/tenant-template-page/create', []);
 
         $response->assertStatus(422)
             ->assertJson([
@@ -214,7 +214,7 @@ class TenantTemplatePageControllerTest extends TestCase
             'slug' => 'contact-us',
         ];
 
-        $response = $this->postJson('/api/v1/dashboard/cms/tenant-page/create', $payload);
+        $response = $this->postJson('/api/v1/dashboard/cms/tenant-template-page/create', $payload);
 
         $response->assertStatus(422)
             ->assertJson([
@@ -239,7 +239,7 @@ class TenantTemplatePageControllerTest extends TestCase
             'is_active' => 1,
         ];
 
-        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-page/update', $payload);
+        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-template-page/update', $payload);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -268,7 +268,7 @@ class TenantTemplatePageControllerTest extends TestCase
             'title' => 'Missing UUID Update',
         ];
 
-        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-page/update', $payload);
+        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-template-page/update', $payload);
 
         $response->assertStatus(422)
             ->assertJson([
@@ -290,7 +290,7 @@ class TenantTemplatePageControllerTest extends TestCase
             'title' => 'Non existent page',
         ];
 
-        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-page/update', $payload);
+        $response = $this->patchJson('/api/v1/dashboard/cms/tenant-template-page/update', $payload);
 
         $response->assertStatus(422)
             ->assertJson([

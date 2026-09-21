@@ -41,8 +41,8 @@ class UpdateTenantTemplatePageService extends DefaultService implements ServiceI
 
     public function prepare($dto)
     {
-        if (isset($dto['tenant_page_uuid'])) {
-            $dto['tenant_page_id'] = $this->findIdByUuid(TenantTemplatePage::query(), $dto['tenant_page_uuid']);
+        if (isset($dto['tenant_template_page_uuid'])) {
+            $dto['tenant_page_id'] = $this->findIdByUuid(TenantTemplatePage::query(), $dto['tenant_template_page_uuid']);
         }
         if (isset($dto['tenant_template_uuid'])) {
             $dto['tenant_template_id'] = $this->findIdByUuid(TenantTemplate::query(), $dto['tenant_template_uuid']);
@@ -54,7 +54,7 @@ class UpdateTenantTemplatePageService extends DefaultService implements ServiceI
     public function rules($dto)
     {
         return [
-            'tenant_page_uuid' => ['required', 'uuid', new ExistsUuid(new TenantTemplatePage)],
+            'tenant_template_page_uuid' => ['required', 'uuid', new ExistsUuid(new TenantTemplatePage)],
             'tenant_template_id' => ['nullable', 'integer', new ExistsId(new TenantTemplate)],
             'tenant_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplate)],
             'title' => ['nullable', 'string'],

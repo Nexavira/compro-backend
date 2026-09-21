@@ -13,9 +13,17 @@ class GetTenantTemplatePageRequest extends FormRequestApi
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
-            'tenant_template_page_uuid' => $this->tenant_template_page_uuid
-        ]);
+        $uuid = $this->route('tenant_template_page_uuid') ?? $this->tenant_template_page_uuid;
+        if ($uuid) {
+            $this->merge([
+                'tenant_template_page_uuid' => $uuid,
+            ]);
+        }
+        if ($this->has('with_pagination')) {
+            $this->merge([
+                'with_pagination' => filter_var($this->with_pagination, FILTER_VALIDATE_BOOLEAN),
+            ]);
+        }
     }
 
     public function rules(): array

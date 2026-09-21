@@ -12,6 +12,7 @@ use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\Redirector;
 use Tests\TestCase;
 
 class TenantTemplatePageControllerUnitTest extends TestCase
@@ -73,8 +74,10 @@ class TenantTemplatePageControllerUnitTest extends TestCase
      */
     public function test_controller_get_returns_json_response(): void
     {
-        $request = GetTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-page', 'GET');
+        $request = GetTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-template-page', 'GET');
         $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
 
         $response = $this->controller->get($request);
 
@@ -96,8 +99,10 @@ class TenantTemplatePageControllerUnitTest extends TestCase
             'is_active' => 1,
         ];
 
-        $request = StoreTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-page/create', 'POST', $payload);
+        $request = StoreTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-template-page/create', 'POST', $payload);
         $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
 
         $response = $this->controller->create($request);
 
@@ -115,13 +120,14 @@ class TenantTemplatePageControllerUnitTest extends TestCase
     {
         $payload = [
             'tenant_template_page_uuid' => $this->tenantTemplatePage->uuid,
-            'tenant_page_uuid' => $this->tenantTemplatePage->uuid,
             'title' => 'Updated Unit Page Title',
             'slug' => 'updated-unit-page-slug',
         ];
 
-        $request = UpdateTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-page/update', 'PATCH', $payload);
+        $request = UpdateTenantTemplatePageRequest::create('/api/v1/dashboard/cms/tenant-template-page/update', 'PATCH', $payload);
         $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
 
         $response = $this->controller->update($request);
 

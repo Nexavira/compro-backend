@@ -32,8 +32,8 @@ class GetTenantTemplatePageService extends DefaultService implements ServiceInte
             });
         }
 
-        if (isset($dto['tenant_page_uuid']) && $dto['tenant_page_uuid'] != '') {
-            $model->where('uuid', $dto['tenant_page_uuid']);
+        if (isset($dto['tenant_template_page_uuid']) && $dto['tenant_template_page_uuid'] != '') {
+            $model->where('uuid', $dto['tenant_template_page_uuid']);
             $data = $model->first();
         } else {
             if (isset($dto['with_pagination']) && $dto['with_pagination'] == true) {

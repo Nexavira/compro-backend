@@ -13,9 +13,11 @@ class UpdateTenantTemplatePageRequest extends FormRequestApi
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
-            'tenant_template_page_uuid' => $this->tenant_template_page_uuid
-        ]);
+        if ($this->tenant_template_page_uuid) {
+            $this->merge([
+                'tenant_template_page_uuid' => $this->tenant_template_page_uuid,
+            ]);
+        }
     }
 
     public function rules(): array
