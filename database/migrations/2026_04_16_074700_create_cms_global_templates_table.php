@@ -14,12 +14,12 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('tenant_category_id')->nullable()->constrained('tnt_tenant_categories')->nullOnDelete();
             $table->foreignId('package_id')->nullable()->constrained('mst_packages')->nullOnDelete();
+            $table->integer('banner_image_id')->nullable();
 
             $table->string('tier')->default('basic')->comment('basic, pro');
 
             $table->string('title');
             $table->text('description')->nullable();
-            $table->jsonb('brand_settings')->nullable();
             $table->string('slug')->nullable();
 
             $table->integer('is_active')->default(1);

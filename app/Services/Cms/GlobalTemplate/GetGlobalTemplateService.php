@@ -17,6 +17,7 @@ class GetGlobalTemplateService extends DefaultService implements ServiceInterfac
         $dto['sort_type'] = $dto['sort_type'] ?? 'desc';
 
         $model = GlobalTemplate::where('deleted_at', null)
+            ->with('bannerImage')
             ->orderBy($dto['sort_by'], $dto['sort_type']);
 
         if (isset($dto['search_param']) and $dto['search_param'] != null) {
