@@ -28,6 +28,12 @@ class GetTenantTemplateService extends DefaultService implements ServiceInterfac
         //     });
         // }
 
+        if (isset($dto['tenant_slug'])) {
+            $model->whereHas('tenant', function ($q) use ($dto) {
+                $q->where('slug', $dto['tenant_slug']);
+            });
+        }
+
         if (isset($dto['tenant_template_id_in'])) {
             $model->whereIn('id', $dto['tenant_template_id_in']);
         }

@@ -8,9 +8,17 @@ use App\Http\Resources\Api\V1\Tenant\Cms\TenantTemplate\GetTenantTemplateResourc
 
 class TenantTemplateController extends Controller
 {
-    public function get(GetTenantTemplateRequest $request)
+    public function get(GetTenantTemplateRequest $request, $tenant_slug = null, $tenant_template_uuid = null)
     {
-        $result = app('GetTenantTemplateService')->execute($request->validated());
+        $payload = $request->validated();
+        if ($tenant_slug) {
+            $payload['tenant_slug'] = $tenant_slug;
+        }
+        if ($tenant_template_uuid) {
+            $payload['tenant_template_uuid'] = $tenant_template_uuid;
+        }
+
+        $result = app('GetTenantTemplateService')->execute($payload);
 
         $data = null;
         if (isset($result['data'])) {

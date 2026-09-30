@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function getTenants(Panel $panel): array|Collection
     {
-        if ($this->roleUser && $this->roleUser->role_id == 1) {
+        if ($this->roleUser && ($this->roleUser->role?->code === 'master_admin' || $this->roleUser->role_id == 1)) {
             return Tenant::all();
         }
 
@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function canAccessTenant(Model $tenant): bool
     {
-        if ($this->roleUser && $this->roleUser->role_id == 1) {
+        if ($this->roleUser && ($this->roleUser->role?->code === 'master_admin' || ($this->roleUser->role_id == 1 && $this->roleUser->role?->code === 'master_admin'))) {
             return true;
         }
 

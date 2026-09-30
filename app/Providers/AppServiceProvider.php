@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Auth\Permission;
 use App\Models\Auth\Role;
 use App\Models\Auth\User;
+use App\Models\CMS\TenantTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\Transaction\Subscription;
 use App\Models\Transaction\Payment;
@@ -13,6 +14,7 @@ use App\Observers\TenantObserver;
 
 use App\Policies\AccessControl\RolePolicy;
 use App\Policies\AccessControl\UserPolicy;
+use App\Policies\CMS\TenantTemplatePolicy;
 use App\Policies\Tenant\TenantPolicy;
 use App\Policies\Transaction\SubscriptionPolicy;
 
@@ -50,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Tenant::class, TenantPolicy::class);
         Gate::policy(Subscription::class, SubscriptionPolicy::class);
+        Gate::policy(TenantTemplate::class, TenantTemplatePolicy::class);
 
         Payment::observe(PaymentObserver::class);
         Tenant::observe(TenantObserver::class);

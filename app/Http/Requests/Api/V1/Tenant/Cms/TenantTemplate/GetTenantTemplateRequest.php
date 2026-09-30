@@ -8,12 +8,18 @@ class GetTenantTemplateRequest extends FormRequestApi
 {
     public function authorize(): bool
     {
+        $tenant = app()->bound('tenant') ? app('tenant') : null;
+        if ($tenant && $this->user()) {
+            return $this->user()->canAccessTenant($tenant);
+        }
+
         return true;
     }
 
     protected function prepareForValidation(): void
     {
         $this->merge([
+            'tenant_slug' => $this->route('tenant_slug') ?? $this->tenant_slug,
             'tenant_template_uuid' => $this->tenant_template_uuid
         ]);
     }
@@ -21,6 +27,7 @@ class GetTenantTemplateRequest extends FormRequestApi
     public function rules(): array
     {
         return [
+            'tenant_slug' => ['required', 'string', 'max:255'],
             'search_param' => ['nullable', 'string'],
             'per_page' => ['nullable', 'integer', 'min:1'],
             'page' => ['nullable', 'integer', 'min:1'],

@@ -2,12 +2,17 @@
 
 namespace Tests\Feature\Tenant\Cms;
 
+use App\Models\Auth\Role;
+use App\Models\Auth\RoleUser;
+use App\Models\Auth\User;
 use App\Models\Cms\GlobalTemplate;
 use App\Models\Cms\TenantTemplate;
 use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
+use App\Models\Tenant\TenantUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class TenantTemplatePageControllerTest extends TestCase
@@ -16,6 +21,7 @@ class TenantTemplatePageControllerTest extends TestCase
 
     protected TenantCategory $category;
     protected Tenant $tenant;
+    protected User $user;
     protected GlobalTemplate $globalTemplate;
     protected TenantTemplate $tenantTemplate;
     protected TenantTemplatePage $tenantTemplatePage;
@@ -35,7 +41,29 @@ class TenantTemplatePageControllerTest extends TestCase
             'slug' => 'public-tenant',
             'tenant_category_id' => $this->category->id,
             'is_active' => 1,
+            'is_suspended' => 0,
         ]);
+
+        Role::create([
+            'name' => 'Master Admin',
+            'code' => 'master_admin',
+            'guard_name' => 'admin',
+        ]);
+
+        $role = Role::create([
+            'name' => 'Member',
+            'code' => 'member',
+            'guard_name' => 'api',
+        ]);
+
+        $this->user = User::create([
+            'email' => 'page_user@example.com',
+            'password' => bcrypt('password'),
+            'is_active' => 1,
+        ]);
+        RoleUser::create(['user_id' => $this->user->id, 'role_id' => $role->id]);
+        TenantUser::create(['user_id' => $this->user->id, 'tenant_id' => $this->tenant->id]);
+        $this->user->refresh();
 
         $this->globalTemplate = GlobalTemplate::create([
             'title' => 'Global Template',
@@ -66,6 +94,8 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_public_tenant_template_page_by_slug_successfully(): void
     {
+        Passport::actingAs($this->user, ['*'], 'api');
+
         $url = "/api/v1/t/{$this->tenant->slug}/cms/page/{$this->tenantTemplatePage->slug}";
 
         $response = $this->getJson($url);
@@ -87,6 +117,8 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_public_tenant_template_pages_without_slug_successfully(): void
     {
+        Passport::actingAs($this->user, ['*'], 'api');
+
         $url = "/api/v1/t/{$this->tenant->slug}/cms/page";
 
         $response = $this->getJson($url);
@@ -104,6 +136,8 @@ class TenantTemplatePageControllerTest extends TestCase
      */
     public function test_get_public_tenant_template_page_returns_404_when_page_not_found(): void
     {
+        Passport::actingAs($this->user, ['*'], 'api');
+
         $url = "/api/v1/t/{$this->tenant->slug}/cms/page/non-existent-page-slug";
 
         $response = $this->getJson($url);
