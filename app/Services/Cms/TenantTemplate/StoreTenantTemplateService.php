@@ -16,18 +16,18 @@ class StoreTenantTemplateService extends DefaultService implements ServiceInterf
     public function process($dto)
     {
         $dto = $this->prepare($dto);
-        $global_template = new TenantTemplate();
+        $tenant_template = new TenantTemplate();
 
-        $global_template->tenant_id = $dto['tenant_id'] ?? null;
-        $global_template->global_template_id = $dto['global_template_id'] ?? null;
-        $global_template->template_settings = $dto['template_settings'] ?? null;
-        $global_template->is_active = $dto['is_active'] ?? 1;
+        $tenant_template->tenant_id = $dto['tenant_id'] ?? null;
+        $tenant_template->global_template_id = $dto['global_template_id'] ?? null;
+        $tenant_template->template_settings = $dto['template_settings'] ?? null;
+        $tenant_template->active_template = (bool) ($dto['active_template'] ?? false);
 
-        $this->prepareAuditActive($global_template);
-        $this->prepareAuditInsert($global_template);
-        $global_template->save();
+        $this->prepareAuditActive($tenant_template);
+        $this->prepareAuditInsert($tenant_template);
+        $tenant_template->save();
 
-        $this->results['data'] = $global_template;
+        $this->results['data'] = $tenant_template;
         $this->results['message'] = "Tenant template successfully stored";
     }
 
@@ -52,6 +52,7 @@ class StoreTenantTemplateService extends DefaultService implements ServiceInterf
             'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate)],
             'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'template_settings' => ['nullable'],
+            'active_template' => ['boolean'],
         ];
     }
 }

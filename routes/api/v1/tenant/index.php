@@ -15,6 +15,7 @@ Route::prefix('t')->group(function () {
                 });
                 Route::prefix('tenant-template')->group(function () {
                     Route::get('{tenant_template_uuid?}', [TenantTemplateController::class, 'get']);
+                    Route::patch('change-active/{tenant_template_uuid?}', [TenantTemplateController::class, 'changeActiveTenantTemplate']);
                 });
             });
         });

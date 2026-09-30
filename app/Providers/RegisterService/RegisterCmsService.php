@@ -5,7 +5,7 @@ namespace App\Providers\RegisterService;
 use App\Providers\AppServiceProvider;
 use App\Services\Cms\GlobalTemplate\GetGlobalTemplateService;
 use App\Services\Cms\GlobalTemplate\StoreGlobalTemplateService;
-
+use App\Services\Cms\TenantTemplate\ChangeActiveTenantTemplateService;
 use App\Services\Cms\TenantTemplate\GetTenantTemplateService;
 use App\Services\Cms\TenantTemplate\StoreTenantTemplateService;
 use App\Services\Cms\TenantTemplate\UpdateTenantTemplateService;
@@ -30,6 +30,7 @@ class RegisterCmsService extends AppServiceProvider
         $this->registerService('UpdateTenantTemplateService', UpdateTenantTemplateService::class);
         $this->registerService('CreateTenantTemplateService', CreateTenantTemplateService::class);
         $this->registerService('EditTenantTemplateService', EditTenantTemplateService::class);
+        $this->registerService('ChangeActiveTenantTemplateService', ChangeActiveTenantTemplateService::class);
 
         // Tenant Page
         $this->registerService('GetTenantTemplatePageService', GetTenantTemplatePageService::class);

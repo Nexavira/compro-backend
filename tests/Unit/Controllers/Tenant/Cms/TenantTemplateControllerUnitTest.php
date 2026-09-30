@@ -3,6 +3,7 @@
 namespace Tests\Unit\Controllers\Tenant\Cms;
 
 use App\Http\Controllers\Api\V1\Tenant\Cms\TenantTemplateController;
+use App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplate\ChangeActiveTenantTemplateRequest;
 use App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplate\GetTenantTemplateRequest;
 use App\Models\Cms\GlobalTemplate;
 use App\Models\Cms\TenantTemplate;
@@ -55,6 +56,7 @@ class TenantTemplateControllerUnitTest extends TestCase
             'global_template_id' => $this->globalTemplate->id,
             'template_settings' => ['theme' => 'light'],
             'is_active' => 1,
+            'active_template' => 0,
         ]);
     }
 
@@ -79,6 +81,7 @@ class TenantTemplateControllerUnitTest extends TestCase
         $this->assertEquals('Tenant Template successfully fetched', $responseData['message']);
         $this->assertIsArray($responseData['data']);
         $this->assertCount(1, $responseData['data']);
+        $this->assertArrayHasKey('active_template', $responseData['data'][0]);
     }
 
     /**
@@ -102,5 +105,66 @@ class TenantTemplateControllerUnitTest extends TestCase
         $this->assertTrue($responseData['success']);
         $this->assertEquals('Tenant Template successfully fetched', $responseData['message']);
         $this->assertEquals($this->tenantTemplate->uuid, $responseData['data']['uuid']);
+        $this->assertArrayHasKey('active_template', $responseData['data']);
+    }
+
+    /**
+     * Test direct changeActiveTenantTemplate method call activating template.
+     */
+    public function test_controller_change_active_tenant_template_to_true_returns_json_response(): void
+    {
+        $payload = [
+            'tenant_slug' => $this->tenant->slug,
+            'tenant_template_uuid' => $this->tenantTemplate->uuid,
+            'active_template' => true,
+        ];
+        $request = ChangeActiveTenantTemplateRequest::create("/api/v1/t/{$this->tenant->slug}/cms/tenant-template/change-active/{$this->tenantTemplate->uuid}", 'PATCH', $payload);
+        $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
+
+        $response = $this->controller->changeActiveTenantTemplate($request, $this->tenant->slug, $this->tenantTemplate->uuid);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $responseData = $response->getData(true);
+        $this->assertTrue($responseData['success']);
+        $this->assertEquals('Tenant template successfully updated', $responseData['message']);
+        $this->assertTrue((bool) $responseData['data']['active_template']);
+
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplate->id,
+            'active_template' => true,
+        ]);
+    }
+
+    /**
+     * Test direct changeActiveTenantTemplate method call deactivating template.
+     */
+    public function test_controller_change_active_tenant_template_to_false_returns_json_response(): void
+    {
+        $this->tenantTemplate->update(['active_template' => true]);
+
+        $payload = [
+            'tenant_slug' => $this->tenant->slug,
+            'tenant_template_uuid' => $this->tenantTemplate->uuid,
+            'active_template' => false,
+        ];
+        $request = ChangeActiveTenantTemplateRequest::create("/api/v1/t/{$this->tenant->slug}/cms/tenant-template/change-active/{$this->tenantTemplate->uuid}", 'PATCH', $payload);
+        $request->setContainer($this->app);
+        $request->setRedirector($this->app->make(Redirector::class));
+        $request->validateResolved();
+
+        $response = $this->controller->changeActiveTenantTemplate($request, $this->tenant->slug, $this->tenantTemplate->uuid);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $responseData = $response->getData(true);
+        $this->assertTrue($responseData['success']);
+        $this->assertEquals('Tenant template successfully updated', $responseData['message']);
+        $this->assertFalse((bool) $responseData['data']['active_template']);
+
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplate->id,
+            'active_template' => false,
+        ]);
     }
 }

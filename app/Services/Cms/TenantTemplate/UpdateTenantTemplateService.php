@@ -16,16 +16,17 @@ class UpdateTenantTemplateService extends DefaultService implements ServiceInter
     public function process($dto)
     {
         $dto = $this->prepare($dto);
-        $global_template = TenantTemplate::find($dto['tenant_template_id']);
+        $tenant_template = TenantTemplate::find($dto['tenant_template_id']);
 
-        $global_template->tenant_id = $dto['tenant_id'] ?? $global_template->tenant_id;
-        $global_template->global_template_id = $dto['global_template_id'] ?? $global_template->global_template_id;
-        $global_template->template_settings = $dto['template_settings'] ?? $global_template->template_settings;
+        $tenant_template->tenant_id = $dto['tenant_id'] ?? $tenant_template->tenant_id;
+        $tenant_template->global_template_id = $dto['global_template_id'] ?? $tenant_template->global_template_id;
+        $tenant_template->template_settings = $dto['template_settings'] ?? $tenant_template->template_settings;
+        $tenant_template->active_template = $dto['active_template'] ?? $tenant_template->active_template;
 
-        $this->prepareAuditUpdate($global_template);
-        $global_template->save();
+        $this->prepareAuditUpdate($tenant_template);
+        $tenant_template->save();
 
-        $this->results['data'] = $global_template;
+        $this->results['data'] = $tenant_template;
         $this->results['message'] = "Tenant template successfully updated";
     }
 
@@ -55,6 +56,7 @@ class UpdateTenantTemplateService extends DefaultService implements ServiceInter
             'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate)],
             'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'template_settings' => ['nullable'],
+            'active_template' => ['boolean'],
         ];
     }
 }

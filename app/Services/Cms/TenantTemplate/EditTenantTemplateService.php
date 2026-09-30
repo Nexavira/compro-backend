@@ -5,7 +5,7 @@ namespace App\Services\Cms\TenantTemplate;
 use App\Models\Cms\TenantTemplate;
 use App\Models\Cms\GlobalTemplate;
 use App\Models\Tenant\Tenant;
-use App\Models\Cms\TenantPage;
+use App\Models\CMS\TenantTemplatePage;
 use App\Rules\ExistsId;
 use App\Rules\ExistsUuid;
 use App\Services\DefaultService;
@@ -30,6 +30,9 @@ class EditTenantTemplateService extends DefaultService implements ServiceInterfa
             if (isset($dto['template_settings'])) {
                 $global_template->template_settings = $dto['template_settings'];
             }
+            if (isset($dto['active_template'])) {
+                $global_template->active_template = (bool) $dto['active_template'];
+            }
 
             $this->prepareAuditUpdate($global_template);
             $global_template->save();
@@ -37,7 +40,7 @@ class EditTenantTemplateService extends DefaultService implements ServiceInterfa
             if (isset($dto['pages']) && is_array($dto['pages'])) {
                 foreach ($dto['pages'] as $pageData) {
                     if (isset($pageData['uuid'])) {
-                        $page = TenantPage::where('uuid', $pageData['uuid'])->first();
+                        $page = TenantTemplatePage::where('uuid', $pageData['uuid'])->first();
                         if ($page) {
                             $page->title = $pageData['title'] ?? $page->title;
                             $page->slug = $pageData['slug'] ?? $page->slug;
@@ -52,7 +55,7 @@ class EditTenantTemplateService extends DefaultService implements ServiceInterfa
                             $page->save();
                         }
                     } else {
-                        $page = new TenantPage();
+                        $page = new TenantTemplatePage();
                         $page->tenant_template_id = $global_template->id;
                         $page->title = $pageData['title'];
                         $page->slug = $pageData['slug'];
@@ -100,8 +103,9 @@ class EditTenantTemplateService extends DefaultService implements ServiceInterfa
             'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate)],
             'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'template_settings' => ['nullable'],
+            'active_template' => ['boolean'],
             'pages' => ['nullable', 'array'],
-            'pages.*.uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantPage)],
+            'pages.*.uuid' => ['nullable', 'uuid', new ExistsUuid(new TenantTemplatePage)],
             'pages.*.title' => ['required_with:pages', 'string'],
             'pages.*.slug' => ['required_with:pages', 'string'],
             'pages.*.template_data' => ['nullable', 'array'],

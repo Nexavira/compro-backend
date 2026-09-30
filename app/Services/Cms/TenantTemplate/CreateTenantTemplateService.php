@@ -24,6 +24,7 @@ class CreateTenantTemplateService extends DefaultService implements ServiceInter
             $global_template->tenant_id = $dto['tenant_id'] ?? null;
             $global_template->global_template_id = $dto['global_template_id'] ?? null;
             $global_template->template_settings = $dto['template_settings'] ?? null;
+            $global_template->active_template = (bool) ($dto['active_template'] ?? false);
 
             $this->prepareAuditActive($global_template);
             $this->prepareAuditInsert($global_template);
@@ -80,6 +81,7 @@ class CreateTenantTemplateService extends DefaultService implements ServiceInter
             'global_template_id' => ['nullable', 'integer', new ExistsId(new GlobalTemplate)],
             'global_template_uuid' => ['nullable', 'uuid', new ExistsUuid(new GlobalTemplate)],
             'template_settings' => ['nullable'],
+            'active_template' => ['boolean'],
             'pages' => ['nullable', 'array'],
             'pages.*.title' => ['required_with:pages', 'string'],
             'pages.*.slug' => ['required_with:pages', 'string'],

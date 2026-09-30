@@ -22,7 +22,6 @@ class GlobalTemplateSeeder extends Seeder
       'title' => 'Home Template',
       'description' => 'This is the default template for all tenants.',
       'is_active' => 1,
-      'brand_settings' => json_encode($settingDataArray['data']),
     ]);
   }
 }

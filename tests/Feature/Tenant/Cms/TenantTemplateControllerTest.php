@@ -29,7 +29,9 @@ class TenantTemplateControllerTest extends TestCase
     protected Role $masterAdminRole;
     protected Role $regularRole;
     protected GlobalTemplate $globalTemplate;
+    protected GlobalTemplate $globalTemplate2;
     protected TenantTemplate $tenantTemplateA;
+    protected TenantTemplate $tenantTemplateA2;
     protected TenantTemplate $tenantTemplateB;
 
     protected function setUp(): void
@@ -109,11 +111,28 @@ class TenantTemplateControllerTest extends TestCase
             'is_active' => 1,
         ]);
 
+        $this->globalTemplate2 = GlobalTemplate::create([
+            'title' => 'Global Modern Template',
+            'slug' => 'global-modern-template',
+            'tier' => 'basic',
+            'tenant_category_id' => $this->category->id,
+            'is_active' => 1,
+        ]);
+
         $this->tenantTemplateA = TenantTemplate::create([
             'tenant_id' => $this->tenantA->id,
             'global_template_id' => $this->globalTemplate->id,
             'template_settings' => ['theme' => 'light', 'primary_color' => '#0000ff'],
             'is_active' => 1,
+            'active_template' => 1,
+        ]);
+
+        $this->tenantTemplateA2 = TenantTemplate::create([
+            'tenant_id' => $this->tenantA->id,
+            'global_template_id' => $this->globalTemplate2->id,
+            'template_settings' => ['theme' => 'modern', 'primary_color' => '#00ff00'],
+            'is_active' => 1,
+            'active_template' => 0,
         ]);
 
         $this->tenantTemplateB = TenantTemplate::create([
@@ -121,6 +140,7 @@ class TenantTemplateControllerTest extends TestCase
             'global_template_id' => $this->globalTemplate->id,
             'template_settings' => ['theme' => 'dark', 'primary_color' => '#ff0000'],
             'is_active' => 1,
+            'active_template' => 1,
         ]);
     }
 
@@ -215,7 +235,10 @@ class TenantTemplateControllerTest extends TestCase
                 'success' => true,
                 'message' => 'Tenant Template successfully fetched',
             ])
-            ->assertJsonCount(1, 'data');
+            ->assertJsonCount(2, 'data');
+
+        $data = $response->json('data');
+        $this->assertArrayHasKey('active_template', $data[0]);
     }
 
     /**
@@ -233,6 +256,7 @@ class TenantTemplateControllerTest extends TestCase
                 'message' => 'Tenant Template successfully fetched',
                 'data' => [
                     'uuid' => $this->tenantTemplateA->uuid,
+                    'active_template' => true,
                 ],
             ]);
     }
@@ -273,5 +297,130 @@ class TenantTemplateControllerTest extends TestCase
                 'data',
                 'pagination' => ['data_per_page', 'total_page', 'total_data'],
             ]);
+    }
+
+    /**
+     * Test authorized user can activate tenant template and other templates are deactivated.
+     */
+    public function test_authorized_user_can_activate_tenant_template_and_deactivate_others(): void
+    {
+        Passport::actingAs($this->userA, ['*'], 'api');
+
+        $payload = [
+            'active_template' => true,
+        ];
+
+        $response = $this->patchJson("/api/v1/t/{$this->tenantA->slug}/cms/tenant-template/change-active/{$this->tenantTemplateA2->uuid}", $payload);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Tenant template successfully updated',
+                'data' => [
+                    'uuid' => $this->tenantTemplateA2->uuid,
+                    'active_template' => true,
+                ],
+            ]);
+
+        // Template A2 should now be active
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplateA2->id,
+            'active_template' => true,
+        ]);
+
+        // Template A should now be inactive due to mutual exclusivity
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplateA->id,
+            'active_template' => false,
+        ]);
+    }
+
+    /**
+     * Test authorized user can deactivate active template.
+     */
+    public function test_authorized_user_can_deactivate_active_template(): void
+    {
+        Passport::actingAs($this->userA, ['*'], 'api');
+
+        $payload = [
+            'active_template' => false,
+        ];
+
+        $response = $this->patchJson("/api/v1/t/{$this->tenantA->slug}/cms/tenant-template/change-active/{$this->tenantTemplateA->uuid}", $payload);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Tenant template successfully updated',
+                'data' => [
+                    'uuid' => $this->tenantTemplateA->uuid,
+                    'active_template' => false,
+                ],
+            ]);
+
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplateA->id,
+            'active_template' => false,
+        ]);
+    }
+
+    /**
+     * Test user cannot change active template for different tenant.
+     */
+    public function test_user_cannot_change_active_template_for_different_tenant(): void
+    {
+        Passport::actingAs($this->userA, ['*'], 'api');
+
+        $payload = [
+            'active_template' => true,
+        ];
+
+        // User A tries to change Tenant B's active template
+        $response = $this->patchJson("/api/v1/t/{$this->tenantB->slug}/cms/tenant-template/change-active/{$this->tenantTemplateB->uuid}", $payload);
+
+        $response->assertStatus(403)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Unauthorized access to this tenant.',
+            ]);
+    }
+
+    /**
+     * Test user cannot change active template with mismatched uuid and tenant slug.
+     */
+    public function test_user_cannot_change_active_template_with_mismatched_uuid_and_slug(): void
+    {
+        Passport::actingAs($this->userA, ['*'], 'api');
+
+        $payload = [
+            'active_template' => true,
+        ];
+
+        // User A passes Tenant B's template UUID on Tenant A's route
+        $response = $this->patchJson("/api/v1/t/{$this->tenantA->slug}/cms/tenant-template/change-active/{$this->tenantTemplateB->uuid}", $payload);
+
+        $response->assertStatus(404)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Tenant template not found',
+            ]);
+
+        // Tenant B's template should remain untouched
+        $this->assertDatabaseHas('cms_tenant_templates', [
+            'id' => $this->tenantTemplateB->id,
+            'active_template' => true,
+        ]);
+    }
+
+    /**
+     * Test change active template validation fails when active_template is missing.
+     */
+    public function test_change_active_template_validation_fails_when_active_template_is_missing(): void
+    {
+        Passport::actingAs($this->userA, ['*'], 'api');
+
+        $response = $this->patchJson("/api/v1/t/{$this->tenantA->slug}/cms/tenant-template/change-active/{$this->tenantTemplateA->uuid}", []);
+
+        $response->assertStatus(422);
     }
 }

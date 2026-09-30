@@ -24,6 +24,7 @@ class TenantTemplateSeeder extends Seeder
                     'font_family' => 'Inter',
                 ],
                 'is_active' => 1,
+                'active_template' => 1,
             ]);
         }
     }

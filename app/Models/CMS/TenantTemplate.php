@@ -15,6 +15,7 @@ class TenantTemplate extends BaseModel
     {
         return array_merge(parent::casts(), [
             'template_settings' => AsArrayObject::class,
+            'active_template' => 'boolean',
         ]);
     }
 

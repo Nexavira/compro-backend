@@ -11,6 +11,7 @@ class GetTenantTemplateResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'active_template' => (bool) ($this->active_template ?? false),
             'is_active' => $this->is_active,
             'template_settings' => $this->template_settings,
             'version' => $this->version,
