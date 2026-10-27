@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\Services\Cms\TenantTemplate;
+namespace Tests\Unit\Services\CMS\TenantTemplate;
 
-use App\Models\Cms\GlobalTemplate;
-use App\Models\Cms\TenantTemplate;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
-use App\Services\Cms\TenantTemplate\UpdateTenantTemplateService;
+use App\Services\CMS\TenantTemplate\UpdateTenantTemplateService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;

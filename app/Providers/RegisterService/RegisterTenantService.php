@@ -8,7 +8,7 @@ use App\Services\Tenant\CreateTenantService;
 use App\Services\Tenant\GetTenantService;
 use App\Services\Tenant\StoreTenantService;
 use App\Services\Tenant\TenantCategory\GetTenantCategoryService;
-use App\Services\Tenant\Cms\PublicGetTenantTemplatePageService;
+use App\Services\Tenant\CMS\PublicGetTenantTemplatePageService;
 use App\Services\Tenant\EditTenantInformationService;
 
 class RegisterTenantService extends AppServiceProvider

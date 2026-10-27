@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Tenant\Tenant;
 use App\Models\CMS\Page;
-// use App\Models\Cms\GlobalTemplatePage;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;

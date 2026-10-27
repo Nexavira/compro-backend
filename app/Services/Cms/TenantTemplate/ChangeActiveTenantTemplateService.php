@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Cms\TenantTemplate;
+namespace App\Services\CMS\TenantTemplate;
 
-use App\Models\Cms\TenantTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Rules\ExistsUuid;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;

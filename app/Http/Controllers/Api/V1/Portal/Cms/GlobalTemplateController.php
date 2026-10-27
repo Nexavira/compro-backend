@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Portal\Cms;
+namespace App\Http\Controllers\Api\V1\Portal\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Portal\Cms\GlobalTemplate\GetGlobalTemplateRequest;
-use App\Http\Requests\Api\V1\Portal\Cms\GlobalTemplate\StoreGlobalTemplateRequest;
-use App\Http\Resources\Api\V1\Portal\Cms\GlobalTemplate\GetGlobalTemplateResource;
+use App\Http\Requests\Api\V1\Portal\CMS\GlobalTemplate\GetGlobalTemplateRequest;
+use App\Http\Requests\Api\V1\Portal\CMS\GlobalTemplate\StoreGlobalTemplateRequest;
+use App\Http\Resources\Api\V1\Portal\CMS\GlobalTemplate\GetGlobalTemplateResource;
 
 class GlobalTemplateController extends Controller
 {

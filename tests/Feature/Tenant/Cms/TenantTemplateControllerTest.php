@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Tenant\Cms;
+namespace Tests\Feature\Tenant\CMS;
 
 use App\Models\Auth\Role;
 use App\Models\Auth\RoleUser;
 use App\Models\Auth\User;
-use App\Models\Cms\GlobalTemplate;
-use App\Models\Cms\TenantTemplate;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
 use App\Models\Tenant\TenantUser;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Portal\Cms\GlobalTemplate;
+namespace App\Http\Requests\Api\V1\Portal\CMS\GlobalTemplate;
 
 use App\Helpers\FormRequestApi;
 use App\Models\Master\Package;

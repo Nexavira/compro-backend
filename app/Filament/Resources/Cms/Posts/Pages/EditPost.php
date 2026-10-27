@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Posts\Pages;
+namespace App\Filament\Resources\CMS\Posts\Pages;
 
-use App\Filament\Resources\Cms\Posts\PostResource;
+use App\Filament\Resources\CMS\Posts\PostResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;

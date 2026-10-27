@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Tenant;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\CMS\TenantTemplate;
 use App\Models\Tenant\Tenant;
 use Illuminate\Database\Seeder;

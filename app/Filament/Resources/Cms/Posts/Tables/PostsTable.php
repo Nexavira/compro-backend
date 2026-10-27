@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Posts\Tables;
+namespace App\Filament\Resources\CMS\Posts\Tables;
 
 use App\Models\CMS\Post;
 use Filament\Actions\ActionGroup;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature\Dashboard\Cms;
+namespace Tests\Feature\Dashboard\CMS;
 
-use App\Models\Cms\GlobalTemplate;
-use App\Models\Cms\TenantTemplate;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;

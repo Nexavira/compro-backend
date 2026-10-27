@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Pages;
+namespace App\Filament\Resources\CMS\Pages;
 
-use App\Filament\Resources\Cms\Pages\Pages\CreatePage;
-use App\Filament\Resources\Cms\Pages\Pages\EditPage;
-use App\Filament\Resources\Cms\Pages\Pages\ListPages;
-use App\Filament\Resources\Cms\Pages\Schemas\PageForm;
-use App\Filament\Resources\Cms\Pages\Tables\PagesTable;
+use App\Filament\Resources\CMS\Pages\Pages\CreatePage;
+use App\Filament\Resources\CMS\Pages\Pages\EditPage;
+use App\Filament\Resources\CMS\Pages\Pages\ListPages;
+use App\Filament\Resources\CMS\Pages\Schemas\PageForm;
+use App\Filament\Resources\CMS\Pages\Tables\PagesTable;
 use App\Models\CMS\Page;
 use BackedEnum;
 use Filament\Resources\Resource;

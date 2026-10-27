@@ -19,7 +19,7 @@ use App\Policies\Tenant\TenantPolicy;
 use App\Policies\Transaction\SubscriptionPolicy;
 
 use App\Providers\RegisterService\RegisterAuthService;
-use App\Providers\RegisterService\RegisterCmsService;
+use App\Providers\RegisterService\RegisterCMSService;
 use App\Providers\RegisterService\RegisterMasterService;
 use App\Providers\RegisterService\RegisterPackageService;
 use App\Providers\RegisterService\RegisterSystemService;
@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RegisterAuthService::class);
-        $this->app->register(RegisterCmsService::class);
+        $this->app->register(RegisterCMSService::class);
         $this->app->register(RegisterMasterService::class);
         $this->app->register(RegisterSystemService::class);
         $this->app->register(RegisterTenantService::class);

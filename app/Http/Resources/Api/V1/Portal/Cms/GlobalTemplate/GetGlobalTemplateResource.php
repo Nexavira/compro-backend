@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Api\V1\Portal\Cms\GlobalTemplate;
+namespace App\Http\Resources\Api\V1\Portal\CMS\GlobalTemplate;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

@@ -2,7 +2,7 @@
 
 namespace App\Services\Tenant;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\Master\Package;
 use App\Models\System\File;
 use App\Models\Tenant\TenantCategory;

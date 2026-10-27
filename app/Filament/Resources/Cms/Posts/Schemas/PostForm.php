@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Posts\Schemas;
+namespace App\Filament\Resources\CMS\Posts\Schemas;
 
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;

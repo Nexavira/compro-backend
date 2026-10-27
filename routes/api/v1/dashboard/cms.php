@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantTemplateController;
-use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantTemplatePageController;
+use App\Http\Controllers\Api\V1\Dashboard\CMS\TenantTemplateController;
+use App\Http\Controllers\Api\V1\Dashboard\CMS\TenantTemplatePageController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('dashboard')->group(function () {

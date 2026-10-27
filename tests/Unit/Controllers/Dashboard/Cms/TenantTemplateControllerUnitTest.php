@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Unit\Controllers\Dashboard\Cms;
+namespace Tests\Unit\Controllers\Dashboard\CMS;
 
-use App\Http\Controllers\Api\V1\Dashboard\Cms\TenantTemplateController;
-use App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplate\StoreTenantTemplateRequest;
-use App\Models\Cms\GlobalTemplate;
-use App\Models\Cms\TenantTemplate;
+use App\Http\Controllers\Api\V1\Dashboard\CMS\TenantTemplateController;
+use App\Http\Requests\Api\V1\Dashboard\CMS\TenantTemplate\StoreTenantTemplateRequest;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\CMS\TenantTemplatePage;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;

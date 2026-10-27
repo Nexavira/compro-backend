@@ -4,7 +4,7 @@ namespace App\Policies\CMS;
 
 use App\Models\Auth\User;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 
 use App\Policies\BasePolicy;
 

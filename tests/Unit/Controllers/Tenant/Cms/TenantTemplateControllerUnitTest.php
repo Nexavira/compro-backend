@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\Controllers\Tenant\Cms;
+namespace Tests\Unit\Controllers\Tenant\CMS;
 
-use App\Http\Controllers\Api\V1\Tenant\Cms\TenantTemplateController;
-use App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplate\ChangeActiveTenantTemplateRequest;
-use App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplate\GetTenantTemplateRequest;
-use App\Models\Cms\GlobalTemplate;
-use App\Models\Cms\TenantTemplate;
+use App\Http\Controllers\Api\V1\Tenant\CMS\TenantTemplateController;
+use App\Http\Requests\Api\V1\Tenant\CMS\TenantTemplate\ChangeActiveTenantTemplateRequest;
+use App\Http\Requests\Api\V1\Tenant\CMS\TenantTemplate\GetTenantTemplateRequest;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\Tenant\TenantCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Cms\GlobalTemplate;
+namespace App\Services\CMS\GlobalTemplate;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\Master\Package;
 use App\Models\System\File;
 use App\Models\Tenant\TenantCategory;

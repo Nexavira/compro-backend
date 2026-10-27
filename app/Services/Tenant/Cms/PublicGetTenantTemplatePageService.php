@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Tenant\Cms;
+namespace App\Services\Tenant\CMS;
 
 use App\Models\CMS\TenantTemplatePage;
 use App\Services\DefaultService;

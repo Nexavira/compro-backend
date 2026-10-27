@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Cms\GlobalTemplates\Tables;
+namespace App\Filament\Resources\CMS\GlobalTemplates\Tables;
 
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;

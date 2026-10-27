@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Cms\GlobalTemplates\Schemas;
+namespace App\Filament\Resources\CMS\GlobalTemplates\Schemas;
 
 use Filament\Schemas\Schema;
 

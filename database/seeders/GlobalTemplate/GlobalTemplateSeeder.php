@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\GlobalTemplate;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use Illuminate\Database\Seeder;
 
 class GlobalTemplateSeeder extends Seeder

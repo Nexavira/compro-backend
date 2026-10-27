@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Cms\TenantTemplate;
+namespace App\Services\CMS\TenantTemplate;
 
-use App\Models\Cms\TenantTemplate;
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use App\Models\CMS\TenantTemplatePage;
 use App\Rules\ExistsId;

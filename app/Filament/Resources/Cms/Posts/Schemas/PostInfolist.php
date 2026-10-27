@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Posts\Schemas;
+namespace App\Filament\Resources\CMS\Posts\Schemas;
 
-use App\Models\Cms\Post;
+use App\Models\CMS\Post;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 

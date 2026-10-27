@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Portal\Cms;
+namespace App\Http\Controllers\Api\V1\Portal\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller

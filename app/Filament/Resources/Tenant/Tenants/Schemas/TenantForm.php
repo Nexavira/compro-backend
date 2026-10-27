@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Tenant\Tenants\Schemas;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\Master\Package;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;

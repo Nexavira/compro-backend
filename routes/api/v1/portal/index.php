@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\V1\Portal\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Portal\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Portal\Auth\Role\RoleController;
-use App\Http\Controllers\Api\V1\Portal\Cms\GlobalTemplateController;
+use App\Http\Controllers\Api\V1\Portal\CMS\GlobalTemplateController;
 use App\Http\Controllers\Api\V1\Portal\Master\PackageController;
 use Illuminate\Support\Facades\Route;
 

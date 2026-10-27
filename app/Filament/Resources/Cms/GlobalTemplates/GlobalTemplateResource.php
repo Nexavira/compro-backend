@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Cms\GlobalTemplates;
+namespace App\Filament\Resources\CMS\GlobalTemplates;
 
-use App\Filament\Resources\Cms\GlobalTemplates\Pages\CreateGlobalTemplate;
-use App\Filament\Resources\Cms\GlobalTemplates\Pages\EditGlobalTemplate;
-use App\Filament\Resources\Cms\GlobalTemplates\Pages\ListGlobalTemplates;
-use App\Filament\Resources\Cms\GlobalTemplates\Schemas\GlobalTemplateForm;
-use App\Filament\Resources\Cms\GlobalTemplates\Tables\GlobalTemplatesTable;
-use App\Models\Cms\GlobalTemplate;
+use App\Filament\Resources\CMS\GlobalTemplates\Pages\CreateGlobalTemplate;
+use App\Filament\Resources\CMS\GlobalTemplates\Pages\EditGlobalTemplate;
+use App\Filament\Resources\CMS\GlobalTemplates\Pages\ListGlobalTemplates;
+use App\Filament\Resources\CMS\GlobalTemplates\Schemas\GlobalTemplateForm;
+use App\Filament\Resources\CMS\GlobalTemplates\Tables\GlobalTemplatesTable;
+use App\Models\CMS\GlobalTemplate;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

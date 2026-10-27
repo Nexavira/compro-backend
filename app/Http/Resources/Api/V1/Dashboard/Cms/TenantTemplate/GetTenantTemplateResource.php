@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Api\V1\Dashboard\Cms\TenantTemplate;
+namespace App\Http\Resources\Api\V1\Dashboard\CMS\TenantTemplate;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

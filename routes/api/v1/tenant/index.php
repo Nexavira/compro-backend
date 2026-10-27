@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Tenant\Cms\TenantTemplateController;
-use App\Http\Controllers\Api\V1\Tenant\Cms\TenantTemplatePageController;
+use App\Http\Controllers\Api\V1\Tenant\CMS\TenantTemplateController;
+use App\Http\Controllers\Api\V1\Tenant\CMS\TenantTemplatePageController;
 use App\Http\Middleware\VerifyTenantAccess;
 use Illuminate\Support\Facades\Route;
 

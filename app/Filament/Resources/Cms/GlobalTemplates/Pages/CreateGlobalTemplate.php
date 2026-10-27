@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Cms\GlobalTemplates\Pages;
+namespace App\Filament\Resources\CMS\GlobalTemplates\Pages;
 
-use App\Filament\Resources\Cms\GlobalTemplates\GlobalTemplateResource;
+use App\Filament\Resources\CMS\GlobalTemplates\GlobalTemplateResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateGlobalTemplate extends CreateRecord

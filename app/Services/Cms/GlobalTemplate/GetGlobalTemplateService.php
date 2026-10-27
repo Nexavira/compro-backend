@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Cms\GlobalTemplate;
+namespace App\Services\CMS\GlobalTemplate;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Services\DefaultService;
 use App\Services\ServiceInterface;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Tenant\Cms;
+namespace App\Http\Controllers\Api\V1\Tenant\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Tenant\Cms\TenantTemplatePage\GetTenantTemplatePageRequest;
-use App\Http\Resources\Api\V1\Tenant\Cms\TenantTemplatePage\GetTenantTemplatePageResource;
+use App\Http\Requests\Api\V1\Tenant\CMS\TenantTemplatePage\GetTenantTemplatePageRequest;
+use App\Http\Resources\Api\V1\Tenant\CMS\TenantTemplatePage\GetTenantTemplatePageResource;
 
 class TenantTemplatePageController extends Controller
 {

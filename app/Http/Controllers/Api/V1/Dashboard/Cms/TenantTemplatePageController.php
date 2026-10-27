@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Dashboard\Cms;
+namespace App\Http\Controllers\Api\V1\Dashboard\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplatePage\GetTenantTemplatePageRequest;
-use App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplatePage\StoreTenantTemplatePageRequest;
-use App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplatePage\UpdateTenantTemplatePageRequest;
-use App\Http\Resources\Api\V1\Dashboard\Cms\TenantTemplatePage\GetTenantTemplatePageResource;
+use App\Http\Requests\Api\V1\Dashboard\CMS\TenantTemplatePage\GetTenantTemplatePageRequest;
+use App\Http\Requests\Api\V1\Dashboard\CMS\TenantTemplatePage\StoreTenantTemplatePageRequest;
+use App\Http\Requests\Api\V1\Dashboard\CMS\TenantTemplatePage\UpdateTenantTemplatePageRequest;
+use App\Http\Resources\Api\V1\Dashboard\CMS\TenantTemplatePage\GetTenantTemplatePageResource;
 use Illuminate\Http\Request;
 
 class TenantTemplatePageController extends Controller

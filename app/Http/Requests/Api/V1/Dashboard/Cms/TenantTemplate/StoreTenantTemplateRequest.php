@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Dashboard\Cms\TenantTemplate;
+namespace App\Http\Requests\Api\V1\Dashboard\CMS\TenantTemplate;
 
 use App\Helpers\FormRequestApi;
 

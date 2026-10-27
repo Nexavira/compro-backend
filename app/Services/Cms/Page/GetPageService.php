@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Cms\Page;
+namespace App\Services\CMS\Page;
 
 use App\Models\CMS\Page;
 use App\Services\DefaultService;

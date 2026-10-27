@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Cms\Pages\Schemas;
+namespace App\Filament\Resources\CMS\Pages\Schemas;
 
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;

@@ -3,20 +3,20 @@
 namespace App\Providers\RegisterService;
 
 use App\Providers\AppServiceProvider;
-use App\Services\Cms\GlobalTemplate\GetGlobalTemplateService;
-use App\Services\Cms\GlobalTemplate\StoreGlobalTemplateService;
-use App\Services\Cms\TenantTemplate\ChangeActiveTenantTemplateService;
-use App\Services\Cms\TenantTemplate\GetTenantTemplateService;
-use App\Services\Cms\TenantTemplate\StoreTenantTemplateService;
-use App\Services\Cms\TenantTemplate\UpdateTenantTemplateService;
-use App\Services\Cms\TenantTemplate\CreateTenantTemplateService;
-use App\Services\Cms\TenantTemplate\EditTenantTemplateService;
+use App\Services\CMS\GlobalTemplate\GetGlobalTemplateService;
+use App\Services\CMS\GlobalTemplate\StoreGlobalTemplateService;
+use App\Services\CMS\TenantTemplate\ChangeActiveTenantTemplateService;
+use App\Services\CMS\TenantTemplate\GetTenantTemplateService;
+use App\Services\CMS\TenantTemplate\StoreTenantTemplateService;
+use App\Services\CMS\TenantTemplate\UpdateTenantTemplateService;
+use App\Services\CMS\TenantTemplate\CreateTenantTemplateService;
+use App\Services\CMS\TenantTemplate\EditTenantTemplateService;
 
-use App\Services\Cms\TenantTemplatePage\GetTenantTemplatePageService;
-use App\Services\Cms\TenantTemplatePage\StoreTenantTemplatePageService;
-use App\Services\Cms\TenantTemplatePage\UpdateTenantTemplatePageService;
+use App\Services\CMS\TenantTemplatePage\GetTenantTemplatePageService;
+use App\Services\CMS\TenantTemplatePage\StoreTenantTemplatePageService;
+use App\Services\CMS\TenantTemplatePage\UpdateTenantTemplatePageService;
 
-class RegisterCmsService extends AppServiceProvider
+class RegisterCMSService extends AppServiceProvider
 {
     public function register(): void
     {
