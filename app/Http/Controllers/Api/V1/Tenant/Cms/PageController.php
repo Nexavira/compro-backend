@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Tenant\CMS;
 
 use App\Http\Controllers\Controller;
-use App\Models\CMS\TenantPage;
+use App\Models\CMS\TenantTemplatePage as TenantPage;
 use App\Models\Tenant\Tenant;
 use Illuminate\Http\Request;
 
@@ -20,12 +20,12 @@ class PageController extends Controller
             ], 404);
         }
 
-        $page = TenantPage::where('cms_tenant_pages.tenant_template_id', $tenant->tenantTemplate->id ?? null)
-            ->join('cms_tenant_templates', 'cms_tenant_pages.tenant_template_id', '=', 'cms_tenant_templates.id')
+        $page = TenantPage::where('cms_tenant_template_pages.tenant_template_id', $tenant->tenantTemplate->id ?? null)
+            ->join('cms_tenant_templates', 'cms_tenant_template_pages.tenant_template_id', '=', 'cms_tenant_templates.id')
             ->join('cms_global_templates', 'cms_global_templates.id', '=', 'cms_tenant_templates.global_template_id')
-            ->select('cms_tenant_pages.*', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug')
-            ->where('cms_tenant_pages.is_active', 1)
-            ->where('cms_tenant_pages.slug', $slug)
+            ->select('cms_tenant_template_pages.*', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug')
+            ->where('cms_tenant_template_pages.is_active', 1)
+            ->where('cms_tenant_template_pages.slug', $slug)
             ->first();
 
         if (!$page) {
@@ -77,11 +77,11 @@ class PageController extends Controller
             ], 404);
         }
 
-        $pages = TenantPage::where('cms_tenant_pages.tenant_template_id', $tenant->tenantTemplate->id ?? null)
-            ->join('cms_tenant_templates', 'cms_tenant_pages.tenant_template_id', '=', 'cms_tenant_templates.id')
+        $pages = TenantPage::where('cms_tenant_template_pages.tenant_template_id', $tenant->tenantTemplate->id ?? null)
+            ->join('cms_tenant_templates', 'cms_tenant_template_pages.tenant_template_id', '=', 'cms_tenant_templates.id')
             ->join('cms_global_templates', 'cms_global_templates.id', '=', 'cms_tenant_templates.global_template_id')
-            ->select('cms_tenant_pages.title', 'cms_tenant_pages.slug', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug', 'cms_tenant_pages.created_at', 'cms_tenant_pages.updated_at')
-            ->where('cms_tenant_pages.is_active', 1)
+            ->select('cms_tenant_template_pages.title', 'cms_tenant_template_pages.slug', 'cms_global_templates.title as template_title', 'cms_global_templates.slug as template_slug', 'cms_tenant_template_pages.created_at', 'cms_tenant_template_pages.updated_at')
+            ->where('cms_tenant_template_pages.is_active', 1)
             ->get();
 
         return response()->json([

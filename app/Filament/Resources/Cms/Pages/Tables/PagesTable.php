@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\CMS\Pages\Tables;
 
-use App\Models\CMS\Page;
+use App\Models\CMS\TenantTemplatePage as Page;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;

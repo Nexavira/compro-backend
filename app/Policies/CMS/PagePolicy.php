@@ -4,7 +4,7 @@ namespace App\Policies\CMS;
 
 use App\Models\Auth\User;
 
-use App\Models\CMS\Page;
+use App\Models\CMS\TenantTemplatePage as Page;
 
 use App\Policies\BasePolicy;
 
