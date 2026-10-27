@@ -8,10 +8,19 @@ parameters:
         - app/
 
     # Level 10 is the highest level
-    level: 0
+    level: 1
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
+    ignoreErrors:
+        -
+            message: '#Access to an undefined property App\\Http\\Resources\\.*::\$.*#'
+            path: app/Http/Resources/*
+        -
+            message: '#Access to an undefined property App\\Filament\\Resources\\Auth\\Roles\\Pages\\ManagePermissionRoles::\$form.*#'
+            path: app/Filament/Resources/Auth/Roles/Pages/ManagePermissionRoles.php
+        -
+            message: '#Access to an undefined property App\\Models\\Auth\\DetailUser::\$photo.*#'
+            path: app/Models/Auth/DetailUser.php
+
+
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php

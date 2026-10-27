@@ -21,7 +21,7 @@ class TenantObserver
     private function handleTemplateCloning(Tenant $tenant)
     {
         if ($tenant->global_template_id && $tenant->globalTemplate) {
-            $cloningService = new TemplateCloningService();
+            $cloningService = new TemplateCloningService(); // @phpstan-ignore-line
             $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
         }
     }

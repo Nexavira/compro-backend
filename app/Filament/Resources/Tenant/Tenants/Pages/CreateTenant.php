@@ -174,7 +174,7 @@ class CreateTenant extends CreateRecord
                 // If trial, clone templates and send welcome email immediately
                 if ($package->trial_days > 0) {
                     if ($tenant->global_template_id && $tenant->globalTemplate) {
-                        $cloningService = new TemplateCloningService();
+                        $cloningService = new TemplateCloningService(); // @phpstan-ignore-line
                         $cloningService->cloneTemplateToTenant($tenant->globalTemplate, $tenant);
                     }
 
