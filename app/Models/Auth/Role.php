@@ -3,17 +3,25 @@
 namespace App\Models\Auth;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends BaseModel
 {
     protected $table = 'auth_roles';
 
-    public function roleUser()
+    public function roleUser(): BelongsTo
     {
         return $this->belongsTo(RoleUser::class, 'role_id', 'id');
     }
 
-    public function permissions()
+    public function rolePermission(): HasMany
+    {
+        return $this->hasMany(PermissionRole::class, 'role_id', 'id');
+    }
+
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(
             Permission::class,

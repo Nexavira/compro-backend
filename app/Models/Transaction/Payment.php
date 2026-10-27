@@ -6,19 +6,25 @@ use App\Models\BaseModel;
 use App\Models\System\File;
 use App\Models\Tenant\Tenant;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends BaseModel
 {
     protected $table = 'trx_payments';
 
-    public function subscription()
+    public function subscription(): BelongsTo
     {
         return $this->belongsTo(Subscription::class);
     }
 
-    public function proofOfPayment()
+    public function proofOfPayment(): BelongsTo
     {
         return $this->belongsTo(File::class, 'proof_of_payment_id');
+    }
+
+    public function paymentProof(): BelongsTo
+    {
+        return $this->proofOfPayment();
     }
 
     public function casts(): array
@@ -44,7 +50,7 @@ class Payment extends BaseModel
         );
     }
 
-    public function tenant()
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }

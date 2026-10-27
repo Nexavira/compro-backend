@@ -3,9 +3,11 @@
 namespace App\Models\CMS;
 
 use App\Models\BaseModel;
-use App\Models\Cms\GlobalTemplate;
+use App\Models\CMS\GlobalTemplate;
 use App\Models\Tenant\Tenant;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TenantTemplate extends BaseModel
 {
@@ -19,17 +21,17 @@ class TenantTemplate extends BaseModel
         ]);
     }
 
-    public function tenant()
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }
 
-    public function globalTemplate()
+    public function globalTemplate(): BelongsTo
     {
         return $this->belongsTo(GlobalTemplate::class);
     }
 
-    public function pages()
+    public function pages(): HasMany
     {
         return $this->hasMany(TenantTemplatePage::class, 'tenant_template_id', 'id');
     }

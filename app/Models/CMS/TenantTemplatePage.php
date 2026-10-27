@@ -4,6 +4,7 @@ namespace App\Models\CMS;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TenantTemplatePage extends BaseModel
 {
@@ -16,7 +17,7 @@ class TenantTemplatePage extends BaseModel
         ]);
     }
 
-    public function tenantTemplate()
+    public function tenantTemplate(): BelongsTo
     {
         return $this->belongsTo(TenantTemplate::class);
     }

@@ -4,11 +4,15 @@ namespace App\Models\Tenant;
 
 use App\Models\BaseModel;
 use App\Models\System\File;
-use App\Models\Cms\GlobalTemplate;
-use App\Models\CMS\Page;
+use App\Models\CMS\GlobalTemplate;
+use App\Models\CMS\TenantTemplate;
 use App\Models\Auth\User;
 use App\Models\CMS\TenantTemplatePage;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Tenant extends BaseModel
 {
@@ -23,17 +27,17 @@ class Tenant extends BaseModel
         ]);
     }
 
-    public function tenantCategory()
+    public function tenantCategory(): BelongsTo
     {
         return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
     }
 
-    public function logo()
+    public function logo(): BelongsTo
     {
         return $this->belongsTo(File::class, 'logo_id', 'id');
     }
 
-    public function favicon()
+    public function favicon(): BelongsTo
     {
         return $this->belongsTo(File::class, 'favicon_id', 'id');
     }
@@ -59,17 +63,28 @@ class Tenant extends BaseModel
 
         return $tenant;
     }
-    public function globalTemplate()
+
+    public function globalTemplate(): BelongsTo
     {
         return $this->belongsTo(GlobalTemplate::class, 'global_template_id', 'id');
     }
 
-    public function pages()
+    public function tenantTemplates(): HasMany
+    {
+        return $this->hasMany(TenantTemplate::class, 'tenant_id', 'id');
+    }
+
+    public function tenantTemplate(): HasOne
+    {
+        return $this->hasOne(TenantTemplate::class, 'tenant_id', 'id')->where('active_template', true);
+    }
+
+    public function pages(): HasMany
     {
         return $this->hasMany(TenantTemplatePage::class, 'tenant_id', 'id');
     }
 
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'tnt_tenant_user', 'tenant_id', 'user_id')
             ->withPivot('role')

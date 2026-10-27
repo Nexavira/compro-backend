@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 
@@ -53,17 +54,17 @@ class User extends Authenticatable
         return ['uuid'];
     }
 
-    public function detailUser()
+    public function detailUser(): HasOne
     {
         return $this->hasOne(DetailUser::class, 'user_id', 'id');
     }
 
-    public function roleUser()
+    public function roleUser(): HasOne
     {
         return $this->hasOne(RoleUser::class, 'user_id', 'id');
     }
 
-    public function tenantUser()
+    public function tenantUser(): HasOne
     {
         return $this->hasOne(TenantUser::class, 'user_id', 'id');
     }

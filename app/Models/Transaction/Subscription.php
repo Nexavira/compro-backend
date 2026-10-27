@@ -6,17 +6,19 @@ use App\Models\BaseModel;
 use App\Models\Master\Package;
 use App\Models\Tenant\Tenant;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends BaseModel
 {
     protected $table = 'trx_subscriptions';
 
-    public function tenant()
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }
 
-    public function package()
+    public function package(): BelongsTo
     {
         return $this->belongsTo(Package::class);
     }
@@ -34,7 +36,7 @@ class Subscription extends BaseModel
         );
     }
 
-    public function payments()
+    public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
     }

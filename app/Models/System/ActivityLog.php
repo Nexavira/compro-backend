@@ -5,6 +5,8 @@ namespace App\Models\System;
 use App\Models\BaseModel;
 use App\Models\Tenant\Tenant;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ActivityLog extends BaseModel
 {
@@ -17,17 +19,17 @@ class ActivityLog extends BaseModel
         ]);
     }
 
-    public function subject()
+    public function subject(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function causer()
+    public function causer(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function tenant()
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }

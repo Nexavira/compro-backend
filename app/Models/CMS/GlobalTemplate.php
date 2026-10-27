@@ -5,6 +5,9 @@ namespace App\Models\CMS;
 use App\Models\BaseModel;
 use App\Models\System\File;
 use App\Models\Tenant\TenantCategory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\Storage;
 
 class GlobalTemplate extends BaseModel
@@ -24,14 +27,24 @@ class GlobalTemplate extends BaseModel
         'version'
     ];
 
-    public function tenantCategory()
+    public function tenantCategory(): BelongsTo
     {
         return $this->belongsTo(TenantCategory::class, 'tenant_category_id', 'id');
     }
 
-    public function bannerImage()
+    public function bannerImage(): BelongsTo
     {
         return $this->belongsTo(File::class, 'banner_image_id', 'id');
+    }
+
+    public function tenantTemplates(): HasMany
+    {
+        return $this->hasMany(TenantTemplate::class, 'global_template_id', 'id');
+    }
+
+    public function pages(): HasManyThrough
+    {
+        return $this->hasManyThrough(TenantTemplatePage::class, TenantTemplate::class, 'global_template_id', 'tenant_template_id', 'id', 'id');
     }
 
     public function setBannerImageUploadAttribute($value)
