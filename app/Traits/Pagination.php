@@ -42,4 +42,25 @@ trait Pagination
             'total_data' => (int) $count
         ];
     }
+
+    public function generatePagination($paginator)
+    {
+        if (!$paginator instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator) {
+            return null;
+        }
+
+        return [
+            'data_per_page' => (int) $paginator->perPage(),
+            'next_page' => $paginator->hasMorePages() ? (int) $paginator->currentPage() + 1 : null,
+            'prev_page' => $paginator->currentPage() > 1 ? (int) $paginator->currentPage() - 1 : null,
+            'first_page' => 1,
+            'last_page' => (int) $paginator->lastPage(),
+            'next_page_url' => $paginator->nextPageUrl(),
+            'previous_page_url' => $paginator->previousPageUrl(),
+            'first_page_url' => $paginator->url(1),
+            'last_page_url' => $paginator->url($paginator->lastPage()),
+            'total_page' => (int) $paginator->lastPage(),
+            'total_data' => (int) $paginator->total()
+        ];
+    }
 }

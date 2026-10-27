@@ -53,7 +53,7 @@ abstract class DefaultService implements ServiceInterface
 
                 $this->results['error'] = $ex;
 
-                if (env('APP_ENV') == 'local') {
+                if (config('app.env') === 'local') {
                     $this->results['message'] = 'Caught exception: "' . $ex->getMessage() . '" on line ' . $ex->getLine() . ' of ' . $ex->getFile();
 
                     if (strlen((string) $original_response_code) > 3) {

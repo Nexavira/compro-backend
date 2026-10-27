@@ -87,7 +87,7 @@ class UserForm
                         Group::make([
                             Select::make('tenant_id')
                                 ->label('Tenant')
-                                ->options(Tenant::all()->pluck('name', 'id'))
+                                ->options(Tenant::pluck('name', 'id'))
                                 ->native(false)
                                 ->searchable()
                                 ->preload()
@@ -105,7 +105,7 @@ class UserForm
                         Group::make([
                             Select::make('role_id')
                                 ->label('Peran')
-                                ->options(Role::all()->pluck('name', 'id'))
+                                ->options(Role::pluck('name', 'id'))
                                 ->native(false)
                                 ->searchable()
                                 ->preload()
